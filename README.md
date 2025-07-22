@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="LOGO.png" alt="Logo" width="80"/>
+</p>
+
+
 # FinancialFraudDataGenerator
 FF Data Generator - A open source Financial Fraud Detection Data Generator Web Application
 
