@@ -1,0 +1,11 @@
+id,original_ID,contactor,contactor_ID,mobile_phone_brand,mobile_operating_system,pv,terminal_type,video_website,shopping_website,overseas_taobao_shopping_channel,automotive_website,real_estate_website,travel_website,highest_calling,city_number,day_calling,night_calling,three_month_calling
+1,phone07163544671,IPTV,K_42408,中兴,Android,中,Tablet,视频网站-爱奇艺,购物网站-一淘,海淘电商-宝贝格子,汽车网站-汽车之家,房产网站-中原房产,旅游网站-众信旅游悠哉网,4,14,0,18,17
+2,phone58610920443,IPTV,K_79748,广信,Android,中,Computer,视频网站-土豆,购物网站-一淘,海淘电商-洋码头,汽车网站-太平洋汽车网,房产网站-安居客,旅游网站-同程旅游,17,17,6,40,0
+3,phone78785096497,IPTV,K_62662,联想,Android,高,Mobile,视频网站-搜狐,购物网站-贝贝,海淘电商-乐天,汽车网站-新浪汽车,房产网站-我爱我家,旅游网站-中青旅遨游旅行,2,25,1,43,20
+4,phone63665385311,手机,K_12165,酷比,Android,中,Mobile,视频网站-哔哩哔哩,购物网站-苏宁易购,海淘电商-小红书,汽车网站-搜狐汽车,房产网站-链家,旅游网站-猫途鹰,5,5,3,39,5
+5,phone34233644619,手机,K_06958,HTC,Android,低,Computer,视频网站-哔哩哔哩,购物网站-折800,海淘电商-乐天,汽车网站-新浪汽车,房产网站-我爱我家,旅游网站-猫途鹰,11,21,0,2,3
+6,phone58862551613,手机,K_59320,"华硕,小辣椒",Android,低,Tablet,视频网站-爱奇艺,购物网站-苏宁易购,海淘电商-洋码头,汽车网站-汽车之家,房产网站-链家,旅游网站-猫途鹰,12,22,5,40,30
+7,phone93229169461,IPTV,K_61698,广信,Android,高,Tablet,视频网站-优酷,购物网站-蘑菇街,海淘电商-达令,汽车网站-太平洋汽车网,房产网站-中原房产,旅游网站-去哪儿,5,21,0,14,23
+8,phone10354616682,IPTV,K_12384,三星,Android,高,Tablet,视频网站-土豆,购物网站-飞牛网,海淘电商-网易考拉,汽车网站-易车网,房产网站-我爱我家,旅游网站-众信旅游悠哉网,15,19,14,11,6
+9,phone26608014960,IPTV,K_33864,语信,Android,中,Computer,视频网站-AcFun,购物网站-天猫,海淘电商-洋码头,汽车网站-新浪汽车,房产网站-房多多,旅游网站-国旅在线,8,14,8,35,13
+10,phone12120628984,IPTV,K_59816,乐丰,Android,高,Computer,视频网站-乐视,购物网站-苏宁易购,海淘电商-洋码头,汽车网站-易车网,房产网站-房多多,旅游网站-国旅在线,29,15,21,22,3
