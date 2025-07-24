@@ -1,10 +1,10 @@
-<head>
-  <link rel="icon" type="image/png" href="LOGO.png">
-</head>
+<link rel="icon" type="image/png" href="favicon.png">
 
-<p align="center">
-  <img src="LOGO.png" alt="F²-Gen Logo" width="120">
+<p style="display: flex; align-items: center; gap: 12px;">
+  <img src="LOGO.png" alt="F²-Gen Logo" width="60">
+  <span style="font-size: 24px; font-weight: bold; color: teal;">F²-Gen: An Open Web Platform for Financial Fraud Simulation</span>
 </p>
+
 
 # <span style="color: teal;">F²-Gen: An Open Web Platform for Financial Fraud Simulation</span>
 
