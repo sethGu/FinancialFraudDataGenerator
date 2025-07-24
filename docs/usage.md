@@ -22,6 +22,7 @@ This platform enables end-to-end simulation and visualization of various financi
 Upon visiting the platform, users will see a login screen as shown below:
 
 [Image: Login Interface]
+![Login Interface](assets/login.png)
 
 - Enter your **username** and **password**.
 - Click the **Login** button to access the main interface.
@@ -37,6 +38,7 @@ Once logged in, users arrive at the homepage, which contains:
 - A top-right icon bar for **Logout** and **Change Password**
 
 [Image: Main Interface Layout]
+![Main Interface](assets/Interface.png)
 
 ---
 
@@ -64,6 +66,7 @@ Each module includes:
 Navigate via the sidebar to “Credit Card Cash-Out”. The interface includes seven areas:
 
 [Image: Credit Card Fraud Interface]
+![Credit Card Fraud](assets/Credit.png)
 
 **Area 1: Parameter Configuration**
 - User Count
