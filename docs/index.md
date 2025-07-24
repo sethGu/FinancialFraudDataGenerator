@@ -6,7 +6,7 @@
 </p>
 
 
-# <span style="color: teal;">F²-Gen: An Open Web Platform for Financial Fraud Simulation</span>
+
 
 Welcome to **F²-Gen**, a research-driven open-source platform for scenario-based financial fraud data generation and simulation.
 
