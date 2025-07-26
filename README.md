@@ -8,6 +8,13 @@ FF Data Generator - A open source Financial Fraud Detection Data Generator Web A
 
 This repository contains the open-source implementation of a financial transaction risk simulation tool. The system is designed to generate large-scale synthetic datasets for modeling and evaluating fraud detection algorithms under multiple abnormal scenarios.
 
+## 🌐 Online Platform
+
+Visit the official homepage of the F²-Gen platform:
+
+👉 [https://sethgu.github.io/FinancialFraudDataGenerator/](https://sethgu.github.io/FinancialFraudDataGenerator/)
+
+
 ## Features
 
 - **Multi-scenario Simulation**: Supports six categories of risk behavior, including:
