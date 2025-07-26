@@ -14,10 +14,11 @@ Welcome to **F²-Gen**, a research-driven open-source platform for scenario-base
 
 ## 🔗 Get Started
 
-- 📘 [Usage Guide](usage.html)
-- 🛠️ [Deployment Instructions](deploy.html)
+- 📖 [Technical Plan](technical.html)
+- 🧭 [Usage Guide](usage.html)
+- 🧰 [Deployment Instructions](deploy.html)
 - 🧪 [Playground Demo](playground.html)
-- 🎥 [Video Tutorial](tutorial.html)
+- 🎬 [Video Tutorial](tutorial.html)
 
 ---
 
