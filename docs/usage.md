@@ -2,6 +2,9 @@
 
 Welcome to the official usage guide for **F²-Gen**, an open-source platform for visualizing and generating scenario-based financial fraud datasets.
 
+> For a deep dive into the simulation logic, visit the [F²-Gen Engine](engine.html). For theoretical background and design rationale, refer to the [Technical Report](technical.html).
+
+
 ---
 
 ## 1. Platform Overview
