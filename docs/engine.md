@@ -9,7 +9,8 @@ This document presents the simulation engine underpinning **F²-Gen**, an open-s
 
 While wire fraud is used as the illustrative example in this document, the described methods apply across all six fraud scenarios supported in the platform.
 
-This page documents the internal mechanisms of the [F²-Gen Engine](index.html), which supports scenario-based fraud data generation. For general usage, see the [Usage Guide](usage.html), or refer to the [Technical Report](technical.html) for theoretical background.
+For general usage, refer to the [Usage Guide](usage.html). For theoretical background and modeling principles, see the [Technical Report](technical.html). return to the [Homepage](index.html).
+
 
 
 ---
