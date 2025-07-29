@@ -32,27 +32,27 @@ This work develops a financial transaction construction method based on Batch-ba
 
 ## Agent Construction
 
-This section defines the key agents---users, debit cards, relatives, and merchants---each with specific attributes and behaviors. Their interactions follow a rule-based process $f(A_i, A_j, t)$, with state transitions governed by a Markov process $P$ [@GRAZZINI201726]:
+This section defines the key agents---users, debit cards, relatives, and merchants---each with specific attributes and behaviors. Their interactions follow a rule-based process $f(A_i, A_j, t)$, with state transitions governed by a Markov process $$P$$ [@GRAZZINI201726]:
 
 $$P = \begin{bmatrix}
 P_{11} & \dots & P_{1n} \\
 P_{21} & \dots & P_{2n} \\
 \vdots & \vdots & \vdots \\
 P_{n1} & \dots & P_{nn}
-\end{bmatrix}$$ where $P_{ij}$ is the transition probability from state
-$s_i$ to $s_j$.
+\end{bmatrix}$$ where $$P_{ij}$$ is the transition probability from state
+$$s_i$$ to $$s_j$$.
 
-**User Agents:** User agents $A_{\text{user}}$ have attributes $\mathcal{A}_{\text{user}} = \{ \text{age}, \text{occupation}, \text{salary}, \text{gender} \}$, with: 
+**User Agents:** User agents $$A_{\text{user}}$$ have attributes $$\mathcal{A}_{\text{user}} = \{ \text{age}, \text{occupation}, \text{salary}, \text{gender} \}$$, with: 
 $$\text{age}_i \sim P(\text{age}), \quad \mathcal{A}_{\text{salary}} \sim P(\text{salary} \mid \text{occupation}_i)$$ 
 Gender follows demographic ratios. Occupation and salary are assigned based on population distributions.
 
-**Merchant Agents:** Merchant agents $A_{\text{merchant}}$ are characterized by $\mathcal{A}_{\text{merchant}} = \{ \text{industry}, \text{hours}, \text{range}, \text{level}, \text{status} \}$. Industry is selected from $P(\mathcal{I})$, with transaction range modeled as: 
+**Merchant Agents:** Merchant agents $$A_{\text{merchant}}$ are characterized by $\mathcal{A}_{\text{merchant}} = \{ \text{industry}, \text{hours}, \text{range}, \text{level}, \text{status} \}$$. Industry is selected from $$P(\mathcal{I})$$, with transaction range modeled as: 
 $$T_i(t) \sim \mathcal{N}(\mu_{\mathcal{I}_i}, \sigma_{\mathcal{I}_i}) \cdot \alpha_i(t) \cdot \beta_i(t)$$
-where $\mathcal{N}(\mu_{\mathcal{I}_i}, \sigma_{\mathcal{I}_i})$ represents the normal distribution for the industry $\mathcal{I}_i$, and $\alpha_i(t), \beta_i(t)$ are decay factors. These decay factors are updated according to real financial data, which classifies each industry into several tiers, reflecting actual transaction value distributions across sub-categories. Merchant status $\mathcal{A}_{\text{status}}$ is modeled as normal or abnormal, with the abnormal status indicating potential fraud. Status transitions are governed by a Markov process.
+where $$\mathcal{N}(\mu_{\mathcal{I}_i}, \sigma_{\mathcal{I}_i})$$ represents the normal distribution for the industry $$\mathcal{I}_i$$, and $$\alpha_i(t), \beta_i(t)$$ are decay factors. These decay factors are updated according to real financial data, which classifies each industry into several tiers, reflecting actual transaction value distributions across sub-categories. Merchant status $$\mathcal{A}_{\text{status}}$$ is modeled as normal or abnormal, with the abnormal status indicating potential fraud. Status transitions are governed by a Markov process.
 
-**Debit Card Agents:** Debit card agents $A_{\text{card}}$ are linked to user agents and have attributes $\mathcal{A}_{\text{card}} = \{ \text{card number}, \text{card type}, \text{brand}, \text{tier} \}$. Card type and brand depend on user occupation and income. The card tier is defined as: $\text{card tier}_i \sim P(\text{tier} \mid \text{salary}_i)$. The number of cards is determined by $f_{\text{cards}}(\text{salary}_i)$.
+**Debit Card Agents:** Debit card agents $$A_{\text{card}}$$ are linked to user agents and have attributes $$\mathcal{A}_{\text{card}} = \{ \text{card number}, \text{card type}, \text{brand}, \text{tier} \}$$. Card type and brand depend on user occupation and income. The card tier is defined as: $$\text{card tier}_i \sim P(\text{tier} \mid \text{salary}_i)$$. The number of cards is determined by $$f_{\text{cards}}(\text{salary}_i)$$.
 
-**Relative Agents:** Relative agents $A_{\text{relative}}$ have attributes $\mathcal{A}_{\text{relative}} = \{ \text{category}, \text{income}, \text{frequency}, \text{salary percentage} \}$. Category is drawn from $P(\text{category})$, and income affects consumption behavior. The consumption amount is defined as:
+**Relative Agents:** Relative agents $$A_{\text{relative}}$$ have attributes $$\mathcal{A}_{\text{relative}} = \{ \text{category}, \text{income}, \text{frequency}, \text{salary percentage} \}$$. Category is drawn from $$P(\text{category})$$, and income affects consumption behavior. The consumption amount is defined as:
 $$\text{consumption\_amount}_i = f_{\text{consumption}}(\text{income}_i)$$
 Frequency and the proportion of income allocated for consumption are modeled accordingly.
 
@@ -64,33 +64,33 @@ Transaction generation simulates realistic financial behaviors through probabili
 
 **Normal Transaction Generation:** Normal Transaction include consumption and transfer transactions. Each transaction is modeled probabilistically based on agent attributes and behaviors.
 
-**Consumption Transactions:** Consumption occur between users and merchants. The probability of a purchase between user $u$ and merchant $m$ is given by:
+**Consumption Transactions:** Consumption occur between users and merchants. The probability of a purchase between user $$u$$ and merchant $$m$$ is given by:
 $$P_{\text{purchase}}(u, m) \propto \phi(u) \cdot \psi(m)$$
 
-where $\phi(u)$ represents the user's spending propensity and $\psi(m)$ represents merchant popularity.
+where $$\phi(u)$$ represents the user's spending propensity and $$\psi(m)$$ represents merchant popularity.
 
-The consumption amount $T_{\text{amount}}$ follows a normal distribution: 
+The consumption amount $$T_{\text{amount}}$$ follows a normal distribution: 
 $$T_{\text{amount}} \sim \mathcal{N}(\mu_u, \sigma_u)$$
-where $\mu_u$ and $\sigma_u$ are derived from the user's income and spending habits.
+where $$\mu_u$$ and $$\sigma_u$$ are derived from the user's income and spending habits.
 
 **Transfer Transactions:** Transfer transactions occur based on user relationships. The probability of a transfer is:
 $$P_{\text{transfer}}(u_i, u_j) \propto \rho(u_i, u_j)$$ where
-$\rho(u_i, u_j)$ represents the strength of the relationship between users $u_i$ and $u_j$. The transfer amount $T_{\text{transfer}}$ is modeled as a Gamma distribution:
+$$\rho(u_i, u_j)$$ represents the strength of the relationship between users $$u_i$$ and $$u_j$$. The transfer amount $$T_{\text{transfer}}$$ is modeled as a Gamma distribution:
 $$T_{\text{transfer}} \sim \text{Gamma}(\alpha_{u_i, u_j}, \beta_{u_i, u_j})$$
-where $\alpha_{u_i, u_j}$ and $\beta_{u_i, u_j}$ are parameters based on historical transfer behavior.
+where $$\alpha_{u_i, u_j}$$ and $$\beta_{u_i, u_j}$$ are parameters based on historical transfer behavior.
 
 **Anomalous Transaction Generation:** Anomalous Transaction focus on fraudulent activities. Fraudulent transfers are generated by selecting a fraud group and victims.
 
-**Fraud Transaction Amount:** The fraudulent transaction amount $T_{\text{fraud\_amount}}$ is modeled as:
+**Fraud Transaction Amount:** The fraudulent transaction amount $$T_{\text{fraud\_amount}}$$ is modeled as:
 $$T_{\text{fraud\_amount}} \sim \mathcal{N}(\mu_v, \sigma_v) \cdot h(\text{fraud\_scenario})$$
 where $\mu_v$ and $\sigma_v$ represent the victim's income distribution, and $h(\cdot)$ encodes the characteristics of different fraud scenarios, such as wire, radio, or television communications.
 
 **Fraud Transaction Time:** Fraud transaction timestamps follow a normal distribution:
 $$T_{\text{fraud\_time}} \sim \mathcal{N}(\mu_f, \sigma_f)$$
 
-To introduce randomness, we apply **BMC** sampling. Given a transaction attribute $X$ with probability distribution $P(X)$, the BMC method estimates expected values by sampling $N$ instances of $X$ from the distribution $P(X)$:
+To introduce randomness, we apply **BMC** sampling. Given a transaction attribute $X$ with probability distribution $P(X)$, the BMC method estimates expected values by sampling $$N$$ instances of $$X$$ from the distribution $$P(X)$$:
 $$X^{(i)} = \frac{1}{N} \sum_{j=1}^{N} f(X_j), \quad X_j \sim P(X)$$
-where $f(\cdot)$ is the function being estimated. Combining BMC with statistical modeling, we construct a transaction table with over 30 fields, including Processing Code, RRN, STAN, Acquirer Identifier, and others, following [@ISO8583-2023; @VisaRules; @MastercardTPR], to facilitate AWF model development in statistical machine learning.
+where $$f(\cdot)$$ is the function being estimated. Combining BMC with statistical modeling, we construct a transaction table with over 30 fields, including Processing Code, RRN, STAN, Acquirer Identifier, and others, following [@ISO8583-2023; @VisaRules; @MastercardTPR], to facilitate AWF model development in statistical machine learning.
 
 # Graph Construction and Feature Encoding
 
