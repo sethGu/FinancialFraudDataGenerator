@@ -32,7 +32,7 @@ This work develops a financial transaction construction method based on Batch-ba
 
 ## Agent Construction
 
-This section defines the key agents---users, debit cards, relatives, and merchants---each with specific attributes and behaviors. Their interactions follow a rule-based process $f(A_i, A_j, t)$, with state transitions governed by a Markov process $$P$$ [@GRAZZINI201726]:
+This section defines the key agents---users, debit cards, relatives, and merchants---each with specific attributes and behaviors. Their interactions follow a rule-based process $$f(A_i, A_j, t)$$, with state transitions governed by a Markov process $$P$$ [@GRAZZINI201726]:
 
 $$P = \begin{bmatrix}
 P_{11} & \dots & P_{1n} \\
@@ -46,7 +46,7 @@ $$s_i$$ to $$s_j$$.
 $$\text{age}_i \sim P(\text{age}), \quad \mathcal{A}_{\text{salary}} \sim P(\text{salary} \mid \text{occupation}_i)$$ 
 Gender follows demographic ratios. Occupation and salary are assigned based on population distributions.
 
-**Merchant Agents:** Merchant agents $$A_{\text{merchant}}$ are characterized by $\mathcal{A}_{\text{merchant}} = \{ \text{industry}, \text{hours}, \text{range}, \text{level}, \text{status} \}$$. Industry is selected from $$P(\mathcal{I})$$, with transaction range modeled as: 
+**Merchant Agents:** Merchant agents $$A_{\text{merchant}}$$ are characterized by $$\mathcal{A}_{\text{merchant}} = \{ \text{industry}, \text{hours}, \text{range}, \text{level}, \text{status} \}$$. Industry is selected from $$P(\mathcal{I})$$, with transaction range modeled as: 
 $$T_i(t) \sim \mathcal{N}(\mu_{\mathcal{I}_i}, \sigma_{\mathcal{I}_i}) \cdot \alpha_i(t) \cdot \beta_i(t)$$
 where $$\mathcal{N}(\mu_{\mathcal{I}_i}, \sigma_{\mathcal{I}_i})$$ represents the normal distribution for the industry $$\mathcal{I}_i$$, and $$\alpha_i(t), \beta_i(t)$$ are decay factors. These decay factors are updated according to real financial data, which classifies each industry into several tiers, reflecting actual transaction value distributions across sub-categories. Merchant status $$\mathcal{A}_{\text{status}}$$ is modeled as normal or abnormal, with the abnormal status indicating potential fraud. Status transitions are governed by a Markov process.
 
@@ -83,12 +83,12 @@ where $$\alpha_{u_i, u_j}$$ and $$\beta_{u_i, u_j}$$ are parameters based on his
 
 **Fraud Transaction Amount:** The fraudulent transaction amount $$T_{\text{fraud\_amount}}$$ is modeled as:
 $$T_{\text{fraud\_amount}} \sim \mathcal{N}(\mu_v, \sigma_v) \cdot h(\text{fraud\_scenario})$$
-where $\mu_v$ and $\sigma_v$ represent the victim's income distribution, and $h(\cdot)$ encodes the characteristics of different fraud scenarios, such as wire, radio, or television communications.
+where $$\mu_v$$ and $$\sigma_v$$ represent the victim's income distribution, and $$h(\cdot)$$ encodes the characteristics of different fraud scenarios, such as wire, radio, or television communications.
 
 **Fraud Transaction Time:** Fraud transaction timestamps follow a normal distribution:
 $$T_{\text{fraud\_time}} \sim \mathcal{N}(\mu_f, \sigma_f)$$
 
-To introduce randomness, we apply **BMC** sampling. Given a transaction attribute $X$ with probability distribution $P(X)$, the BMC method estimates expected values by sampling $$N$$ instances of $$X$$ from the distribution $$P(X)$$:
+To introduce randomness, we apply **BMC** sampling. Given a transaction attribute $$X$$ with probability distribution $$P(X)$$, the BMC method estimates expected values by sampling $$N$$ instances of $$X$$ from the distribution $$P(X)$$:
 $$X^{(i)} = \frac{1}{N} \sum_{j=1}^{N} f(X_j), \quad X_j \sim P(X)$$
 where $$f(\cdot)$$ is the function being estimated. Combining BMC with statistical modeling, we construct a transaction table with over 30 fields, including Processing Code, RRN, STAN, Acquirer Identifier, and others, following [@ISO8583-2023; @VisaRules; @MastercardTPR], to facilitate AWF model development in statistical machine learning.
 
@@ -113,6 +113,6 @@ However, as merchants are not the primary detection targets, we enhance graph co
 
 **Cyclic Patterns in Graph**: The transaction graph generated from the transaction table reveals over 10,000 cycles, indicating fund recirculation behaviors typical of fraud and money laundering, with several key accounts involved in recurring transactions. As shown in the left half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"}, these cycles range from simple 4-node loops to complex multi-node structures, similar to the Fraud Patterns in [@altman2023realistic], reflecting diverse fraud tactics such as layered transactions and networked fraudulent groups.
 
-**Community in Transactions Graph**: Applying the Louvain algorithm reveals numerous small communities ($\leq$`<!-- -->`{=html}10 accounts), indicative of localized fraud rings, alongside larger clusters (140+ accounts) that may function as laundering hubs. The right half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"} shows a skewed community size distribution, confirming that the dataset captures both tightly connected fraud networks and expansive intermediary structures, reflecting the hierarchical nature of wire fraud schemes.
+**Community in Transactions Graph**: Applying the Louvain algorithm reveals numerous small communities ($$\leq$$`<!-- -->`{=html}10 accounts), indicative of localized fraud rings, alongside larger clusters (140+ accounts) that may function as laundering hubs. The right half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"} shows a skewed community size distribution, confirming that the dataset captures both tightly connected fraud networks and expansive intermediary structures, reflecting the hierarchical nature of wire fraud schemes.
 
 **Demonstrations**: Demonstration presents our AWF generator, which consists of a pip package and a demo video. Due to space constraints, details can be found in the demo video.
