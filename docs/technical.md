@@ -2,6 +2,9 @@
 
 This document provides a comprehensive technical description of the data generation mechanism in **F²-Gen**, an open-source platform for simulating scenario-based financial fraud datasets.
 
+To learn about the underlying simulation engine, see the [F²-Gen Engine](engine.html). For hands-on use, refer to the [Usage Guide](usage.html).
+
+
 ---
 
 ## 1. Overview
