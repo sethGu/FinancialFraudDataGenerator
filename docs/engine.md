@@ -26,9 +26,10 @@ This work develops a financial transaction construction method based on Batch-ba
 
 # Core Simulation Logic: Agent and Transactions
 
-**Motivation**: Obtaining wire fraud transaction data is challenging due to fraud complexity, label misclassification, and banking privacy policies that restrict access to transaction records. To this end, we introduce the AWF transaction generator, as shown in the left half of Fig. [1](#fig:Illustration){reference-type="ref" reference="fig:Illustration"}, which accurately reflects real-world fraud patterns and transaction fluctuations.
+**Motivation**: Obtaining wire fraud transaction data is challenging due to fraud complexity, label misclassification, and banking privacy policies that restrict access to transaction records. To this end, we introduce the AWF transaction generator, as shown in the left half of **Figure 1**, which accurately reflects real-world fraud patterns and transaction fluctuations.
 
-![The architecture of AWF transaction generator](assets/Illustration.png){#fig:Illustration}
+![The architecture of AWF transaction generator](assets/Illustration.png)
+**Figure 1**
 
 ## Agent Construction
 
@@ -100,20 +101,22 @@ where $$f(\cdot)$$ is the function being estimated. Combining BMC with statistic
 
 **Transaction Graph Construction:**
 
-To facilitate the learning of the AWF graph-based model, we construct transfer and consumption transaction networks, as shown in the right half of Fig. [1](#fig:Illustration){reference-type="ref" reference="fig:Illustration"}. Starting with raw data, we filter noise, address anomalies and missing values, then extract banking card features. In the transfer graph network, bank cards serve as nodes with transaction pattern attributes, while directed edges represent transactions. To reduce noise and complexity, we apply transfer-type filtering, analyzing correlations between transaction types and fraudulent card distributions. Transactions with minimal fraud activity are pruned to refine the network structure. In the consumption transaction network, purchases are made using bank cards at merchants.
+To facilitate the learning of the AWF graph-based model, we construct transfer and consumption transaction networks, as shown in the right half of **Figure 1**. Starting with raw data, we filter noise, address anomalies and missing values, then extract banking card features. In the transfer graph network, bank cards serve as nodes with transaction pattern attributes, while directed edges represent transactions. To reduce noise and complexity, we apply transfer-type filtering, analyzing correlations between transaction types and fraudulent card distributions. Transactions with minimal fraud activity are pruned to refine the network structure. In the consumption transaction network, purchases are made using bank cards at merchants.
 However, as merchants are not the primary detection targets, we enhance graph connectivity by linking bank cards based on risk rules, effectively eliminating merchants from the graph and forming a homogeneous card consumption network. Nodes retain the same transaction pattern attributes as in the transfer network, while edges are constructed based on identified risk patterns.
 
-![The generated dataset spans October 1, 2022, to August 10, 2023, containing 1.92 million transactions, 90,800 cards, and 6,250 merchants.](assets/pairplot_output.png){#fig:distribution}
+![The generated dataset spans October 1, 2022, to August 10, 2023, containing 1.92 million transactions, 90,800 cards, and 6,250 merchants.](assets/pairplot_output.png)
+**Figure 2**
 
 # Visualization and Validation Examples
 
-**Distribution in Transaction Table**: Fig. [2](#fig:distribution){reference-type="ref" reference="fig:distribution"} shows the distributions of STAN, Acquirer Identifier, Transaction Amount, and Transaction Time, demonstrating strong alignment with real-world financial transactions and wire fraud patterns. The generated data preserves key statistical properties, with variations mainly in distribution steepness. These results confirm the dataset's realism and its applicability for AWF modeling.
+**Distribution in Transaction Table**: **Figure 2** shows the distributions of STAN, Acquirer Identifier, Transaction Amount, and Transaction Time, demonstrating strong alignment with real-world financial transactions and wire fraud patterns. The generated data preserves key statistical properties, with variations mainly in distribution steepness. These results confirm the dataset's realism and its applicability for AWF modeling.
 
-![Wire Fraud Patterns in Transactions Graph.](assets/data_explore.png){#fig:graph_explore}
+![Wire Fraud Patterns in Transactions Graph.](assets/data_explore.png)
+**Figure 3**
 
-**Cyclic Patterns in Graph**: The transaction graph generated from the transaction table reveals over 10,000 cycles, indicating fund recirculation behaviors typical of fraud and money laundering, with several key accounts involved in recurring transactions. As shown in the left half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"}, these cycles range from simple 4-node loops to complex multi-node structures, similar to the Fraud Patterns in [altman2023realistic](#ref-altman2023realistic), reflecting diverse fraud tactics such as layered transactions and networked fraudulent groups.
+**Cyclic Patterns in Graph**: The transaction graph generated from the transaction table reveals over 10,000 cycles, indicating fund recirculation behaviors typical of fraud and money laundering, with several key accounts involved in recurring transactions. As shown in the left half of **Figure 3**, these cycles range from simple 4-node loops to complex multi-node structures, similar to the Fraud Patterns in [altman2023realistic](#ref-altman2023realistic), reflecting diverse fraud tactics such as layered transactions and networked fraudulent groups.
 
-**Community in Transactions Graph**: Applying the Louvain algorithm reveals numerous small communities ($$\leq$$`<!-- -->`{=html}10 accounts), indicative of localized fraud rings, alongside larger clusters (140+ accounts) that may function as laundering hubs. The right half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"} shows a skewed community size distribution, confirming that the dataset captures both tightly connected fraud networks and expansive intermediary structures, reflecting the hierarchical nature of wire fraud schemes.
+**Community in Transactions Graph**: Applying the Louvain algorithm reveals numerous small communities ($$\leq$$`<!-- -->`{=html}10 accounts), indicative of localized fraud rings, alongside larger clusters (140+ accounts) that may function as laundering hubs. The right half of **Figure 3** shows a skewed community size distribution, confirming that the dataset captures both tightly connected fraud networks and expansive intermediary structures, reflecting the hierarchical nature of wire fraud schemes.
 
 ## References
 
