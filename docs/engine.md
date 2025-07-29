@@ -90,7 +90,7 @@ $$T_{\text{fraud\_time}} \sim \mathcal{N}(\mu_f, \sigma_f)$$
 
 To introduce randomness, we apply **BMC** sampling. Given a transaction attribute $$X$$ with probability distribution $$P(X)$$, the BMC method estimates expected values by sampling $$N$$ instances of $$X$$ from the distribution $$P(X)$$:
 $$X^{(i)} = \frac{1}{N} \sum_{j=1}^{N} f(X_j), \quad X_j \sim P(X)$$
-where $$f(\cdot)$$ is the function being estimated. Combining BMC with statistical modeling, we construct a transaction table with over 30 fields, including Processing Code, RRN, STAN, Acquirer Identifier, and others, following [@ISO8583-2023; @VisaRules; @MastercardTPR], to facilitate AWF model development in statistical machine learning.
+where $$f(\cdot)$$ is the function being estimated. Combining BMC with statistical modeling, we construct a transaction table with over 30 fields, including Processing Code, RRN, STAN, Acquirer Identifier, and others, following [ISO8583-2023](#ref-ISO8583-2023), [VisaRules](#ref-VisaRules), [MastercardTPR](#MastercardTPR), to facilitate AWF model development in statistical machine learning.
 
 # Graph Construction and Feature Encoding
 
@@ -111,8 +111,41 @@ However, as merchants are not the primary detection targets, we enhance graph co
 
 ![Wire Fraud Patterns in Transactions Graph.](data_explore.png){#fig:graph_explore}
 
-**Cyclic Patterns in Graph**: The transaction graph generated from the transaction table reveals over 10,000 cycles, indicating fund recirculation behaviors typical of fraud and money laundering, with several key accounts involved in recurring transactions. As shown in the left half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"}, these cycles range from simple 4-node loops to complex multi-node structures, similar to the Fraud Patterns in [@altman2023realistic], reflecting diverse fraud tactics such as layered transactions and networked fraudulent groups.
+**Cyclic Patterns in Graph**: The transaction graph generated from the transaction table reveals over 10,000 cycles, indicating fund recirculation behaviors typical of fraud and money laundering, with several key accounts involved in recurring transactions. As shown in the left half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"}, these cycles range from simple 4-node loops to complex multi-node structures, similar to the Fraud Patterns in [altman2023realistic](#ref-altman2023realistic), reflecting diverse fraud tactics such as layered transactions and networked fraudulent groups.
 
 **Community in Transactions Graph**: Applying the Louvain algorithm reveals numerous small communities ($$\leq$$`<!-- -->`{=html}10 accounts), indicative of localized fraud rings, alongside larger clusters (140+ accounts) that may function as laundering hubs. The right half of Fig. [3](#fig:graph_explore){reference-type="ref" reference="fig:graph_explore"} shows a skewed community size distribution, confirming that the dataset captures both tightly connected fraud networks and expansive intermediary structures, reflecting the hierarchical nature of wire fraud schemes.
 
-**Demonstrations**: Demonstration presents our AWF generator, which consists of a pip package and a demo video. Due to space constraints, details can be found in the demo video.
+## References
+
+- <span id="ref-ISO8583-2023">[ISO8583-2023]</span> International Organization for Standardization. *ISO 8583:2023 - Financial Transaction Card Originated Messages – Interchange Message Specifications*. International Organization for Standardization (ISO), 2023. [Available here](https://www.iso.org/standard/79451.html)
+
+- <span id="ref-VisaRules">[VisaRules]</span> Visa Inc. *Visa Core Rules and Visa Product and Service Rules*. 2015. [Available here](https://usa.visa.com/dam/VCOM/download/about-visa/visa-rules-public.pdf)
+
+- <span id="ref-MastercardTPR">[MastercardTPR]</span> Mastercard International Incorporated. *Transaction Processing Rules*. 2025. [Available here](https://www.mastercard.us/content/dam/public/mastercardcom/na/global-site/documents/transaction-processing-rules.pdf)
+
+- <span id="ref-IC3_2024">[IC3_2024]</span> IC3. *Public Service Announcement: IC3 Fraud Report*. 2024. [Available here](https://www.ic3.gov/PSA/2024/PSA240911)
+
+- <span id="ref-10.1145/3469886">[10.1145/3469886]</span> Giuseppe Desolda, Lauren S. Ferro, Andrea Marrella, Tiziana Catarci, Maria Francesca Costabile. *Human Factors in Phishing Attacks: A Systematic Literature Review*. ACM Comput. Surv., 2022. [Available here](https://doi.org/10.1145/3469886)
+
+- <span id="ref-USC_18_1343_2023">[USC_18_1343_2023]</span> United States Congress. *Title 18 U.S. Code § 1343 - Fraud by wire, radio, or television*. 2023. [Available here](https://www.govinfo.gov/content/pkg/USCODE-2023-title18/pdf/USCODE-2023-title18-partI-chap63-sec1343.pdf)
+
+- <span id="ref-CybersecurityVentures_2025">[CybersecurityVentures_2025]</span> Cybersecurity Ventures. *Cybercrime Damage Costs To Hit \$10 Trillion By 2025*. 2023. [Available here](https://cybersecurityventures.com/cybercrime-damage-costs-10-trillion-by-2025/)
+
+- <span id="ref-CertifID_2024">[CertifID_2024]</span> CertifID. *2024 Sued for Wire Fraud Report: What We Learned About Liability*. 2024. [Available here](https://www.certifid.com/article/2024-sued-for-wire-fraud-report-what-we-learned-about-liability)
+
+- <span id="ref-10191990">[10191990]</span> Ramachandran, K., Kayathwal, K., Wadhwa, H., Dhama, G. *FraudAmmo: Large Scale Synthetic Transactional Dataset for Payment Fraud Detection*. IJCNN, 2023. [Available here](https://doi.org/10.1109/IJCNN54540.2023.10191990)
+
+- <span id="ref-ijcai2023p828">[ijcai2023p828]</span> Baumann, J., Castelnovo, A., Cosentini, A., Crupi, R., Inverardi, N., Regoli, D. *Bias On Demand: Investigating Bias with a Synthetic Data Generator*. IJCAI-23, 2023. [Available here](https://doi.org/10.24963/ijcai.2023/828)
+
+- <span id="ref-altman2023realistic">[altman2023realistic]</span> Altman, E., Blanuša, J., Von Niederhäusern, L., Egressy, B., Anghel, A., Atasu, K. *Realistic Synthetic Financial Transactions for Anti-Money Laundering Models*. NeurIPS Datasets and Benchmarks, 2023. [Available here](https://openreview.net/forum?id=XZf2bnMBag)
+
+- <span id="ref-DBLP:conf/flairs/SuZDZW20">[Su et al., 2020]</span> Su, Y., Zhu, X., Dong, B., Zhang, Y., Wu, X. *MedFroDetect: Medicare Fraud Detection with Extremely Imbalanced Class Distributions*. FLAIRS, 2020. [Available here](https://aaai.org/ocs/index.php/FLAIRS/FLAIRS20/paper/view/18462)
+
+- <span id="ref-Akoglu_Chandy_Faloutsos_2021">[Akoglu et al., 2021]</span> Akoglu, L., Chandy, R., Faloutsos, C. *Opinion Fraud Detection in Online Reviews by Network Effects*. ICWSM, 2021. [Available here](https://ojs.aaai.org/index.php/ICWSM/article/view/14380)
+
+- <span id="ref-jesus2022turning">[jesus2022turning]</span> Jesus, S., Pombal, J., Alves, D., Cruz, A., Saleiro, P., Ribeiro, R. P., Gama, J., Bizarro, P. *Turning the Tables: Biased, Imbalanced, Dynamic Tabular Datasets for ML Evaluation*. NeurIPS, 2022. [Available here](https://openreview.net/forum?id=UrAYT2QwOX8)
+
+- <span id="ref-6145622">[6145622]</span> Browne, C. B., et al. *A Survey of Monte Carlo Tree Search Methods*. IEEE Trans. Comput. Intell. AI Games, 2012. [Available here](https://doi.org/10.1109/TCIAIG.2012.2186810)
+
+- <span id="ref-GRAZZINI201726">[GRAZZINI201726]</span> Grazzini, J., Richiardi, M. G., Tsionas, M. *Bayesian estimation of agent-based models*. Journal of Economic Dynamics and Control, 2017. [Available here](https://doi.org/10.1016/j.jedc.2017.01.014)
+
