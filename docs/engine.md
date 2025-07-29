@@ -1,3 +1,8 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);">
+</script>
 
 
 This document presents the simulation engine underpinning **F²-Gen**, an open-source platform for multi-scenario financial fraud data generation. The engine supports six major types of fraud behaviors—including credit card abuse, illegal gambling, merchant violations, and wire fraud—through a unified agent-based and transaction-level modeling framework.
