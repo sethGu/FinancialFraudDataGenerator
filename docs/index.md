@@ -14,8 +14,9 @@ Welcome to **F²-Gen**, a research-driven open-source platform for scenario-base
 
 ## 🔗 Get Started
 
+- 🖥️ [Deployment Instructions (Non-Docker)](deploy.html)
+- 🐳 [Deployment Guide (Docker)](deploy_docker.html)
 - 🧭 [Usage Guide](usage.html)
-- 🧰 [Deployment Instructions](deploy.html)
 - 📖 [Technical Plan](technical.html)
 - 📂 [Engine](engine.html)
 - 📌 [Fraud Scenarios Overview](scenarios.html)
