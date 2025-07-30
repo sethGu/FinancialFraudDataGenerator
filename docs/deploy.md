@@ -7,6 +7,20 @@ This page describes the standard environment-based deployment method for **F²-G
 > 🎮 To begin using the system, check out the [Usage Guide](usage.html).
 
 
+<div style="margin-top: 1em; margin-bottom: 1em;">
+  <a href="https://github.com/sethGu/FinancialFraudDataGenerator/releases/download/v1.0/F2Gen-v1.0.zip" style="text-decoration: none;">
+    <button style="background-color: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
+      ⬇️ Download .zip
+    </button>
+  </a>
+  <a href="https://github.com/sethGu/FinancialFraudDataGenerator/releases/download/v1.0/F2Gen-v1.0.tar.gz" style="text-decoration: none; margin-left: 10px;">
+    <button style="background-color: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
+      ⬇️ Download .tar.gz
+    </button>
+  </a>
+</div>
+
+
 ## Specific Steps
 
 ### Environment Setup
