@@ -1,6 +1,5 @@
 import os
 
-# 基础路径 BASE_DIR = ././YTSystem/
 import pymysql
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -30,11 +29,11 @@ class get_mysql_connection():
     #     self.cursor.execute(sql,item)
 
     def close(self):
-        print('关闭mysql连接')
+        print('Close MySQL connection.')
         try:
             self.connection.close()
         except:
-            print('mysql连接已关闭')
+            print('The MySQL connection has been closed.')
 
     def commit(self):
         self.connection.commit()
@@ -43,4 +42,4 @@ class get_mysql_connection():
     #     try:
     #         self.connection.close()
     #     except:
-    #         print('mysql连接已关闭')
+    #         print('The MySQL connection has been closed.')

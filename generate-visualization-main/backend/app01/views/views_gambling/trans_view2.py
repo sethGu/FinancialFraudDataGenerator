@@ -18,7 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from smart_finance_main import api_DataGeneration
 
 
-# 赌博
+# Gambling_violation
 @require_http_methods(["POST"])
 def GamblingTrans_2(request):
     postBody = request.body
@@ -40,14 +40,14 @@ def GamblingTrans_2(request):
     store_quantity = p['store_quantity']
     user_quantity = p['user_quantity']
 
-    print("生成赌博开始")
+    print("Start generating gambling")
 
     api_DataGeneration.api_GamblingTrans(is_in_opening_time, personal_trans_time_ratio, low_rank_store_ratio,
                                          middle_rank_store_ratio, high_rank_store_ratio,
                                          gambling_user_ratio, year, month, day, duration, store_quantity, user_quantity)
 
     # api_DataGeneration.api_GamblingTrans()
-    print("生成赌博结束")
+    print("End generating gambling")
 
     return GamblingTransDisplay()
 
@@ -79,11 +79,11 @@ def GamblingTransDisplay():
 
     GamblingTrans_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "赌博交易",
+            'name': "Gambling transaction",
             'value': GamblingTrans_num
         }
     ]

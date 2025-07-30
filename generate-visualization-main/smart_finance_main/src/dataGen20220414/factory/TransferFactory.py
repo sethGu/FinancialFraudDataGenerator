@@ -11,19 +11,19 @@ from src.utils.functions import getday
 
 
 def from_xflx_to_je(xflx):
-    xflx_je_dict = {"小": "2-600", "中": "60-500", "大": "50-5000"}
+    xflx_je_dict = {"Small": "2-600", "Medium": "60-500", "Large": "50-5000"}
     jefw = xflx_je_dict[xflx]
     je_st = int(jefw.strip("\"").split("-")[0])
     je_ed = int(jefw.strip("\"").split("-")[1])
-    if xflx == '中':
+    if xflx == 'Medium':
         return random.randint(je_st, je_ed) * 10
-    elif xflx == '大':
+    elif xflx == 'Large':
         return random.randint(je_st, je_ed) * 100
     return random.randint(je_st, je_ed)
 
 
 def get_trans_time_duration(xflx):
-    xflx_je_dict = {"小":"1-30", "中":"10-20", "大":"20-30" }
+    xflx_je_dict = {"Small":"1-30", "Medium":"10-20", "Large":"20-30" }
     jefw = xflx_je_dict[xflx]
     je_st = int(jefw.strip("\"").split("-")[0])
     je_ed = int(jefw.strip("\"").split("-")[1])
@@ -41,46 +41,33 @@ class TransferFactory:
         # start_year = 2022
         # start_month = 2
         # start_day = 1
-        # duration = 365  # 生成的持续时间
+        # duration = 365
         end_day_str, (end_year, end_month, end_day) = getday(y=start_year, m=start_month, d=start_day, n=duration)
         # print(end_day_str, end_year, end_month, end_day)
 
-        # 读取user
         user_list =  self.userService.selectUsers()
 
         for d in range(duration):
-            for user in user_list: # 针对每一个用户
-                #第一步：根据工资生成总转账次数
+            for user in user_list:
                 transferService = TransferService()
                 total_trans_num = transferService.from_wage_to_total_trans_num(user.wage)
-                # 第二步：根据总转账次数，得到user分别给1、2、3阶中亲戚的总转账记录条数
                 per_ji_transfer_time = transferService.per_ji_tras_time( total_trans_num  )
 
-                #针对1、2、3每一阶
                 neighboursDic = self.relativeService.getNearestNeighborsOfN( user.id, 3 )
                 for js in range(1,4):
                     if not neighboursDic.__contains__(js):
                         continue
                     benjie_qqlb = neighboursDic[js]
-                    # 针对该用户每一阶的每一笔转账
                     for c in range( per_ji_transfer_time[js] ):
-                        # 第三步：选择转账对象与他的银行卡
                         dx = random.choice(benjie_qqlb)
-                        dx_card_list = self.cardService.getTransferCardByOwnerId(dx)     #查接受对象的银行卡列表
+                        dx_card_list = self.cardService.getTransferCardByOwnerId(dx)
                         dx_card = random.choice( dx_card_list )
 
-                        # 第四步：确定消费类型：学费、月度零花钱、日常小额转账【这里对应是确定大中小类型】
                         xflx = transferService.from_wage_to_xflx(user.wage)
-                        # print("消费类型 ", xflx)
-                        # 第四步：确定转账金额
                         je = from_xflx_to_je( xflx )
-                        # print("金额",je)
-                        #第五步：确定自己转出的信用卡。（这里要考虑转账金额要小于信用卡额度吗）
                         user_card = random.choice( user.getCard() )
 
-                        # 第六步：根据消费类型，选择消费时间。消费类型越大，时间间隔越大
                         trans_time_duration = get_trans_time_duration( xflx )
-                        # 到了转账的日子了：
                         if d % trans_time_duration == 0:
                             trans_time_duration = random.randint(
                                 (trans_time_duration - 3) if trans_time_duration - 3 >= 0 else 0,
@@ -106,7 +93,7 @@ class TransferFactory:
                                           T29='00000000', T30='', T31='00000000',T32='', T33='', T34='', T35='01', T36='', T37=user_card['C4'], T38='1',
                                           T39='1',
                                           abnormal=0,
-                                          abnormal_state= {"赌博违规交易": 0, "伪冒注册欺诈": 0,"信用卡违规套现":0, "黄牛营销欺诈":0, "商户违规":0,"异常转账":0}
+                                          abnormal_state= {"Gambling_violation":0, "Fake_registration":0,"Credit_card_fraud":0, "Scalper_marketing":0, "Merchant_violation":0,"Abnormal_transfer":0}
                                           )
 
                             self.transService.insertTrans(trans)

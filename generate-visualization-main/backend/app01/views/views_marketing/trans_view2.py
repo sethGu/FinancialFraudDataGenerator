@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from smart_finance_main import api_DataGeneration
 
 
-# 黄牛营销欺诈
+# Scalper_marketing
 @require_http_methods(["POST"])
 def MarketingFraud(request):
     postBody = request.body
@@ -37,11 +37,11 @@ def MarketingFraud(request):
     duration = p['duration']
     # print(fraud_user_quantity, store_quantity, start_year, start_month, start_day, duration)
 
-    print("生成黄牛营销欺诈开始")
+    print("Start generating scalper marketing fraud")
     api_DataGeneration.api_MarketingFraud(is_in_opening_time, cloth_ratio, life_service_ratio, fraud_user_quantity,
                                           store_quantity, start_year, start_month,
                                           start_day, duration)
-    print("生成黄牛营销欺诈结束")
+    print("End generating scalper marketing fraud")
     return MarketingFraudDisplay()
 
 
@@ -72,11 +72,11 @@ def MarketingFraudDisplay():
 
     MarketingFraud_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "黄牛营销欺诈交易",
+            'name': "Scalper marketing fraud transaction",
             'value': MarketingFraud_num
         }
     ]

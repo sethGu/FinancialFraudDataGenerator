@@ -8,18 +8,17 @@ class StoreDao():
     def __init__(self):
         pass
 
-    # 创建store数据库表
     def createStoreTable(self, table_name):
 
         # sql = """
         #             CREATE TABLE `store`  (
-        #                 `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
-        #                 `industry` varchar(50) NULL DEFAULT NULL COMMENT '行业',
-        #                 `name_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '商铺名称' ,
-        #                 `rank_` varchar(50) NULL DEFAULT NULL COMMENT '等级',
+        #                 `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'ID primary key',
+        #                 `industry` varchar(50) NULL DEFAULT NULL COMMENT 'Industry',
+        #                 `name_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'Store name' ,
+        #                 `rank_` varchar(50) NULL DEFAULT NULL COMMENT 'Level',
         #
-        #                 `consumption_range` json NULL DEFAULT NULL COMMENT '消费区间',
-        #                 `opening_hours` varchar(50) NULL DEFAULT NULL COMMENT '营业时间',
+        #                 `consumption_range` json NULL DEFAULT NULL COMMENT 'Spending range',
+        #                 `opening_hours` varchar(50) NULL DEFAULT NULL COMMENT 'Business hours',
         #
         #                 `S1` varchar(50) null default null comment '',
         #                 `S2` varchar(20) null default null COMMENT '',
@@ -51,20 +50,20 @@ class StoreDao():
         #                 `S28` varchar(20) null default null COMMENT '',
         #                 `S29` varchar(20) null default null COMMENT '',
         #                 `S30` json NULL DEFAULT NULL COMMENT '',
-        #                 `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-        #                 `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
+        #                 `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+        #                 `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
         #                 PRIMARY KEY (`id`) USING BTREE
         #             ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
         #             """
 
         sql = """CREATE TABLE """ + """`""" + table_name + """`  (
-                        `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
-                        `industry` varchar(50) NULL DEFAULT NULL COMMENT '行业',
-                        `name_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '商铺名称' ,
-                        `rank_` varchar(50) NULL DEFAULT NULL COMMENT '等级',
+                        `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'ID primary key',
+                        `industry` varchar(50) NULL DEFAULT NULL COMMENT 'Industry',
+                        `name_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'Store name' ,
+                        `rank_` varchar(50) NULL DEFAULT NULL COMMENT 'Level',
                         
-                        `consumption_range` json NULL DEFAULT NULL COMMENT '消费区间',
-                        `opening_hours` varchar(50) NULL DEFAULT NULL COMMENT '营业时间',
+                        `consumption_range` json NULL DEFAULT NULL COMMENT 'Spending range',
+                        `opening_hours` varchar(50) NULL DEFAULT NULL COMMENT 'Business hours',
                         
                         `S1` varchar(50) null default null comment '',
                         `S2` varchar(20) null default null COMMENT '',
@@ -96,8 +95,8 @@ class StoreDao():
                         `S28` varchar(20) null default null COMMENT '',
                         `S29` varchar(20) null default null COMMENT '',
                         `S30` json NULL DEFAULT NULL COMMENT '',
-                        `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-                        `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
+                        `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+                        `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
                         PRIMARY KEY (`id`) USING BTREE 
                     ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;"""
         try:
@@ -157,7 +156,6 @@ class StoreDao():
             S27 = store.S27
             S28 = store.S28
             S29 = store.S29
-            # 务必要转换成JSON字符串，否则会因为编译器导致dic中为单引号，使得非JSON格式，而插入失败
             abnormal_state = json.dumps(store.getAbnormal_state())
             sql = """
                         insert into """ + table_name + """(id, industry, name_, rank_,consumption_range,opening_hours,
@@ -217,12 +215,6 @@ class StoreDao():
         db.commit()
 
     def updateStoreState(self,store_id, fraud_category, table_name):
-        '''
-        更新商户是否为欺诈商户
-        :param store_id:
-        :param fraud_category:
-        :return:
-        '''
         sql_select = """
                 select id,abnormal,abnormal_state
                 from """ + table_name + """ 
@@ -238,12 +230,10 @@ class StoreDao():
         abnormal_state = json.loads(abnormal_state)
         if fraud_category == '' or fraud_category == None:
             abnormal = 0
-            # 将字典中的所有值设为0
             abnormal_state = dict.fromkeys(abnormal_state, 0)
         else:
             abnormal = 1
             abnormal_state[fraud_category] = 1
-        # 更新数据库
         sql_update = """
                 update """ + table_name + """
                 set abnormal = %s, abnormal_state = %s
@@ -262,7 +252,6 @@ class StoreDao():
 
         db = get_mysql_connection()
         cursor = db.cursor()
-        # 更新数据库
         sql_update = """
                 update """ + table_name + """
                 set S30 = %s

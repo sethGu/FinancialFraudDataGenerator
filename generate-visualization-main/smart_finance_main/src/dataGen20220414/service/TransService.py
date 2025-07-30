@@ -18,9 +18,9 @@ class TransService():
         self.storeService = StoreService(scene)
         self.cardService = CardService(scene)
 
-        self.table_names = {"黄牛营销欺诈": 'marketing_trans', "信用卡违规套现": 'credit_trans', "异常转账": 'abnormal_trans',
-                        "伪冒注册欺诈": 'register_trans', "赌博违规交易": 'gambling_trans',
-                        "商户违规": 'store_trans'}
+        self.table_names = {"Scalper_marketing": 'marketing_trans', "Credit_card_fraud": 'credit_trans', "Abnormal_transfer": 'abnormal_trans',
+                        "Fake_registration": 'register_trans', "Gambling_violation": 'gambling_trans',
+                        "Merchant_violation": 'store_trans'}
         self.scene = self.table_names[scene]
     def createTransTable(self):
         self.transDao.createTransTable(self.scene)
@@ -76,7 +76,7 @@ class TransService():
         trans.T30 = '0000'
         if trans.T25 == '000000000000000':
             trans.T28 = random.choice(['01', '03', '07'])
-            trans.T32 = 'XXXX转账'
+            trans.T32 = 'XXXX_transfer'
         else:
             store = self.storeService.selectStoreByS1(trans.T25)
             trans.T28 = '01'
@@ -88,7 +88,6 @@ class TransService():
         trans.T33 = random.choice(m) + random.choice(['0', '1', '2'])
         trans.T29 = '00000000'
 
-        # 卡相关信息
         card_info = self.cardService.getCardInfoByC4(trans.T1)
         ###########################
         trans.T20 = card_info.C11
@@ -100,8 +99,6 @@ class TransService():
         trans.T22 = trans.T20 + trans.T9 + trans.T10 + '0' + trans.T3
         self.transDao.insertTrans(trans, self.scene)
 
-
-        # 若为异常交易，插入数据至f_t
         if trans.abnormal == 1:
             rmb_to_usd = 6.6958
             F1 = '000' + ''.join(random.choice('0123456789') for _ in range(20))
@@ -130,13 +127,12 @@ class TransService():
             F20 = trans.T5
             F21 = F3[-4:]
             F22 = '000'
-            type = {"黄牛营销欺诈": 81, "信用卡违规套现": 82, "异常转账": 83, "伪冒注册欺诈": 84, "赌博违规交易": 85, "商户违规": 86, "商户团伙欺诈": 87}
+            type = {"Scalper_marketing": 81, "Credit_card_fraud": 82, "Abnormal_transfer": 83, "Fake_registration": 84, "Gambling_violation": 85, "Merchant_violation": 86, "Merchant_gang_fraud": 87}
             F23 = 0
             for k, v in trans.abnormal_state.items():
                 if v == 1:
                     F23 = type[k]
                     break
-            # F2即交易中的欺诈账户，黄牛场景是T37,其他是T1
             F2 = trans.T1
             if F23 == 81:
                 F2 = trans.T37

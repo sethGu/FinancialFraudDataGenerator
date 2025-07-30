@@ -18,7 +18,6 @@ router.beforeEach(async(to, from, next) => {
   document.title = getPageTitle(to.meta.title)
 
   // determine whether the user has logged in
-  // 首先要获得登陆用户的token，否则重定向（48行）
   const hasToken = getToken()
 
   if (hasToken) {
@@ -27,7 +26,6 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      // 获取登陆用户的权限，如果没有权限就调用getInfo获取（34行）
       const hasGetUserInfo = store.getters.name
       if (hasGetUserInfo) {
         next()

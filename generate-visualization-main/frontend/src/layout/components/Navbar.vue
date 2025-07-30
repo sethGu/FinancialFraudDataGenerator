@@ -71,23 +71,19 @@ export default {
         confirmPassword: ''
       },
       rules: {
-        // 密码规格：10-100个字符，包含大小写字母、数字、特殊字符
         oldPassword: [
           { required: true, message: 'Please enter your old password.', trigger: 'blur' },
           { min: 10, max: 100, message: 'Length must be between 10 and 100 characters.', trigger: 'blur' },
-          // 必须包含大小写字母、数字、特殊字符
           { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-])[A-Za-z\d!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-]{10,100}$/, message: 'Must include uppercase and lowercase letters, numbers, and special characters.', trigger: 'blur' }
         ],
         newPassword: [
           { required: true, message: 'Please enter your new password.', trigger: 'blur' },
           { min: 10, max: 100, message: 'Length must be between 10 and 100 characters.', trigger: 'blur' },
-          // 必须包含大小写字母、数字、特殊字符
           { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-])[A-Za-z\d!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-]{10,100}$/, message: 'Must contain uppercase and lowercase letters, numbers, and special characters.', trigger: 'blur' }
         ],
         confirmPassword: [
           { required: true, message: 'Please enter your new password again.', trigger: 'blur' },
           { min: 10, max: 100, message: 'Length must be between 6 and 16 characters.', trigger: 'blur' },
-          // 必须包含大小写字母、数字、特殊字符
           { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-])[A-Za-z\d!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-]{10,100}$/, message: 'Must contain uppercase and lowercase letters, numbers, and special characters.', trigger: 'blur' },
           {
             validator: (rule, value, callback) => {
@@ -128,11 +124,10 @@ export default {
       this.$refs.passwordForm.validate(async valid => {
         if (valid) {
           try {
-            // 密码全部加密
             this.passwordForm.oldPassword = encrypt(this.passwordForm.oldPassword)
             this.passwordForm.newPassword = encrypt(this.passwordForm.newPassword)
             this.passwordForm.confirmPassword = encrypt(this.passwordForm.confirmPassword)
-            // 调用修改密码接口
+
             await this.$store.dispatch('user/updatePassword', this.passwordForm)
             this.$message.success('Password changed successfully.')
             this.btnCancel()

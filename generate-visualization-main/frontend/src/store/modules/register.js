@@ -54,7 +54,7 @@ const mutations = {
 const actions = {
   durationChooseRegister({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseRegister(payload).then(response => {
         const { data } = response
@@ -87,7 +87,7 @@ const actions = {
 
   userGenerateRegister({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateRegister(payload).then(response => {
         const { data } = response
@@ -104,7 +104,7 @@ const actions = {
   },
   userInitRegister({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitRegister().then(response => {
         const { data } = response
         if (!data) {
@@ -121,7 +121,7 @@ const actions = {
 
   storeGenerateRegister({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateRegister(payload).then(response => {
         const { data } = response
@@ -138,7 +138,7 @@ const actions = {
   },
   storeInitRegister({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitRegister().then(response => {
         const { data } = response
         if (!data) {
@@ -155,10 +155,10 @@ const actions = {
 
   cardGenerateRegister({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateRegister(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -172,9 +172,9 @@ const actions = {
   },
   cardInitRegister({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitRegister().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -187,10 +187,10 @@ const actions = {
     })
   },
 
-  consumeGenerateRegister({ commit }, form) { // 正常消费数据
+  consumeGenerateRegister({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -208,9 +208,9 @@ const actions = {
       })
     })
   },
-  consumeInitRegister({ commit }) { // 正常消费数据
+  consumeInitRegister({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitRegister().then(response => {
         const { data } = response
         if (!data) {
@@ -224,11 +224,10 @@ const actions = {
       })
     })
   },
-  transferGenerateRegister({ commit }, form) { // 正常转账数据
+  transferGenerateRegister({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -246,10 +245,9 @@ const actions = {
       })
     })
   },
-  transferInitRegister({ commit }) { // 正常转账数据
+  transferInitRegister({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitRegister().then(response => {
         const { data } = response
         if (!data) {
@@ -264,9 +262,9 @@ const actions = {
     })
   },
 
-  registerFraudInit({ commit }) { // 伪冒注册
+  registerFraudInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('伪冒注册初始化')
+      console.log('Fake registration initialization')
       registerFraudInit().then(response => {
         const { data } = response
         if (!data) {
@@ -280,11 +278,10 @@ const actions = {
       })
     })
   },
-  registerFraudGenerate({ commit }, form) { // 伪冒注册
+  registerFraudGenerate({ commit }, form) {
     const { startDate, number_of_victims } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('伪冒注册生成')
+      console.log('Fake registration generation')
       const payload = {
         'date': startDate,
         'number_of_victims': number_of_victims
@@ -302,13 +299,12 @@ const actions = {
       })
     })
   },
-  // 删除历史数据并重新建表
   registerRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       registerRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

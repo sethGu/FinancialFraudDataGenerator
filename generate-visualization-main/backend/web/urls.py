@@ -23,7 +23,7 @@ from django.conf.urls import include
 from django.urls import re_path as url
 from django.contrib import admin
 
-from django.views.generic import TemplateView  # 新增
+from django.views.generic import TemplateView
 
 from app01.urls import urls_0
 from app01.urls import urls_abnormal
@@ -32,8 +32,6 @@ from app01.urls import urls_gambling
 from app01.urls import urls_marketing
 from app01.urls import urls_register
 from app01.urls import urls_store_fraud
-from app01.urls import urls_enterprise
-from app01.urls import urls_operator
 
 urlpatterns = [
 
@@ -52,12 +50,6 @@ urlpatterns = [
     url(r'^api_register/', include(urls_register)),
 
     url(r'^api_store_fraud/', include(urls_store_fraud)),
-
-    url(r'^api_enterprise/', include(urls_enterprise)),
-
-    url(r'^api_operator/', include(urls_operator)),
-
-    # 新增
 
     url(r'^$', TemplateView.as_view(template_name="index.html"))
 

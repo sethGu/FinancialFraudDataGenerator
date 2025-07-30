@@ -14,9 +14,9 @@ class CardService():
         self.userDao = UserDao()
         self.storeDao = StoreDao()
 
-        self.table_names = {"黄牛营销欺诈": 'marketing_card', "信用卡违规套现": 'credit_card', "异常转账": 'abnormal_card',
-                            "伪冒注册欺诈": 'register_card', "赌博违规交易": 'gambling_card',
-                            "商户违规": 'store_card'}
+        self.table_names = {"Scalper_marketing": 'marketing_card', "Credit_card_fraud": 'credit_card', "Abnormal_transfer": 'abnormal_card',
+                            "Fake_registration": 'register_card', "Gambling_violation": 'gambling_card',
+                            "Merchant_violation": 'store_card'}
         self.scene = self.table_names[scene]
     def createCardTable(self):
 
@@ -35,12 +35,12 @@ class CardService():
             owner_type = card.getowner_type()
             C4 = card.getC4()
             self.insertCard(card)
-            if owner_type == "普通用户":
+            if owner_type == "Regular_user":
                 if index_by_id is True:
                     self.userDao.addUserCard(user_id=owner_id_, new_card=card, table_name=self.scene.replace("card", "user"))
                 else:
                     self.userDao.addUserCard(owner_id_, card, user_no=user_no, table_name=self.scene.replace("card", "user"))
-            elif owner_type == "商户":
+            elif owner_type == "Merchant":
                 self.updateAcctOfStore(owner_id_, C4)
                 self.updateS2OfStore(owner_id_, card.C11)
 
@@ -92,11 +92,11 @@ class CardService():
         card_num = CardService.from_human_to_card_num(human['wage'])
         credit_card_num = CardService.getCreditCardNum(card_num)
 
-        for i in range(0, credit_card_num):  # 处理一个人的一张信用卡
-            card_id = CardService.total_card_num  # 编号从0开始。0号，现在有1张卡
+        for i in range(0, credit_card_num):
+            card_id = CardService.total_card_num
             CardService.total_card_num += 1
 
-            owner_type = "普通用户"
+            owner_type = "Regular_user"
             owner_id = human['id']
 
             C4 = ''.join(random.sample('zyxwvu0123456789tsrqponmlkjihgfedcba', 13))
@@ -112,7 +112,6 @@ class CardService():
             if contain_id:
                 card = Card(card_id, owner_type, owner_id, C4, C5, C6, C7, C8,C9,C10,C11)
             else:
-                # 生成卡时不包含card_id
                 card = Card(owner_type=owner_type, owner_id=owner_id, C4=C4, C5=C5,
                             C6=C6, C7=C7, C8=C8,C9 = C9, C10 = C10,C11 = C11)
             per_person_card_list.append(card)
@@ -121,7 +120,7 @@ class CardService():
             card_id = CardService.total_card_num
             CardService.total_card_num += 1
 
-            owner_type = "普通用户"
+            owner_type = "Regular_user"
             owner_id = human['id']
 
             C4 = ''.join(random.sample('zyxwvu0123456789tsrqponmlkjihgfedcba', 13))
@@ -138,7 +137,6 @@ class CardService():
             if contain_id:
                 card = Card(card_id, owner_type, owner_id, C4, C5, C6, C7, C8,C9, C10,C11 )
             else:
-                # 生成卡时不包含card_id
                 card = Card(owner_type=owner_type, owner_id=owner_id, C4=C4, C5=C5,
                             C6=C6, C7=C7, C8=C8, C9 = C9, C10 = C10, C11 = C11)
             per_person_card_list.append(card)
@@ -146,12 +144,12 @@ class CardService():
         return per_person_card_list
 
     def createCardsFromStore(self,store):
-        per_store_card_list = []  # 其实一个商户只有一张卡
+        per_store_card_list = []
         for i in range(0, 1):
-            card_id = CardService.total_card_num  # 编号从0开始。0号，现在有1张卡
+            card_id = CardService.total_card_num
             CardService.total_card_num += 1
 
-            owner_type = "商户"
+            owner_type = "Merchant"
             owner_id = store['id']
 
             C4 = ''.join(random.sample('zyxwvu0123456789tsrqponmlkjihgfedcba', 13))
@@ -160,7 +158,7 @@ class CardService():
             C6 = CardService.getC6()
             C7 = "--"
             C8 = "--"
-            C9 = CardService.getC9()    #可能要改
+            C9 = CardService.getC9()
             C10 = CardService.getC10()
             C11 = C9 + C10
 
@@ -184,7 +182,7 @@ class CardService():
         return random.choice([9, 10, 11, 12, 13, 14])
 
     @staticmethod
-    def getCreditCardNum(card_num):  # 从五张卡中，按照二项式分布取卡
+    def getCreditCardNum(card_num):
         all_credict_nums = 5
         pro = 0
         card_credit_dict = {"0-2": 0, "2-5": 0.2, "5-8": 0.2, "8-11": 0.3, "11-14": 0.3, "14-15": 0.3}
@@ -196,7 +194,6 @@ class CardService():
                 break
         if card_num < 5:
             credit_card_nums = np.random.binomial(card_num, pro, 1)
-        # 根据二项式1分布构造概率区间
         else:
             credit_card_nums = np.random.binomial(all_credict_nums, pro, 1)
         if card_num == credit_card_nums[0]:
@@ -222,22 +219,22 @@ class CardService():
     def getC7(job):
         C7 = ""
         pro = random.uniform(0, 1)
-        if job == "农、林、牧、渔业":
-            C7 = "B卡"
-        elif job in ["采矿业", "制造业", "电力、热力、燃气及水产和供应业", "建筑业", "批发和零售业", "交通运输、仓储和邮政业", "住宿和餐饮", "信息传输、软件和信息技术服务业", "金融业",
-                     "房地产业", "租凭和商务服务业", "居民服务、修理和其他服务业", "文化、体育和娱乐业"]:
+        if job == "Agriculture,Forestry,Animal_husbandry,Fishery":
+            C7 = "Card_B"
+        elif job in ["Mining_industry", "Manufacturing_industry", "Electricity,Heat,Gas,Water_production_and_supply_industry", "Construction_industry", "Wholesale_and_retail_industry", "Transportation,Warehousing,Postal_industry", "Accommodation_and_catering", "Information_transmission,Software,Information_technology_services_industry", "Financial_industry",
+                     "Real_estate_industry", "Rental_and_business_services_industry", "Residential_services,Repair,Other_service_industries", "Culture,Sports,Entertainment_industry"]:
             if 0.3 < pro:
-                C7 = "C卡"
+                C7 = "Card_C"
             elif 0.15 < pro:
-                C7 = "D卡"
+                C7 = "Card_D"
             else:
-                C7 = "E卡"
+                C7 = "Card_E"
 
-        elif job in ["教育", "公共管理、社会保障和社会组织", "卫生和社会工作", "科学研究和技术服务业", "水利、环境和公共设施管理业"]:
+        elif job in ["Education", "Public_administration,Social_security,Social_organizations", "Health_and_social_work", "Scientific_research_and_technical_services_industry", "Water_conservancy,Environment,Public_facilities_management_industry"]:
             if pro > 0.2:
-                C7 = "A卡"
+                C7 = "Card_A"
             else:
-                C7 = "E卡"
+                C7 = "Card_E"
         return C7
 
     @staticmethod
@@ -258,7 +255,7 @@ class CardService():
                         if pro >= st and pro < ed:
                             return C8.strip("\"")
             else:
-                for C8, prob in value.items():  # > 100w 的
+                for C8, prob in value.items():
                     st = float(prob.strip("\"").split("-")[0])
                     ed = float(prob.strip("\"").split("-")[1])
                     # print("st,ed", st, ed)

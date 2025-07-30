@@ -1,7 +1,7 @@
 class Card:
-    card_id = 0             #卡号
-    owner_type = ''          #拥有者类型
-    owner_id = 0             #拥有者id编号：用户：0、1、2、3。。。商户：0、1、2、3。。。
+    card_id = 0             #Card number
+    owner_type = ''          #Owner type
+    owner_id = 0             #Owner ID number:User：0、1、2、3。。。Merchant:0、1、2、3。。。
     C4 = ''
     C5 = ''
     C6 = ''
@@ -13,7 +13,7 @@ class Card:
     abnormal = 0
     abnormal_state = {}
 
-    def __init__(self, card_id, owner_type, owner_id, C4, C5, C6, C7, C8,C9,C10,C11, abnormal=0, abnormal_state= {"赌博违规交易": 0, "伪冒注册欺诈": 0,"信用卡违规套现":0, "黄牛营销欺诈":0, "商户违规":0,"异常转账":0}):
+    def __init__(self, card_id, owner_type, owner_id, C4, C5, C6, C7, C8,C9,C10,C11, abnormal=0, abnormal_state= {"Gambling_violation": 0, "Fake_registration": 0,"Credit_card_fraud":0, "Scalper_marketing":0, "Merchant_violation":0,"Abnormal_transfer":0}):
         self.card_id = card_id
         self.owner_type = owner_type
         self.owner_id = owner_id
@@ -65,7 +65,7 @@ class Card:
     def setAbnormal(self, abnormal):
         self.abnormal = abnormal
 
-    def setAbnormal_state(self, abnormal_state):  # 传入一个dict
+    def setAbnormal_state(self, abnormal_state):
         self.abnormal_state = abnormal_state
 
     #get
@@ -113,5 +113,5 @@ class Card:
                "C5" : self.getC5().__str__() , "C6" : self.getC6().__str__()  , "C7": self.getC7().__str__() ,"C8": self.getC8().__str__(), "C9":self.getC9(),"C10":self.getC10(),"C11":self.getC11(),"abnormal":self.getAbnormal(), "abnormal_state":self.getAbnormal_state() }
 
     def __str__(self):
-        return "Card：[" + self.getcard_id() + "拥有者类型：" + self.getowner_type().__str__() + "拥有者id：" + self.getowner_id() + "C4：" + self.getC4().__str__() +\
+        return "Card：[" + self.getcard_id() + "owner_type：" + self.getowner_type().__str__() + "owner_id：" + self.getowner_id() + "C4：" + self.getC4().__str__() +\
                "C5：" + self.getC5().__str__() + "C6：" + self.getC6().__str__()  + "C7：" + self.getC7().__str__() + "C8：" + self.getC8().__str__() + "C9:"+self.getC9().__str__() + "C10:" + self.getC10().__str__() + "C11:" + self.getC11().__str__() + self.getAbnormal_state()   + "]"

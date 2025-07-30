@@ -18,7 +18,6 @@ import pytz
 
 from django.contrib.auth.hashers import make_password, check_password
 
-# 私钥
 private_key = """-----BEGIN RSA PRIVATE KEY-----
 MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEA0vfvyTdGJkdbHkB8
 mp0f3FE0GYP3AYPaJF7jUd1M0XxFSE2ceK3k2kw20YvQ09NJKk+OMjWQl9WitG9p
@@ -44,25 +43,21 @@ def user_login(request):
 
         username = p.get('username')
         encrypted_password = p.get('password')
-        password = rsa_decrypt(encrypted_password)  # 解密传入的密码
+        password = rsa_decrypt(encrypted_password)
         print(username, password)
         try:
-            # 获取用户对象
             user = Login.objects.get(username=username)
             print(user.password)
-            # 验证密码
             # if (3 > 1):
             if check_password(password, user.password):
-                # 记录登录日志
                 log_entry = System_log(
                     user=username,
                     change="User login",
                     time=timezone.now(),
                     result="success"
                 )
-                log_entry.save()  # 保存日志
+                log_entry.save()
 
-                # 将用户名存储在会话中
                 request.session['username'] = username
 
                 return JsonResponse({
@@ -74,7 +69,7 @@ def user_login(request):
                     }
                 })
             else:
-                raise Login.DoesNotExist  # 密码不匹配则视为用户不存在
+                raise Login.DoesNotExist
 
         except Login.DoesNotExist:
             log_entry = System_log(
@@ -83,7 +78,7 @@ def user_login(request):
                 time=timezone.now(),
                 result="failure"
             )
-            log_entry.save()  # 保存日志
+            log_entry.save()
 
             return JsonResponse({
                 "code": 0,
@@ -101,20 +96,16 @@ def user_update_password(request):
 
         username = request.session.get('username', None)
         encrypted_old_password = p.get('oldPassword')
-        old_password = rsa_decrypt(encrypted_old_password)  # 解密旧密码
-        new_password = rsa_decrypt(p.get('newPassword'))  # 解密新密码
+        old_password = rsa_decrypt(encrypted_old_password)
+        new_password = rsa_decrypt(p.get('newPassword'))
 
         try:
-            # 获取用户对象
             user = Login.objects.get(username=username)
-            # 验证旧密码
             # if (3 > 1):
             if check_password(old_password, user.password):
-                # 更新密码，使用make_password进行哈希
                 user.password = make_password(new_password)
                 user.save()
 
-                # 记录修改密码日志
                 log_entry = System_log(
                     user=username,
                     change="User change password",
@@ -132,7 +123,7 @@ def user_update_password(request):
                 })
 
             else:
-                raise Login.DoesNotExist  # 如果旧密码不匹配
+                raise Login.DoesNotExist
 
         except Login.DoesNotExist:
             log_entry = System_log(
@@ -170,22 +161,19 @@ def user_info(request):
 
 @require_http_methods(["POST"])
 def user_logout(request):
-    username = request.session.get('username', None)  # 获取会话中的用户名
+    username = request.session.get('username', None)
 
     if username:
-        # 如果用户名存在，则进行登出操作
-        # 记录登录日志
         log_entry = System_log(
             user=username,
-            change="User logout",  # 操作描述
-            time=timezone.now(),  # 当前时间
+            change="User logout",
+            time=timezone.now(),
             result="success"
         )
 
-        log_entry.save()  # 保存日志
-        request.session.flush()  # 清除所有会话数据（登出）
+        log_entry.save()
+        request.session.flush()
 
-        # 返回成功的响应
         return JsonResponse({
             "code": 200,
             "data": {
@@ -204,10 +192,9 @@ def user_logout(request):
 
 @require_http_methods(["POST"])
 def log_change(request):
-    username = request.session.get('username', None)  # 获取会话中的用户名
+    username = request.session.get('username', None)
 
     try:
-        # 获取请求的 JSON 数据
         data = json.loads(request.body)
         change = data.get('change')
         result = data.get('result')
@@ -221,7 +208,6 @@ def log_change(request):
                 }
             })
 
-        # 创建日志记录
         log_entry = System_log(
             user=username,
             change=change,
@@ -229,7 +215,7 @@ def log_change(request):
             result=result
         )
 
-        log_entry.save()  # 保存日志到数据库
+        log_entry.save()
 
         return JsonResponse({
             "code": 200,

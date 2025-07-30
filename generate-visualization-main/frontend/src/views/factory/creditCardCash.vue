@@ -31,10 +31,6 @@
         <el-form-item id="longTime" label="Long-term interval(days)">
           <el-input-number v-model="form.longTime" controls-position="right" :min="20"/>
         </el-form-item>
-
-        <!--        <el-form-item label="个人套现比例">-->
-        <!--          <el-input-number v-model="form.personalRatio" :precision="1" :step="0.1" :min="0.1" :max="1.0" />-->
-        <!--        </el-form-item>-->
         <el-form-item label="Merchant min grouping">
           <el-input-number v-model="form.storeMin" controls-position="right" :min="1"/>
         </el-form-item>
@@ -79,11 +75,8 @@
             :disabled="btnDisabled"
           />
         </el-form-item>
-
-        <!--正常数据生成可选框-->
         <el-checkbox-group v-model="checkList" class="checkData">
           <el-checkbox label="Normal transaction data generation" border size="big" @change="conC"/>
-          <!--          <el-checkbox label="正常转账数据生成" border size="big" @change="tranC" />-->
         </el-checkbox-group>
 
         <div class="creditGebtn">
@@ -93,10 +86,7 @@
           <el-button type="danger" round size="large" @click="deleteData()">Data deletion</el-button>
         </div>
       </el-form>
-      <!-- 表单结束 -->
     </div>
-
-    <!-- 图表展示 -->
     <div class="chart-container" style="width: 25%;">
       <div id="chartCard" class="chart" style="height:200px;width:100%;padding: 5px;"/>
       <div id="chartCreditCardCash" class="chart" style="height:200px;width:100%;padding: 5px;"/>
@@ -122,14 +112,13 @@
 import * as echarts from 'echarts'
 import { mapGetters } from 'vuex'
 import { Loading } from 'element-ui'
-import user from "@/store/modules/user"
-import store from "@/store"
+// import user from "@/store/modules/user"
+// import store from "@/store"
 import { logChange } from '@/api/logs'
 
 export default {
   data() {
     return {
-      // ——————————————————————————————————————直接复制——————————————————————————————————————
       radio1: 2,
       radio2: 2,
       btnDisabled: false,
@@ -139,13 +128,13 @@ export default {
       is_tran: false,
       checkList: [],
       store: {
-        totaldata: [], // 行业数量
-        totalvalue: [], // 行业数量
-        parantClassdata: [], // 行业大类生成数量
-        parantClassvalue: [], // 行业大类生成数量
-        childClassdata: [], // 行业子类生成数量
-        childClassvalue: [], // 行业子类生成数量
-        dictClass: [] // 用字典保存行业占比数据，用来行业占比显示，这里只获取了行业大类
+        totaldata: [],
+        totalvalue: [],
+        parantClassdata: [],
+        parantClassvalue: [],
+        childClassdata: [],
+        childClassvalue: [],
+        dictClass: []
       },
       cardsOwnerType: [],
       pickerOptions: {
@@ -158,23 +147,21 @@ export default {
           { required: true, message: 'Please select a date.', trigger: 'blur' }
         ]
       },
-      // ——————————————————————————————————————不用修改——————————————————————————————————————
       form: {
-        startDate: '20221001', // 开始日期
-        shortTime: 1, // 短时间套现间隔(h/时)  small_fraud_gap
-        longTime: 20, // 长时间套现间隔(d/天)  big_fraud_gap
-        user: 10, // 违规用户数量        user_quantity
-        store: 10, // 违规商户数量        store_quantity
-        duration: 30, // 天数
-        personalRatio: 0.7, // 个人套现比例  personal_cash_out_ratio
-        storeRatio: 0.8, // 个人商户占比  personal_store_ratio
-        storeMin: 4, // 商户群组最小值  store_group_size_min
-        storeMax: 10, // 商户群组最大值  store_group_size_max
-        openTime: 0.7 // 营业时间比例  is_in_opening_time
+        startDate: '20221001',
+        shortTime: 1, // small_fraud_gap
+        longTime: 20, // big_fraud_gap
+        user: 10, // user_quantity
+        store: 10, // store_quantity
+        duration: 30, // days
+        personalRatio: 0.7, // personal_cash_out_ratio
+        storeRatio: 0.8, // personal_store_ratio
+        storeMin: 4, // store_group_size_min
+        storeMax: 10, // store_group_size_max
+        openTime: 0.7 // is_in_opening_time
       }
     }
   },
-  // ——————————————————————————————————————部分修改——————————————————————————————————————
   computed: {
     ...mapGetters([
       'credit_user_data',
@@ -195,9 +182,7 @@ export default {
   created() {
     this.init()
   },
-  // ——————————————————————————————————————部分修改——————————————————————————————————————
   methods: {
-    // ——————————————————————————————————————部分修改——————————————————————————————————————
     conC(value) {
       this.is_con = value
       this.is_tran = value
@@ -252,16 +237,14 @@ export default {
       this.form.storeRatio = 0.8
       this.form.storeMin = 4
       this.form.storeMax = 10
-      this.form.openTime = 0.7 // 修改
-
-      // 发送请求记录日志
+      this.form.openTime = 0.7
       logChange({
         change: 'CreditCardCash reset',
         result: 'success'
       }).then(response => {
-        console.log('日志记录成功', response.data)
+        console.log('Log recorded successfully', response.data)
       }).catch(error => {
-        console.error('日志记录失败', error)
+        console.error('Log recording failed', error)
       })
     },
     deleteData() {
@@ -270,20 +253,18 @@ export default {
         cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
-        // 发送请求记录日志
         logChange({
           change: 'CreditCardCash deleteData',
           result: 'success'
         }).then(response => {
-          console.log('日志记录成功', response.data)
+          console.log('Log recorded successfully', response.data)
         }).catch(error => {
-          console.error('日志记录失败', error)
+          console.error('Log recording failed', error)
         })
         this.$message({
           type: 'success',
           message: 'Data deleted successfully!'
         })
-        // 执行删除接口
         this.$store.dispatch('creditCardCash/creditRecreateTable').then(response => {
         })
       }).catch(() => {
@@ -294,20 +275,17 @@ export default {
       })
     },
     download() {
-      // 发送请求记录日志
       logChange({
         change: 'CreditCardCash download',
         result: 'success'
       }).then(response => {
-        console.log('日志记录成功', response.data)
+        console.log('Log recorded successfully', response.data)
       }).catch(error => {
-        console.error('日志记录失败', error)
+        console.error('Log recording failed', error)
       })
       window.location.href = '/api_credit_card/credit_card/download/'
     },
-    // ——————————————————————————————————————部分修改——————————————————————————————————————
     init() {
-      // ——————————————————————————————————————部分修改——————————————————————————————————————
       this.$store.dispatch('creditCardCash/userInitCredit', this.userAmount).then(() => {
         this.showUserAge()
         // this.showUserJob()
@@ -317,15 +295,11 @@ export default {
 
           this.$store.dispatch('creditCardCash/cardInitCredit', '1').then(() => {
             this.showChartCard()
-
-            // 将消费和转账数据嵌套在这里了
             this.$store.dispatch('creditCardCash/consumeInitCredit').then(() => {
               this.showChartConsume()
 
               // this.$store.dispatch('creditCardCash/transferInitCredit').then(() => {
-              // this.showChartTrans() // 静态数据，待修改
-
-              // ——————————————————————————————————————部分修改——————————————————————————————————————
+              // this.showChartTrans()
               this.$store.dispatch('creditCardCash/creditInit').then(response => {
                 this.showChartCreditCardCash()
                 this.showChartFraud()
@@ -335,10 +309,8 @@ export default {
           })
         })
       })
-      // ——————————————————————————————————————共用部分——————————————————————————————————————
     },
     create() {
-      // ——————————————————————————————————————部分修改——————————————————————————————————————
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.$confirm('Do you want to generate the data?', 'Tip', {
@@ -346,54 +318,52 @@ export default {
             cancelButtonText: 'No',
             type: 'warning'
           }).then(() => {
-            // 发送请求记录日志
             logChange({
               change: 'CreditCardCash create',
               result: 'success'
             }).then(response => {
-              console.log('日志记录成功', response.data)
+              console.log('Log recorded successfully', response.data)
             }).catch(error => {
-              console.error('日志记录失败', error)
+              console.error('Log recording failed', error)
             })
             this.$message({
               type: 'success',
               message: 'Data generated successfully!'
             })
-            const loadingInstanceUserAge = Loading.service({ // 启动loading服务
+            const loadingInstanceUserAge = Loading.service({
               target: document.querySelector('#chartUserAge'),
               fullscreen: false
             })
-            const loadingInstanceStoreBig = Loading.service({ // 启动loading服务
+            const loadingInstanceStoreBig = Loading.service({
               target: document.querySelector('#chartStoreBig'),
               fullscreen: false
             })
-            const loadingInstanceCard = Loading.service({ // 启动loading服务
+            const loadingInstanceCard = Loading.service({
               target: document.querySelector('#chartCard'),
               fullscreen: false
             })
-            const loadingInstanceCredit = Loading.service({ // 启动loading服务
+            const loadingInstanceCredit = Loading.service({
               target: document.querySelector('#chartCreditCardCash'),
               fullscreen: false
             })
-            const loadingInstanceFraud = Loading.service({ // 启动loading服务
+            const loadingInstanceFraud = Loading.service({
               target: document.querySelector('#chartFraud'),
               fullscreen: false
             })
-            const loadingInstanceConsume = Loading.service({ // 启动loading服务
+            const loadingInstanceConsume = Loading.service({
               target: document.querySelector('#chartConsume'),
               fullscreen: false
             })
-            // const loadingInstanceUserJob = Loading.service({ // 启动loading服务
+            // const loadingInstanceUserJob = Loading.service({
             //   target: document.querySelector('#chartUserJob'),
             //   fullscreen: false
             // })
-            // const loadingInstanceTrans = Loading.service({ // 启动loading服务
+            // const loadingInstanceTrans = Loading.service({
             //   target: document.querySelector('#chartTrans'),
             //   fullscreen: false
             // })
 
-            this.$store.dispatch('creditCardCash/durationChooseCredit',
-              {startDate: this.form.startDate, duration: this.form.duration}).then(() => {
+            this.$store.dispatch('creditCardCash/durationChooseCredit', {startDate: this.form.startDate, duration: this.form.duration}).then(() => {
               this.$store.dispatch('creditCardCash/userGenerateCredit', this.userAmount).then(() => {
                 loadingInstanceUserAge.close()
                 // loadingInstanceUserJob.close()
@@ -446,10 +416,9 @@ export default {
     },
 
     showUserAge() {
-      // chartUserAge 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartUserAge'))
       var optionUserAge = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'User age distribution',
           left: 'center'
@@ -497,7 +466,7 @@ export default {
           {
             type: 'value',
             name: 'People',
-            nameGap: '15' // 距离大小可以根据自己的实际需求调整
+            nameGap: '15'
           }
         ],
         color: ['#00437C'],
@@ -512,10 +481,8 @@ export default {
         ]
       }
       this.chart.setOption(optionUserAge)
-    }
-    ,
+    },
     showChartStoreBig() {
-      // 获取行业大类
       var pdTmp = []
       var pvTmp = []
       this.credit_store_data['data_1'].forEach(item => {
@@ -527,13 +494,12 @@ export default {
       if (pdTmp.length > 0 || pvTmp.length > 0) {
         this.store.parantClassdata = pdTmp
         this.store.parantClassvalue = pvTmp
-        this.store.parantClassdata.forEach(item => { // 将所有大类和子类的data数据保存到totaldata中，用来做行业数量显示
+        this.store.parantClassdata.forEach(item => {
           this.store.totaldata.push(item)
         })
-        this.store.parantClassvalue.forEach(item => { // 将所有大类和子类的value数据保存到totalvalue中，用来做行业数量显示
+        this.store.parantClassvalue.forEach(item => {
           this.store.totalvalue.push(item)
         })
-        // 获取行业大类的字典数据
         this.store.parantClassdata.forEach((item, i) => {
           this.store.dictClass.push({
             value: this.store.parantClassvalue[i],
@@ -541,8 +507,6 @@ export default {
           })
         })
       }
-
-      // 获取行业子类
       var cdTmp = []
       var cvTmp = []
       this.credit_store_data['data_2'].forEach(item => {
@@ -561,7 +525,6 @@ export default {
           this.store.totalvalue.push(item)
         })
       }
-      // chartStoreBig 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartStoreBig'))
       const colors = ['#007D85', '#00437C']
       var optionStoreBig = {
@@ -626,7 +589,7 @@ export default {
             },
             axisPointer: {
               label: {
-                formatter: function (params) {
+                formatter: function(params) {
                   return (
                     'Number of industry categories  ' +
                     params.value +
@@ -650,7 +613,7 @@ export default {
             },
             axisPointer: {
               label: {
-                formatter: function (params) {
+                formatter: function(params) {
                   return (
                     'Number of industry subcategories  ' +
                     params.value +
@@ -666,7 +629,7 @@ export default {
           {
             type: 'value',
             name: 'Amount (units)',
-            nameGap: '30' // 距离大小可以根据自己的实际需求调整
+            nameGap: '30'
           }
         ],
         series: [
@@ -692,8 +655,7 @@ export default {
         ]
       }
       this.chart.setOption(optionStoreBig)
-    }
-    ,
+    },
     showChartCard() {
       var cardsOwnerTypeTmp = []
       this.credit_card_data.forEach(item => {
@@ -706,7 +668,6 @@ export default {
       if (cardsOwnerTypeTmp.length > 0) {
         this.cardsOwnerType = cardsOwnerTypeTmp
       }
-      // chart1 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartCard'))
       var optionCard = {
         backgroundColor: 'rgba(128, 128, 128, 0.1)',
@@ -750,12 +711,11 @@ export default {
         ]
       }
       this.chart.setOption(optionCard)
-    }
-    ,
+    },
     showChartCreditCardCash() {
       this.chart = echarts.init(document.getElementById('chartCreditCardCash'))
       var optionCreditCardCash = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Transaction size distribution',
           left: 'center'
@@ -802,12 +762,11 @@ export default {
         ]
       }
       this.chart.setOption(optionCreditCardCash)
-    }
-    ,
+    },
     showChartConsume() {
       this.chart = echarts.init(document.getElementById('chartConsume'))
       var optionConsume = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Normal transaction',
           left: 'center'
@@ -874,12 +833,11 @@ export default {
         ]
       }
       this.chart.setOption(optionConsume)
-    }
-    ,
+    },
     showChartFraud() {
       this.chart = echarts.init(document.getElementById('chartFraud'))
       var optionFraud = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Abnormal transaction',
           left: 'center'
@@ -949,12 +907,11 @@ export default {
     }
 
     // showUserJob() {
-    //   // chartUserJob 基于准备好的dom，初始化echarts实例
     //   this.chart = echarts.init(document.getElementById('chartUserJob'))
     //   var optionUserJob = {
-    //     backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+    //     backgroundColor: 'rgba(128, 128, 128, 0.1)',
     //     title: {
-    //       text: '职业分布',
+    //       text: 'Occupation distribution',
     //       left: 'center'
 
     //     },
@@ -965,7 +922,7 @@ export default {
     //     color: ['#00437C', '#007D85', '#FC001B'],
     //     series: [
     //       {
-    //         name: '用户数量',
+    //         name: 'Number of users',
     //         type: 'pie',
     //         radius: [50, 200],
     //         // radius: ['30%', '60%'],
@@ -989,9 +946,9 @@ export default {
     // showChartTrans() {
     //   this.chart = echarts.init(document.getElementById('chartTrans'))
     //   var optionTrans = {
-    //     backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+    //     backgroundColor: 'rgba(128, 128, 128, 0.1)',
     //     title: {
-    //       text: '正常转账',
+    //       text: 'Normal transfer',
     //       left: 'center'
     //     },
     //     tooltip: {
@@ -1031,7 +988,7 @@ export default {
     //       end: 35
     //     }],
     //     xAxis: {
-    //       name: '时间',
+    //       name: 'Time',
     //       type: 'category',
     //       boundaryGap: false,
     //       axisLabel: {
@@ -1042,12 +999,12 @@ export default {
     //     },
     //     yAxis: {
     //       type: 'value',
-    //       name: '金额(元)'
+    //       name: 'Amount (CNY)'
     //     },
     //     color: ['#00437C'],
     //     series: [
     //       {
-    //         name: '金额(元)',
+    //         name: 'Amount (CNY)',
     //         type: 'line',
     //         stack: 'Total',
     //         // data: [120, 132, 101, 134, 90, 230, 210]

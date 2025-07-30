@@ -11,7 +11,7 @@ class TransDao():
     def createTransTable(self, table_name):
         sql = """
             create table """ + table_name + """(
-                id int(0) not null auto_increment comment 'id主键',
+                id int(0) not null auto_increment comment 'ID primary key',
                 T1 varchar(100) null default null comment '',
                 T2 varchar(10) null default null comment '',
                 T3 varchar(20) null default null comment '',
@@ -51,8 +51,8 @@ class TransDao():
                 T37 varchar(100) null default null comment '', 
                 T38 varchar(20) null default null comment '',
                 T39 varchar(20) null default null comment '',
-                abnormal int(0) NULL DEFAULT 0 COMMENT '是否异常',
-                abnormal_state json NULL DEFAULT NULL COMMENT '异常类型',
+                abnormal int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+                abnormal_state json NULL DEFAULT NULL COMMENT 'Abnormal type',
 
                 PRIMARY KEY (`id`) USING BTREE
             ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

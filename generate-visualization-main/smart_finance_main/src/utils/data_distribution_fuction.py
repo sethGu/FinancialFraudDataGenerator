@@ -4,12 +4,6 @@ from scipy.stats import beta
 
 
 def binomial(samples=1,pro=0.3,times=100):
-    """
-    二项分布
-    实验样本数 samples,
-    发生概率   pro
-    实验次数   times
-    """
     # example
     example_samples=6
     example_pro = 0.3
@@ -31,12 +25,6 @@ def binomial_plt(samples=1,pro=0.3,times=100):
     plt.show()
 
 def poisson(lam=0.5, size=100):
-    """
-    泊松分布
-    发生率 lam
-    返回数组的形状  size
-    # https://www.cjavapy.com/article/1058/
-    """
     result = np.random.poisson(lam, size)
     return result
 
@@ -48,13 +36,6 @@ def poisson_plt(lam=0.5, size=100):
 
 
 def normal(mean=1,sigma=0.3):
-    """
-    正太分布
-    均值 mean
-    标准差  sigma
-
-    """
-
     result = np.random.normal(mean,sigma)
     return result
 
@@ -65,13 +46,6 @@ def normal_plt(mean=1,sigma=0.3):
 
 '''
 def exponential1(start=0,end=15,gap=100000):
-    """
-    :param start: 起点
-    :param end: 终点
-    :param gap: 步长
-    target:
-    :return:
-    """
     lambd = 3
     x = np.arange(start, end, gap)
     y = 0.1*lambd*np.exp( 0.1*-lambd * x)
@@ -81,7 +55,6 @@ def exponential1(start=0,end=15,gap=100000):
     plt.title("Exponential Distribution varying λ")
     plt.legend()
     plt.show()
-    #取得target两边的值
     x = list(x)
     pro = 0
     _ = (end-start)/gap
@@ -100,7 +73,6 @@ def exponential(start=10,end=1500,gap=0.1,target=[5,6]):
     plt.title("Exponential Distribution varying λ")
     plt.legend()
     plt.show()
-    # 取得target两边的值
     x = list(x)
     pro = 0
     for i in range(len(x)):
@@ -110,11 +82,7 @@ def exponential(start=10,end=1500,gap=0.1,target=[5,6]):
     return result
 
 def gamma(shape=2., scale=3., size=1000, multi=200):
-    """
-    gamma分布
-    返回偏态随机数
-    """
-    result = np.random.gamma(shape, scale, size) * multi   # 生成2000个随机数，并进行区间缩放微调。
+    result = np.random.gamma(shape, scale, size) * multi
     # print(s)
 
     return result
@@ -122,7 +90,7 @@ def gamma(shape=2., scale=3., size=1000, multi=200):
 def gamma_plt(shape=2., scale=3., size=1000, multi=200):
 
     result = gamma(shape, scale, size, multi)
-    plt.hist(result, 1000)  # 50：是50个条形图
+    plt.hist(result, 1000)
     plt.show()
 
 def beta_(a=0.5, b=0.5):

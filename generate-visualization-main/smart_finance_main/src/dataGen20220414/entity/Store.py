@@ -2,7 +2,7 @@ class Store:
     def __init__(self, store_id, industry, name, level, charge_duration,open_duration,
                  S1, S2,S3,S4,S5,S6,S7,S8,S9,S10,S11,S12,S13, S14, S15, S16,S17,S18,S19,S20,S21,S22,S23,S24,S25,S26,S27,S28,S29,S30,
                  abnormal=0,
-                 abnormal_state={"赌博违规交易": 0, "伪冒注册欺诈": 0,"信用卡违规套现":0, "黄牛营销欺诈":0, "商户违规":0,"异常转账":0}
+                 abnormal_state={"Gambling_violation": 0, "Fake_registration": 0,"Credit_card_fraud":0, "Scalper_marketing":0, "Merchant_violation":0,"Abnormal_transfer":0}
                 ):
 
         self.store_id = store_id
@@ -91,7 +91,7 @@ class Store:
     def setAbnormal(self, abnormal):
         self.abnormal = abnormal
 
-    def setAbnormal_state(self, abnormal_state):  # 传入一个dict
+    def setAbnormal_state(self, abnormal_state):
         self.abnormal_state = abnormal_state
 
     def getAbnormal_state(self):

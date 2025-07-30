@@ -11,14 +11,14 @@ import {
 
 const getDefaultState = () => {
   return {
-    abnormal_user_data: '', // 用户
-    abnormal_store_data: '', // 商户
-    abnormal_card_data: '', // 卡
-    abnormal_date_data: '', // 日期
-    abnormal_consume_data: '', // 消费
-    abnormal_transfer_data: '', // 转账
-    abnormal_data: '', // 异常数据
-    abnormal_recreate_data: '', // 删库
+    abnormal_user_data: '',
+    abnormal_store_data: '',
+    abnormal_card_data: '',
+    abnormal_date_data: '',
+    abnormal_consume_data: '',
+    abnormal_transfer_data: '',
+    abnormal_data: '',
+    abnormal_recreate_data: ''
   }
 }
 
@@ -48,13 +48,13 @@ const mutations = {
   },
   SET_abnormal_RECREATE: (state, abnormal_recreate_data) => {
     state.abnormal_recreate_data = abnormal_recreate_data
-  },
+  }
 }
 
 const actions = {
   durationChooseAbnormal({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseAbnormal(payload).then(response => {
         const { data } = response
@@ -87,7 +87,7 @@ const actions = {
 
   userGenerateAbnormal({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateAbnormal(payload).then(response => {
         const { data } = response
@@ -104,7 +104,7 @@ const actions = {
   },
   userInitAbnormal({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitAbnormal().then(response => {
         const { data } = response
         if (!data) {
@@ -121,7 +121,7 @@ const actions = {
 
   storeGenerateAbnormal({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateAbnormal(payload).then(response => {
         const { data } = response
@@ -138,7 +138,7 @@ const actions = {
   },
   storeInitAbnormal({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitAbnormal().then(response => {
         const { data } = response
         if (!data) {
@@ -155,10 +155,10 @@ const actions = {
 
   cardGenerateAbnormal({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateAbnormal(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -172,9 +172,9 @@ const actions = {
   },
   cardInitAbnormal({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitAbnormal().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -187,10 +187,10 @@ const actions = {
     })
   },
 
-  consumeGenerateAbnormal({ commit }, form) { // 正常消费数据
+  consumeGenerateAbnormal({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -208,9 +208,9 @@ const actions = {
       })
     })
   },
-  consumeInitAbnormal({ commit }) { // 正常消费数据
+  consumeInitAbnormal({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitAbnormal().then(response => {
         const { data } = response
         if (!data) {
@@ -224,11 +224,10 @@ const actions = {
       })
     })
   },
-  transferGenerateAbnormal({ commit }, form) { // 正常转账数据
+  transferGenerateAbnormal({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -246,10 +245,9 @@ const actions = {
       })
     })
   },
-  transferInitAbnormal({ commit }) { // 正常转账数据
+  transferInitAbnormal({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitAbnormal().then(response => {
         const { data } = response
         if (!data) {
@@ -264,9 +262,9 @@ const actions = {
     })
   },
 
-  abnormalInit({ commit }) { // 异常转账交易
+  abnormalInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('异常转账交易初始化')
+      console.log('Abnormal transfer transaction initialization')
       abnormalInit().then(response => {
         const { data } = response
         if (!data) {
@@ -280,11 +278,10 @@ const actions = {
       })
     })
   },
-  abnormalGenerate({ commit }, form) { // 异常转账交易
+  abnormalGenerate({ commit }, form) {
     const { gang, startDate, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('异常转账交易生成')
+      console.log('Abnormal transfer transaction generation')
       const payload = {
         'gang_num': gang,
         'start_date': startDate,
@@ -303,13 +300,12 @@ const actions = {
       })
     })
   },
-  // 删除历史数据并重新建表
   abnormalRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       abnormalRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

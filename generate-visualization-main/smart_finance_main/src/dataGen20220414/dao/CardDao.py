@@ -10,13 +10,13 @@ class CardDao():
     def __init__(self):
         pass
 
-    # 创建store数据库表
+    # Create store database table
     def createCardTable(self, table_name):
         # sql = """
         #             CREATE TABLE `card`  (
-        #                 `card_id` int(0) NOT NULL AUTO_INCREMENT COMMENT '卡id',
-        #                 `owner_type` varchar(50) NULL DEFAULT NULL COMMENT '拥有者类型',
-        #                 `owner_id` int(30) NULL DEFAULT NULL COMMENT '拥有者id',
+        #                 `card_id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'Card id',
+        #                 `owner_type` varchar(50) NULL DEFAULT NULL COMMENT 'Owner type',
+        #                 `owner_id` int(30) NULL DEFAULT NULL COMMENT 'Owner ID',
         #                 `C4` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT 'C4',
         #                 `C5` varchar(100) NULL DEFAULT NULL COMMENT 'C5',
         #                 `C6` varchar(100) NULL DEFAULT NULL COMMENT 'C6',
@@ -25,15 +25,15 @@ class CardDao():
         #                 `C9` varchar(100) NULL DEFAULT NULL COMMENT 'C9',
         #                 `C10` varchar(100) NULL DEFAULT NULL COMMENT 'C10',
         #                 `C11` varchar(100) NULL DEFAULT NULL COMMENT 'C11',
-        #                 `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-        #                 `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
+        #                 `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+        #                 `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
         #                 PRIMARY KEY (`card_id`) USING BTREE
         #             ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
         #             """
         sql = """CREATE TABLE """  + """`""" + table_name + """`(
-                        `card_id` int(0) NOT NULL AUTO_INCREMENT COMMENT '卡id',
-                        `owner_type` varchar(50) NULL DEFAULT NULL COMMENT '拥有者类型',
-                        `owner_id` int(30) NULL DEFAULT NULL COMMENT '拥有者id',
+                        `card_id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'Card id',
+                        `owner_type` varchar(50) NULL DEFAULT NULL COMMENT 'Owner type',
+                        `owner_id` int(30) NULL DEFAULT NULL COMMENT 'Owner ID',
                         `C4` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT 'C4',
                         `C5` varchar(100) NULL DEFAULT NULL COMMENT 'C5',
                         `C6` varchar(100) NULL DEFAULT NULL COMMENT 'C6',
@@ -42,8 +42,8 @@ class CardDao():
                         `C9` varchar(100) NULL DEFAULT NULL COMMENT 'C9',
                         `C10` varchar(100) NULL DEFAULT NULL COMMENT 'C10',
                         `C11` varchar(100) NULL DEFAULT NULL COMMENT 'C11',
-                        `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-                        `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
+                        `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+                        `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
                         PRIMARY KEY (`card_id`) USING BTREE
                     ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
                     """
@@ -77,7 +77,6 @@ class CardDao():
         C11 = card.getC11()
         abnormal = card.getAbnormal()
 
-        # 务必要转换成JSON字符串，否则会因为编译器导致dic中为单引号，使得非JSON格式，而插入失败
         abnormal_state = json.dumps(card.getAbnormal_state(), ensure_ascii=False)
         # sql = """
         #                         insert into `card`(owner_type, owner_id, C4, C5, C6, C7, C8, C9, C10, C11, abnormal, abnormal_state)
@@ -93,12 +92,6 @@ class CardDao():
 
     @staticmethod
     def selectNormalCard(table_name):
-        '''
-        获取正常用户列表
-        # editor: 20220410顾峻铨
-        # 20220410修改后，fraud_category为单个异常标签选择，若为空则返回所有abnormal卡
-        :return:
-        '''
         sql_select = """
                     select card_id,owner_type,owner_id,C4,C5,C6,C7,C8,C9,C10,C11,abnormal,abnormal_state
                     from """ + table_name
@@ -115,13 +108,6 @@ class CardDao():
 
     @staticmethod
     def selectFraudCard(fraud_category, table_name):
-        '''
-        # 搜索指定类型的欺诈银行卡
-        # editor: 20220410顾峻铨
-        # 20220410修改后，fraud_category为单个异常标签选择，若为空则返回所有abnormal卡
-        :param category: String 欺诈用户类别
-        :return:
-        '''
         sql_select = """
                 select card_id,owner_type,owner_id,C4,C5,C6,C7,C8,C9,C10,C11,abnormal,abnormal_state
                 from 
@@ -135,7 +121,6 @@ class CardDao():
         select_res = cursor.fetchall()
         return select_res
 
-    # 根据C4获取卡信息
     @staticmethod
     def selectCardInfoByC4(C4, table_name):
         '''
@@ -157,12 +142,6 @@ class CardDao():
         return select_res
 
     def updateCardState(self, C4, fraud_category, table_name):
-        '''
-
-        :param card_id:
-        :param fraud_category: 欺诈类型
-        :return:
-        '''
         sql_select = """
             select abnormal,abnormal_state
             from """ + table_name + """ 
@@ -178,13 +157,11 @@ class CardDao():
         abnormal_state = json.loads(abnormal_state)
         if fraud_category == '' or fraud_category == None:
             abnormal = 0
-            # 将字典中的所有值设为0
             abnormal_state = dict.fromkeys(abnormal_state, 0)
         else:
             abnormal = 1
             abnormal_state[fraud_category] = 1
 
-        # 更新数据库
         sql_update = """
             update """ + table_name + """
             set abnormal = %s, abnormal_state = %s
@@ -228,7 +205,7 @@ class CardDao():
             """
         db = get_mysql_connection()
         cursor = db.cursor()
-        item = [ownerId, '01', '普通用户']
+        item = [ownerId, '01', 'Regular_user']
         cursor.execute(sql_select, item)
         select_res = cursor.fetchall()
 

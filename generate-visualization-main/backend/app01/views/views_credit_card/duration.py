@@ -31,10 +31,9 @@ def durationChoose(request):
         "code": 200,
         "data": date
     }
-    # 结果保存路径
+
     dateSelection_path = os.path.dirname(os.path.abspath(__file__)) + '/annoyingDatas/dateSelection.json'
 
-    # 结果写入文件
     with open(dateSelection_path, "w") as f:
         json.dump(dateSelection_datas, f)
 

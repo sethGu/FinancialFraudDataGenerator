@@ -13,7 +13,7 @@ class FraudTransDao:
     def createFraudTransTable(self, table_name):
         sql = """
             create table """ + table_name + """(
-                id int(0) not null auto_increment comment 'id主键',
+                id int(0) not null auto_increment comment 'ID primary key',
                 F1 varchar(26) null default null comment '',
                 F2 varchar(100) null default null comment '',
                 F3 varchar(11) null default null comment '',

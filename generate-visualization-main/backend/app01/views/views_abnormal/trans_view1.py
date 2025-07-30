@@ -25,9 +25,9 @@ def consumption(request):
     month = int(p['date'][4:6])
     day = int(p['date'][-2:])
     duration = p['duration']
-    print("生成正常消费开始")
-    api_DataGeneration.api_consumption("异常转账", year, month, day, duration)
-    print("生成正常消费结束")
+    print("Start generating normal consumption")
+    api_DataGeneration.api_consumption("Abnormal_transfer", year, month, day, duration)
+    print("End generating normal consumption")
     return consumptionDisplay()
 
 
@@ -37,7 +37,7 @@ def consumptionInit(request):
 
 
 def consumptionDisplay():
-    consumption_num = AbnormalTrans.objects.filter(abnormal=0, t2='01').count()  # 查询正常消费数据的数量
+    consumption_num = AbnormalTrans.objects.filter(abnormal=0, t2='01').count()
     consumption_lists = AbnormalTrans.objects.filter(abnormal=0, t2='01').values('t17', 't2', 't23', 't19').order_by('t23', 't19')
     # print(consumption_num)
     # print(consumption_lists)
@@ -76,9 +76,9 @@ def transfer(request):
     month = int(p['date'][4:6])
     day = int(p['date'][-2:])
     duration = p['duration']  # duration >= 30
-    print("生成正常转账开始")
-    api_DataGeneration.api_relative("异常转账", year, month, day, duration)
-    print("生成正常转账结束")
+    print("Start generating normal transfer")
+    api_DataGeneration.api_relative("Abnormal_transfer", year, month, day, duration)
+    print("End generating normal transfer")
     return transferDisplay()
 
 
@@ -88,7 +88,7 @@ def transferInit(request):
 
 
 def transferDisplay():
-    transfer_num = AbnormalTrans.objects.filter(abnormal=0, t2='03').count()  # 查询正常转账数据的数量
+    transfer_num = AbnormalTrans.objects.filter(abnormal=0, t2='03').count()
     transfer_lists = AbnormalTrans.objects.filter(abnormal=0, t2='03').values('t17', 't2', 't23', 't19').order_by('t23', 't19')
     # print(transfer_num)
     # print(transfer_lists)

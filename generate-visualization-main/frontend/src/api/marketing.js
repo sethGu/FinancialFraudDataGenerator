@@ -112,7 +112,6 @@ export function marketingGenerate(data) {
   })
 }
 
-// 删除历史数据并重新建表
 export function marketingRecreateTable(data) {
   return request({
     url: '/api_marketing/marketing/RecreateTable/',

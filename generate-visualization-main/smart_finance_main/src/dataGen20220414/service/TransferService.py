@@ -2,7 +2,6 @@ import random
 
 class TransferService:
     def from_distributin_to_one_anser(self,kx, glfb):
-        # 先求sum
         sum = [0 for i in range(len(glfb))]
         sum[0] = glfb[0]
         for i in range(1, len(glfb)):
@@ -13,7 +12,7 @@ class TransferService:
                 return kx[i]
 
     def from_human_age_to_tras_pat(self,age):
-        transfer_pattern = ["student", "adult", "old"]  # 对应22岁以下，22-55岁，55岁以上
+        transfer_pattern = ["student", "adult", "old"]
         if age <= 22:
             return transfer_pattern[0]
         elif age > 22 and age < 55:
@@ -50,10 +49,10 @@ class TransferService:
         return jtcs
 
     def from_wage_to_xflx(self,wage):
-        wage_rank_dict = {"0-100000": {"小": 0.6, "中": 0.3, "大": 0.1},
-                          "100000-200000": {"小": 0.6, "中": 0.3, "大": 0.1},
-                          "200000-1000000": {"小": 0.5, "中": 0.3, "大": 0.2},
-                          "> 1000000": {"小": 0.35, "中": 0.35, "大": 0.3}}
+        wage_rank_dict = {"0-100000": {"Small": 0.6, "Medium": 0.3, "Large": 0.1},
+                          "100000-200000": {"Small": 0.6, "Medium": 0.3, "Large": 0.1},
+                          "200000-1000000": {"Small": 0.5, "Medium": 0.3, "Large": 0.2},
+                          "> 1000000": {"Small": 0.35, "Medium": 0.35, "Large": 0.3}}
         for key, value in wage_rank_dict.items():
             if key != "> 1000000":
                 wg_st = int(key.strip("\"").split("-")[0])
@@ -64,17 +63,15 @@ class TransferService:
                     for lx, atr in value.items():
                         lx_ls.append(lx)
                         lx_atribute.append(atr)
-                    # print("wage",wage,"比例",lx_atribute)
                     return self.from_distributin_to_one_anser(lx_ls, lx_atribute)
             else:
-                lx_ls = ["小", "中", "大"]
+                lx_ls = ["Small", "Medium", "Large"]
                 lx_atribute = [0.35, 0.35, 0.3]
-                # print("wage", wage, "比例", lx_atribute)
                 return self.from_distributin_to_one_anser(lx_ls, lx_atribute)
 
 
     def get_trans_time_duration(self,xflx):
-        xflx_je_dict = {"小": "1-365", "中": "30-365", "大": "90-365"}
+        xflx_je_dict = {"Small": "1-365", "Medium": "30-365", "Large": "90-365"}
         jefw = xflx_je_dict[xflx]
         je_st = int(jefw.strip("\"").split("-")[0])
         je_ed = int(jefw.strip("\"").split("-")[1])

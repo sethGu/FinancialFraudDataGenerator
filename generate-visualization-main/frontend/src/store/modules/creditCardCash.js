@@ -18,7 +18,7 @@ const getDefaultState = () => {
     credit_consume_data: '',
     credit_transfer_data: '',
     credit_data: '',
-    credit_recreate_data: '' // 删库
+    credit_recreate_data: ''
   }
 }
 
@@ -54,7 +54,7 @@ const mutations = {
 const actions = {
   durationChooseCredit({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseCredit(payload).then(response => {
         const { data } = response
@@ -87,7 +87,7 @@ const actions = {
 
   userGenerateCredit({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateCredit(payload).then(response => {
         const { data } = response
@@ -104,7 +104,7 @@ const actions = {
   },
   userInitCredit({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitCredit().then(response => {
         const { data } = response
         if (!data) {
@@ -121,7 +121,7 @@ const actions = {
 
   storeGenerateCredit({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateCredit(payload).then(response => {
         const { data } = response
@@ -138,7 +138,7 @@ const actions = {
   },
   storeInitCredit({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitCredit().then(response => {
         const { data } = response
         if (!data) {
@@ -155,10 +155,10 @@ const actions = {
 
   cardGenerateCredit({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateCredit(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -172,9 +172,9 @@ const actions = {
   },
   cardInitCredit({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitCredit().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -187,10 +187,10 @@ const actions = {
     })
   },
 
-  consumeGenerateCredit({ commit }, form) { // 正常消费数据
+  consumeGenerateCredit({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -208,9 +208,9 @@ const actions = {
       })
     })
   },
-  consumeInitCredit({ commit }) { // 正常消费数据
+  consumeInitCredit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitCredit().then(response => {
         const { data } = response
         if (!data) {
@@ -224,11 +224,10 @@ const actions = {
       })
     })
   },
-  transferGenerateCredit({ commit }, form) { // 正常转账数据
+  transferGenerateCredit({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -246,10 +245,9 @@ const actions = {
       })
     })
   },
-  transferInitCredit({ commit }) { // 正常转账数据
+  transferInitCredit({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitCredit().then(response => {
         const { data } = response
         if (!data) {
@@ -263,9 +261,9 @@ const actions = {
       })
     })
   },
-  creditInit({ commit }) { // 信用卡违规套现
+  creditInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('信用卡违规套现初始化')
+      console.log('Credit card fraudulent cash withdrawal initialization')
       creditInit().then(response => {
         const { data } = response
         if (!data) {
@@ -279,11 +277,10 @@ const actions = {
       })
     })
   },
-  creditGenerate({ commit }, form) { // 信用卡违规套现
+  creditGenerate({ commit }, form) {
     const { startDate, shortTime, longTime, user, store, duration, personalRatio, storeRatio, storeMin, storeMax, openTime } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('信用卡违规套现生成')
+      console.log('Credit card fraudulent cash withdrawal generation')
       const payload = {
         'small_fraud_gap': shortTime,
         'big_fraud_gap': longTime,
@@ -310,14 +307,12 @@ const actions = {
       })
     })
   },
-
-  // 删除历史数据并重新建表
   creditRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       creditRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

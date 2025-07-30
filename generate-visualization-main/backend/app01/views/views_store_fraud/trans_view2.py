@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from smart_finance_main import api_DataGeneration
 
 
-# 商户违规
+# Merchant_violation
 @require_http_methods(["POST"])
 def storeFraud(request):
 
@@ -27,10 +27,10 @@ def storeFraud(request):
     ymd = p['ymd']
     number_of_stores = p['number_of_stores']
 
-    print("生成商户违规开始")
+    print("Start generating merchant violation")
     api_DataGeneration.api_storeFraud(ymd, number_of_stores)
     # api_DataGeneration.api_storeFraud()
-    print("生成商户违规结束")
+    print("End generating merchant violation")
     return storeFraudDisplay()
 
 
@@ -61,11 +61,11 @@ def storeFraudDisplay():
 
     storeFraud_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "商户违规交易",
+            'name': "Merchant violation transaction",
             'value': storeFraud_num
         }
     ]

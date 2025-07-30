@@ -5,18 +5,16 @@ class User:
 
     wage = -1
 
-    # 0:女 1:男
     gender = -1
 
     abnormal = 0
 
     abnormal_state = {}
 
-    # 4位地区字段
     loc_id = ''
 
     def __init__(self, age, gender, job, wage, id=-1, card=[], abnormal=0,
-                 abnormal_state={"赌博违规交易": 0, "伪冒注册欺诈": 0,"信用卡违规套现":0, "黄牛营销欺诈":0, "商户违规":0,"异常转账":0}, user_no=None, loc_id = ''):
+                 abnormal_state={"Gambling_violation":0, "Fake_registration":0,"Credit_card_fraud":0, "Scalper_marketing":0, "Merchant_violation":0,"Abnormal_transfer":0}, user_no=None, loc_id = ''):
         self.id = id
         self.age = age
         self.gender = gender
@@ -70,7 +68,7 @@ class User:
     def getAbnormal(self):
         return self.abnormal
 
-    def setAbnormal_state(self, abnormal_state):  # 传入一个dict
+    def setAbnormal_state(self, abnormal_state):
         self.abnormal_state = abnormal_state
 
     def getAbnormal_state(self):
@@ -95,11 +93,11 @@ class User:
 
     def __str__(self):
         return "User" + ":[" + \
-               "性别:" + self.getGender().__str__() + \
-               ", 年龄:" + self.getAge().__str__() + \
-               ", 职业:" + self.getJob() + \
-               ", 工资:" + self.getWage().__str__() + \
-               ", 异常状态:" + self.abnormal_state + \
-               ", 加密的用户号" + self.user_no + \
-               ", 地区标识码" + self.loc_id + \
+               "Gender:" + self.getGender().__str__() + \
+               ", Age:" + self.getAge().__str__() + \
+               ", Occupation:" + self.getJob() + \
+               ", Salary:" + self.getWage().__str__() + \
+               ", Abnormal_status:" + self.abnormal_state + \
+               ", Encrypted_user_ID" + self.user_no + \
+               ", Region_identification_code" + self.loc_id + \
                "]"

@@ -18,7 +18,7 @@ const getDefaultState = () => {
     gambling_consume_data: '',
     gambling_transfer_data: '',
     gambling_data: '',
-    gambling_recreate_data: '', // 删库
+    gambling_recreate_data: '',
     gambleModel_data: '',
     gambleTest_data: ''
   }
@@ -50,13 +50,13 @@ const mutations = {
   },
   SET_gambling_RECREATE: (state, gambling_recreate_data) => {
     state.gambling_recreate_data = gambling_recreate_data
-  },
+  }
 }
 
 const actions = {
   durationChooseGambling({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseGambling(payload).then(response => {
         const { data } = response
@@ -89,7 +89,7 @@ const actions = {
 
   userGenerateGambling({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateGambling(payload).then(response => {
         const { data } = response
@@ -106,7 +106,7 @@ const actions = {
   },
   userInitGambling({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitGambling().then(response => {
         const { data } = response
         if (!data) {
@@ -123,7 +123,7 @@ const actions = {
 
   storeGenerateGambling({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateGambling(payload).then(response => {
         const { data } = response
@@ -140,7 +140,7 @@ const actions = {
   },
   storeInitGambling({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitGambling().then(response => {
         const { data } = response
         if (!data) {
@@ -157,10 +157,10 @@ const actions = {
 
   cardGenerateGambling({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateGambling(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -174,9 +174,9 @@ const actions = {
   },
   cardInitGambling({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitGambling().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -189,10 +189,10 @@ const actions = {
     })
   },
 
-  consumeGenerateGambling({ commit }, form) { // 正常消费数据
+  consumeGenerateGambling({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -210,9 +210,9 @@ const actions = {
       })
     })
   },
-  consumeInitGambling({ commit }) { // 正常消费数据
+  consumeInitGambling({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitGambling().then(response => {
         const { data } = response
         if (!data) {
@@ -226,11 +226,10 @@ const actions = {
       })
     })
   },
-  transferGenerateGambling({ commit }, form) { // 正常转账数据
+  transferGenerateGambling({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -248,10 +247,9 @@ const actions = {
       })
     })
   },
-  transferInitGambling({ commit }) { // 正常转账数据
+  transferInitGambling({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitGambling().then(response => {
         const { data } = response
         if (!data) {
@@ -265,9 +263,9 @@ const actions = {
       })
     })
   },
-  gamblingInit({ commit }) { // 赌博交易
+  gamblingInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('赌博交易初始化')
+      console.log('Gambling transaction initialization')
       gamblingInit().then(response => {
         const { data } = response
         if (!data) {
@@ -281,10 +279,10 @@ const actions = {
       })
     })
   },
-  gamblingGenerate({ commit }, form) { // 赌博交易
+  gamblingGenerate({ commit }, form) {
     const { startDate, duration, store, user, isOpenTime, personalTrans, storeLow, storeMiddle, storeHigh, gambleUser } = form
     return new Promise((resolve, reject) => {
-      console.log('赌博交易生成')
+      console.log('Gambling transaction generation')
       const payload = {
         'date': startDate,
         'duration': duration,
@@ -313,10 +311,10 @@ const actions = {
   // 删除历史数据并重新建表
   gamblingRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       gamblingRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

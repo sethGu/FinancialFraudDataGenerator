@@ -11,11 +11,11 @@ class RelativeDao():
     def createRelativeTable(self, table_name):
         sql = """
             create table """ + table_name + """(
-                `id` int(0) NOT NULL auto_increment comment 'id主键',
+                `id` int(0) NOT NULL auto_increment comment 'ID primary key',
                 `user_id` int(0) NOT NULL comment 'user id',
-                `gender` int(0) NULL DEFAULT NULL COMMENT '性别',
-                `age` int(0) NULL DEFAULT NULL COMMENT '年龄',
-                `childList` json NULL DEFAULT NULL COMMENT '孩子集合',
+                `gender` int(0) NULL DEFAULT NULL COMMENT 'Gender',
+                `age` int(0) NULL DEFAULT NULL COMMENT 'Age',
+                `childList` json NULL DEFAULT NULL COMMENT 'Children collection',
                 `f_id` int(0) NULL DEFAULT NULL comment 'father id',
                 `m_id` int(0) NULL DEFAULT NULL comment 'mather id',
                 `c_id` int(0) NULL DEFAULT NULL comment 'couple id',

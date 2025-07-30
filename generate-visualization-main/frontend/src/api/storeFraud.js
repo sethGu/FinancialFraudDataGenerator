@@ -112,7 +112,6 @@ export function storeFraudGenerate(data) {
   })
 }
 
-// 删除历史数据并重新建表
 export function storeFraudRecreateTable(data) {
   return request({
     url: '/api_store_fraud/store_fraud/RecreateTable/',

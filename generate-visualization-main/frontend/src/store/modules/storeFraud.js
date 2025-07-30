@@ -18,7 +18,7 @@ const getDefaultState = () => {
     storeFraud_consume_data: '',
     storeFraud_transfer_data: '',
     storeFraud_data: '',
-    storeFraud_recreate_data: '' // 删库
+    storeFraud_recreate_data: ''
   }
 }
 
@@ -54,7 +54,7 @@ const mutations = {
 const actions = {
   durationChooseStoreFraud({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseStoreFraud(payload).then(response => {
         const { data } = response
@@ -87,7 +87,7 @@ const actions = {
 
   userGenerateStoreFraud({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateStoreFraud(payload).then(response => {
         const { data } = response
@@ -104,7 +104,7 @@ const actions = {
   },
   userInitStoreFraud({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitStoreFraud().then(response => {
         const { data } = response
         if (!data) {
@@ -121,7 +121,7 @@ const actions = {
 
   storeGenerateStoreFraud({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateStoreFraud(payload).then(response => {
         const { data } = response
@@ -138,7 +138,7 @@ const actions = {
   },
   storeInitStoreFraud({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitStoreFraud().then(response => {
         const { data } = response
         if (!data) {
@@ -155,10 +155,10 @@ const actions = {
 
   cardGenerateStoreFraud({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateStoreFraud(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -172,9 +172,9 @@ const actions = {
   },
   cardInitStoreFraud({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitStoreFraud().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -187,10 +187,10 @@ const actions = {
     })
   },
 
-  consumeGenerateStoreFraud({ commit }, form) { // 正常消费数据
+  consumeGenerateStoreFraud({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -208,9 +208,9 @@ const actions = {
       })
     })
   },
-  consumeInitStoreFraud({ commit }) { // 正常消费数据
+  consumeInitStoreFraud({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitStoreFraud().then(response => {
         const { data } = response
         if (!data) {
@@ -224,11 +224,10 @@ const actions = {
       })
     })
   },
-  transferGenerateStoreFraud({ commit }, form) { // 正常转账数据
+  transferGenerateStoreFraud({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -246,10 +245,9 @@ const actions = {
       })
     })
   },
-  transferInitStoreFraud({ commit }) { // 正常转账数据
+  transferInitStoreFraud({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitStoreFraud().then(response => {
         const { data } = response
         if (!data) {
@@ -263,9 +261,9 @@ const actions = {
       })
     })
   },
-  storeFraudInit({ commit }) { // 商户违规
+  storeFraudInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('商户违规生成')
+      console.log('Merchant violation generation')
       storeFraudInit().then(response => {
         const { data } = response
         if (!data) {
@@ -279,11 +277,10 @@ const actions = {
       })
     })
   },
-  storeFraudGenerate({ commit }, form) { // 商户违规
+  storeFraudGenerate({ commit }, form) {
     const { store, startDate } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('商户违规生成')
+      console.log('Merchant violation generation')
       const payload = {
         'ymd': startDate,
         'number_of_stores': store
@@ -301,13 +298,12 @@ const actions = {
       })
     })
   },
-  // 删除历史数据并重新建表
   storeFraudRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       storeFraudRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

@@ -12,26 +12,12 @@ from src.utils.config import get_mysql_connection
 
 class UserFactory:
     def __init__(self, scene):
-        '''
-        UserFactory负责创建User表和批量生成User
-        '''
         self.userService = UserService(scene)
 
     def createUserTable(self):
-        '''
-        创建User数据库表
-        by赵征明20220414
-        :return:
-        '''
         self.userService.createUserTable()
 
     def createUsers(self, n):
-        '''
-        批量生成User
-        by赵征明20220414
-        :param n:
-        :return:
-        '''
         userList = []
         for i in range(n):
             user = UserService.createUser()

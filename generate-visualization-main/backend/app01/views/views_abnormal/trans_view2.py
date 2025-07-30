@@ -18,7 +18,7 @@ sys.path.append(
 from smart_finance_main import api_DataGeneration
 
 
-# 异常转账
+# Abnormal_transfer
 @require_http_methods(["POST"])
 def AbnormalTrans_2(request):
     postBody = request.body
@@ -29,9 +29,9 @@ def AbnormalTrans_2(request):
     start_date = p['start_date']
     duration = p['duration']
 
-    print("生成异常转账开始")
+    print("Start generating abnormal transfer")
     api_DataGeneration.api_AbnormalTrans(gang_num, start_date, duration)
-    print("生成异常转账结束")
+    print("End generating abnormal transfer")
     return AbnormalTransDisplay()
 
 
@@ -61,11 +61,11 @@ def AbnormalTransDisplay():
     # print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=")
     AbnormalTrans_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "异常转账交易",
+            'name': "Abnormal transfer transaction",
             'value': AbnormalTrans_num
         }
     ]

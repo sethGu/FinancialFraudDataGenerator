@@ -18,7 +18,7 @@ const getDefaultState = () => {
     marketing_consume_data: '',
     marketing_transfer_data: '',
     marketing_data: '',
-    marketing_recreate_data: '' // 删库
+    marketing_recreate_data: ''
   }
 }
 
@@ -48,13 +48,13 @@ const mutations = {
   },
   SET_marketing_RECREATE: (state, marketing_recreate_data) => {
     state.marketing_recreate_data = marketing_recreate_data
-  },
+  }
 }
 
 const actions = {
   durationChooseMarketing({ commit, state }, date) {
     return new Promise((resolve, reject) => {
-      console.log('日期选择')
+      console.log('Date selection')
       const payload = { 'date': date }
       durationChooseMarketing(payload).then(response => {
         const { data } = response
@@ -87,7 +87,7 @@ const actions = {
 
   userGenerateMarketing({ commit, state }, num) {
     return new Promise((resolve, reject) => {
-      console.log('用户生成')
+      console.log('User generation')
       const payload = { 'total': num }
       userGenerateMarketing(payload).then(response => {
         const { data } = response
@@ -104,7 +104,7 @@ const actions = {
   },
   userInitMarketing({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('用户初始化')
+      console.log('User initialization')
       userInitMarketing().then(response => {
         const { data } = response
         if (!data) {
@@ -121,7 +121,7 @@ const actions = {
 
   storeGenerateMarketing({ commit, state }, total) {
     return new Promise((resolve, reject) => {
-      console.log('商户生成')
+      console.log('Merchant generation')
       const payload = { 'total': total }
       storeGenerateMarketing(payload).then(response => {
         const { data } = response
@@ -138,7 +138,7 @@ const actions = {
   },
   storeInitMarketing({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('商户初始化')
+      console.log('Merchant initialization')
       storeInitMarketing().then(response => {
         const { data } = response
         if (!data) {
@@ -155,10 +155,10 @@ const actions = {
 
   cardGenerateMarketing({ commit, state }, is_generate) {
     return new Promise((resolve, reject) => {
-      console.log('卡生成')
-      const payload = { 'is_generate': is_generate }// 将前端的is_generate数据封装以payload形式发给后端
+      console.log('Card generation')
+      const payload = { 'is_generate': is_generate }
       cardGenerateMarketing(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -172,9 +172,9 @@ const actions = {
   },
   cardInitMarketing({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('卡初始化')
+      console.log('Card initialization')
       cardInitMarketing().then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -187,10 +187,10 @@ const actions = {
     })
   },
 
-  consumeGenerateMarketing({ commit }, form) { // 正常消费数据
+  consumeGenerateMarketing({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      console.log('正常交易生成')
+      console.log('Normal transaction generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -208,9 +208,9 @@ const actions = {
       })
     })
   },
-  consumeInitMarketing({ commit }) { // 正常消费数据
+  consumeInitMarketing({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('正常交易初始化')
+      console.log('Normal transaction initialization')
       consumeInitMarketing().then(response => {
         const { data } = response
         if (!data) {
@@ -224,11 +224,10 @@ const actions = {
       })
     })
   },
-  transferGenerateMarketing({ commit }, form) { // 正常转账数据
+  transferGenerateMarketing({ commit }, form) {
     const { date, duration } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账生成')
+      console.log('Normal transfer generation')
       const payload = {
         'date': date,
         'duration': duration
@@ -246,10 +245,9 @@ const actions = {
       })
     })
   },
-  transferInitMarketing({ commit }) { // 正常转账数据
+  transferInitMarketing({ commit }) {
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('正常转账初始化')
+      console.log('Normal transfer initialization')
       transferInitMarketing().then(response => {
         const { data } = response
         if (!data) {
@@ -263,9 +261,9 @@ const actions = {
       })
     })
   },
-  marketingInit({ commit }) { // 黄牛营销欺诈
+  marketingInit({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('黄牛营销欺诈初始化')
+      console.log('Scalper marketing fraud initialization')
       marketingInit().then(response => {
         const { data } = response
         if (!data) {
@@ -279,11 +277,10 @@ const actions = {
       })
     })
   },
-  marketingGenerate({ commit }, form) { // 黄牛营销欺诈
+  marketingGenerate({ commit }, form) {
     const { startDate, duration, store, user, openTime, clothRatio, serviceRatio } = form
     return new Promise((resolve, reject) => {
-      // console.log('表单信息', form)
-      console.log('黄牛营销欺诈生成')
+      console.log('Scalper marketing fraud generation')
       const payload = {
         'date': startDate,
         'duration': duration,
@@ -306,13 +303,12 @@ const actions = {
       })
     })
   },
-  // 删除历史数据并重新建表
   marketingRecreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       marketingRecreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }

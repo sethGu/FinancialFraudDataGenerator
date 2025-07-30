@@ -35,7 +35,7 @@ module.exports = {
     proxy: null,
     // proxy: {
     //   [process.env.VUE_APP_BASE_API]: {
-    //     // target: 'http://127.0.0.1:8000/', // 后台接口域名
+    //     // target: 'http://127.0.0.1:8000/',
     //     changeOrigin: true,
     //     pathRewrite: {
     //       ['^' + process.env.VUE_APP_BASE_API]: ''
@@ -49,11 +49,10 @@ module.exports = {
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: (config) => {
-    // 判断为生产模式下，因为开发模式我们是想保存console的
     if (process.env.NODE_ENV === 'production') {
       config.optimization.minimizer.map((arg) => {
         const option = arg.options.terserOptions.compress
-        option.drop_console = true // 打开开关
+        option.drop_console = true
         return arg
       })
     }

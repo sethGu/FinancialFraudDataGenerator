@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from smart_finance_main import api_DataGeneration
 
 
-# 伪冒注册
+# Fake_registration
 @require_http_methods(["POST"])
 def registerFraud(request):
     postBody = request.body
@@ -27,9 +27,9 @@ def registerFraud(request):
     date = p['date']
     number_of_victims = p['number_of_victims']
 
-    print("生成伪冒注册开始")
+    print("Start generating fake registration")
     api_DataGeneration.api_registerFraud(date, number_of_victims)
-    print("生成伪冒注册结束")
+    print("End generating fake registration")
     return registerFraudDisplay()
 
 
@@ -60,11 +60,11 @@ def registerFraudDisplay():
 
     registerFraud_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "伪冒注册交易",
+            'name': "Fake registration transaction",
             'value': registerFraud_num
         }
     ]

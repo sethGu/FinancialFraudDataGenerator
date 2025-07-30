@@ -9,23 +9,23 @@ from src.utils.functions import id_generator, read_json_file
 from src.utils.config import BASE_DIR
 
 store_name_dict = {
-    "餐饮":{'低':"小厨","中":"餐厅","高":"酒店"},
-    "衣着美容":{'低':"发廊","中":"美容","高":"衣柜"},
-    "生活用品及服务":{'低':"便利店","中":"超市","高":"商场"},
-    "交通通信":{'低':"公交","中":"出租公司","高":"航空"},
-    "教育文化":{'低':"学校","中":"培训中心","高":"教育"},
-    "医疗保健":{'低':"诊所","中":"医院","高":"医院"},
-    "居住":{'低':"旅馆","中":"酒店","高":"大酒店"},
-    "娱乐":{'低':"KTV","中":"酒吧","高":"会所"}
+    "Catering":{'Low':"Small_kitchen","Medium":"Restaurant","High":"Hotel"},
+    "Clothing_and_beauty":{'Low':"Hair_salon","Medium":"Beauty_treatment","High":"Wardrobe"},
+    "Household_items_and_services":{'Low':"Convenience_store","Medium":"Supermarket","High":"Shopping_mall"},
+    "Transportation_and_communication":{'Low':"Bus","Medium":"Rental_company","High":"Aviation"},
+    "Education_and_culture":{'Low':"School","Medium":"Training_center","High":"Education"},
+    "Healthcare":{'Low':"Clinic","Medium":"Hospital","High":"Hospital"},
+    "Residence":{'Low':"Inn","Medium":"Hotel","High":"Grand_hotel"},
+    "Entertainment":{'Low':"KTV","Medium":"Bar","High":"Clubhouse"}
 }
 
 class StoreService():
     def __init__(self, scene):
         self.storeDao = StoreDao()
 
-        self.table_names = {"黄牛营销欺诈": 'marketing_store', "信用卡违规套现": 'credit_store', "异常转账": 'abnormal_store',
-                        "伪冒注册欺诈": 'register_store', "赌博违规交易": 'gambling_store',
-                        "商户违规": 'store_store'}
+        self.table_names = {"Scalper_marketing": 'marketing_store', "Credit_card_fraud": 'credit_store', "Abnormal_transfer": 'abnormal_store',
+                        "Fake_registration": 'register_store', "Gambling_violation": 'gambling_store',
+                        "Merchant_violation": 'store_store'}
         self.scene = self.table_names[scene]
     def createStoreTable(self):
         # for name in self.table_names.values():
@@ -35,10 +35,6 @@ class StoreService():
         self.storeDao.insertStores(storeList, self.scene)
 
     def selectStores(self):
-        '''
-        查询所有商户
-        :return:
-        '''
         select_res = self.storeDao.selectStores(self.scene)
         storeList = []
         for item in select_res:
@@ -59,20 +55,16 @@ class StoreService():
     def createStore():
         store_name = ''.join(random.sample('zyxwvutsrqponmlkjihgfedcba',3))
         store_id = StoreService.createStore_id()
-        # 大类和子类
         industry, industry_ = StoreService.createIndustry()
-        # 根据子类获取营业时间
         open_duration = StoreService.createOpen_duration(industry_)
 
-        # 根据大类和子类获取商户等级
         result = StoreService.createSubClassLevel(industry, industry_)
 
         S30 = id_generator(size=8, chars='1234567890')
-        S30s = {S30: "正常"}
+        S30s = {S30: "Normal"}
         S30 =  json.dumps(S30s, ensure_ascii=False)
-        #商户EXT创建时间
-        MINTIME = datetime.datetime(2015, 2, 11, 0, 0, 0)  # 设置时间范围的开始时间
-        MAXTIME = datetime.datetime(2022, 2, 12, 0, 0, 0)  # 设置时间范围的结束时间
+        MINTIME = datetime.datetime(2015, 2, 11, 0, 0, 0)
+        MAXTIME = datetime.datetime(2022, 2, 12, 0, 0, 0)
         mintime_ts = int(time.mktime(MINTIME.timetuple()))
         maxtime_ts = int(time.mktime(MAXTIME.timetuple()))
         random_ts = random.randint(mintime_ts, maxtime_ts)
@@ -93,7 +85,7 @@ class StoreService():
         S4 = store_name
         S5 = StoreService.createS5(industry_)
         S6 = "0000000000"
-        S7 = date#随机时间吧，如果是异常商户，可以把它修改的与生成数据时间相近 ?????
+        S7 = date
         S8 = '001'
         S9 = '0'
         # T16
@@ -132,13 +124,11 @@ class StoreService():
 
     @staticmethod
     def createStore_id():
-        # 生成商户id暂时不考虑
         return 0
 
     @staticmethod
     def createIndustry():
-        # industry_list = ["餐饮", "衣着美容", "生活用品及服务", "交通通信", "教育文化", "医疗保健", "居住", "娱乐"]
-        # # 以下为各行业的比例，可以进行修改
+        # industry_list = ["Catering", "Clothing_and_beauty", "Household_items_and_services", "Transportation_and_communication", "Education_and_culture", "Healthcare", "Residence", "Entertainment"]
         # industryProportion = [10, 3, 4, 2, 1, 1.5, 6, 2]
         # sum_ = sum(industryProportion)
         # pro_list = [0 for i in range(len(industryProportion))]
@@ -152,14 +142,14 @@ class StoreService():
         #     if r < pro_list[i]:
         #         return industry_list[i]
         industry_list = [
-            "餐饮",
-            "衣着美容",
-            "生活用品及服务",
-            "交通通信",
+            "Catering",
+            "Clothing_and_beauty",
+            "Household_items_and_services",
+            "Transportation_and_communication",
             # "教育文化",
-            "医疗保健",
-            "居住",
-            "娱乐"
+            "Healthcare",
+            "Residence",
+            "Entertainment"
         ]
         industryProportion = [
             10,
@@ -178,7 +168,6 @@ class StoreService():
             else:
                 pro_list[i] = pro_list[i - 1] + industryProportion[i] / sum_
         r = random.random()
-        # 行业大类
         industry = ''
         for i in range(len(pro_list)):
             if r < pro_list[i]:
@@ -200,7 +189,6 @@ class StoreService():
             else:
                 pro_list[i] = pro_list[i - 1] + sub_class_value[i] / sum_
         r = random.random()
-        # 行业小类
         industry_ = ''
         for i in range(len(pro_list)):
             if r < pro_list[i]:
@@ -211,11 +199,9 @@ class StoreService():
 
     @staticmethod
     def createLevel(industry):
-        # 以下为各行业的对应低中高档的比例，可以进行修改
-        # 娱乐， 医疗保健，餐饮，居住又分为低中高三级， 其他不分类
-        industry_level_info = {"餐饮":[8,1.5,0.5],"衣着美容":[8, 1.5, 0.5],"生活用品及服务":[8, 1.5, 0.5],"交通通信":[5, 1.5, 0.5],"教育文化":[3, 1.5, 0.5],"医疗保健":[8, 1.5, 0.5],"居住":[8, 1.5, 0.5],"娱乐":[8, 1.5, 0.5]}
+        industry_level_info = {"Catering":[8,1.5,0.5],"Clothing_and_beauty":[8, 1.5, 0.5],"Household_items_and_services":[8, 1.5, 0.5],"Transportation_and_communication":[5, 1.5, 0.5],"Education_and_culture":[3, 1.5, 0.5],"Healthcare":[8, 1.5, 0.5],"Residence":[8, 1.5, 0.5],"Entertainment":[8, 1.5, 0.5]}
         weight_list = industry_level_info[industry]
-        level_list = ["低", "中", "高"]
+        level_list = ["Low", "Medium", "High"]
         pro_list = [0 for i in range(len(weight_list))]
         sum_ = sum(weight_list)
         for i in range(len(weight_list)):
@@ -230,21 +216,21 @@ class StoreService():
 
     @staticmethod
     def createSubClassLevel(industry, industry_):
-        has_sub_class = ["餐饮", "医疗保健", "居住", "娱乐", "生活用品及服务"]
+        has_sub_class = ["Catering", "Healthcare", "Residence", "Entertainment", "Household_items_and_services"]
         result = []
         if industry not in has_sub_class:
             result.append(industry_)
             return result
-        if industry == "居住" and industry_ == "青旅":
+        if industry == "Residence" and industry_ == "Youth_hostel":
             result.append(industry_)
             return result
-        if industry == "医疗保健":
-            result.append(industry_ + "(低)")
-            result.append(industry_ + "(中)")
+        if industry == "Healthcare":
+            result.append(industry_ + "(Low)")
+            result.append(industry_ + "(Medium)")
         else:
-            result.append(industry_ + "(低)")
-            result.append(industry_ + "(中)")
-            result.append(industry_ + "(高)")
+            result.append(industry_ + "(Low)")
+            result.append(industry_ + "(Medium)")
+            result.append(industry_ + "(High)")
         return result
 
     @staticmethod
@@ -255,9 +241,7 @@ class StoreService():
         industry_Charge_duration = industry_Charge_duration.split('-')
         min = int(industry_Charge_duration[0])
         max = int(industry_Charge_duration[1])
-        #生成商户最小消费值,范围为[min 到 2*min*max/(min+max)]
         min_ = random.randint(min, int((2 * min * max)/(min+max)))
-        # 生成商户最大消费值,范围为[min+max/2 到 max]
         max_ = random.randint(int((min+max)/2), max)
         return [min_,max_]
 
@@ -270,23 +254,6 @@ class StoreService():
         return S5
     @staticmethod
     def createOpen_duration(industry):
-        # r = random.random()
-        # industry_Open_duration={
-        #     "餐饮":{"低":["6:00-11:00","15:00-24:00","8:00-23:00"] ,"中":["9:00-22:00","10:00-22:00"],"高":[ "9:00-21:00","11:00-20:00" ]},
-        #     "衣着美容":{"低": [ "15:00-24:00","8:00-23:00","9:00-22:00"  ],"中":["15:00-22:00","8:00-22:00","9:00-22:00"],"高":[ "14:00-24:00","10:00-23:00" ]},
-        #     "生活用品及服务":{"低":["0:00-24:00","9:00-23:00","8:00-22:00"] ,"中":["8:00-22:00","9:00-22:00"],"高":[  "9:00-19:00", "10:00-22:00"  ]},
-        #     "交通通信": {"低":["6:00-23:00","0:00-24:00,"], "中":["6:00-24:00"], "高":["6:00-24:00"]},
-        #     "教育文化": {"低":[ "7:00-22:00" ], "中":[ "7:00-22:00"], "高":[ "7:00-22:00"]},
-        #     "医疗保健": {"低":["8:00-24:00"], "中":["8:00-24:00"], "高":["8:00-24:00"]},
-        #     "居住": {"低":["9:00-24:00"], "中":["9:00-24:00"], "高":["9:00-24:00"]},
-        #     "娱乐": {"低":["0:00-24:00"], "中":["0:00-24:00"], "高":["0:00-24:00"]},
-        # }
-        # industry_Open_duration_list = industry_Open_duration[industry][level]
-        # len_industry_Open_duration_list = len(industry_Open_duration_list)
-        # pool = [i-1 for i in range(len_industry_Open_duration_list)]
-        # index = random.choice(pool)
-        # return industry_Open_duration_list[index]
-
         jsonfile = BASE_DIR + '/src/json_file/store_open_time.json'
 
         open_duration = read_json_file(jsonfile)

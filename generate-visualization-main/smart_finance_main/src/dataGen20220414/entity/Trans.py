@@ -6,7 +6,7 @@ class Trans:
                  T11='0',T12='0000000000',T13='',T14='',T15='',T16='0',T17='',T18='01',T19='',T20='00000000',
                  T21='0',T22='',T23='',T24='00000000',T25='',T26='',T27='00',T28='',T29='00000000',T30='',
                  T31='00000000',T32='',T33='',T34='',T35='01',T36='',T37='',T38='1', T39='1',
-                 abnormal=0, abnormal_state= {"赌博违规交易": 0, "伪冒注册欺诈": 0,"信用卡违规套现":0, "黄牛营销欺诈":0, "商户违规":0,"异常转账":0}):
+                 abnormal=0, abnormal_state= {"Gambling_violation": 0, "Fake_registration": 0,"Credit_card_fraud":0, "Scalper_marketing":0, "Merchant_violation":0,"Abnormal_transfer":0}):
         self.id = id
         self.T1 = T1
         self.T2 = T2

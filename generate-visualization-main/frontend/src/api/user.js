@@ -3,7 +3,6 @@ import request from '@/utils/request'
 // const axios = axiosInstance
 
 export function login(data) {
-  // 详见request.js
   return request({
     // baseURL: 'http://127.0.0.1:8000/',
     url: '/api/user_login/',

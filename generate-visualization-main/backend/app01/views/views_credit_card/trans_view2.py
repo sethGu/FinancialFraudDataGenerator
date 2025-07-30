@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from smart_finance_main import api_DataGeneration
 
 
-# 信用卡违规套现
+# Credit_card_fraud
 @require_http_methods(["POST"])
 def CreditCardCashOut(request):
     postBody = request.body
@@ -34,14 +34,14 @@ def CreditCardCashOut(request):
     user_quantity = p['user_quantity']
     store_quantity = p['store_quantity']
     duration = p['duration']
-    print("生成信用卡违规套现开始")
+    print("Start generating credit card fraud")
     api_DataGeneration.api_CreditCardCashOut(personal_cash_out_ratio, personal_store_ratio,
                                              store_group_size_min,
                                              store_group_size_max, is_in_opening_time, small_fraud_gap, big_fraud_gap,
                                              start_year, start_month, start_day,
                                              user_quantity, store_quantity, duration)
     # api_DataGeneration.api_CreditCardCashOut()
-    print("生成信用卡违规套现结束")
+    print("End generating credit card fraud")
     return CreditCardCashOutDisplay()
 
 
@@ -69,11 +69,11 @@ def CreditCardCashOutDisplay():
 
     CreditCardCashOut_datas = [
         {
-            'name': "正常交易",
+            'name': "Normal transaction",
             'value': normal_num
         },
         {
-            'name': "信用卡违规套现交易",
+            'name': "Credit card fraud transaction",
             'value': CreditCardCashOut_num
         }
     ]

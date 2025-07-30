@@ -111,14 +111,14 @@ export const constantRoutes = [
   //   path: '/enterpriseDataGenerate',
   //   component: Layout,
   //   redirect: 'noRedirect',
-  //   name: '工商企业数据',
-  //   meta: { title: '工商企业数据', icon: 'el-icon-s-data' },
+  //   name: 'Business enterprise data',
+  //   meta: { title: 'Business enterprise data', icon: 'el-icon-s-data' },
   //   children: [
   //     {
   //       path: 'enterprise',
-  //       name: '工商企业数据',
+  //       name: 'Business enterprise data',
   //       component: () => import('@/views/enterprise/index'),
-  //       meta: { title: '工商企业数据', icon: 'el-icon-tickets' }
+  //       meta: { title: 'Business enterprise data', icon: 'el-icon-tickets' }
   //     }
   //   ]
   // },
@@ -126,14 +126,14 @@ export const constantRoutes = [
   //   path: '/operatorDataGenerate',
   //   component: Layout,
   //   redirect: 'noRedirect',
-  //   name: '运营商数据',
-  //   meta: { title: '运营商数据', icon: 'el-icon-s-claim' },
+  //   name: 'Operator data',
+  //   meta: { title: 'Operator data', icon: 'el-icon-s-claim' },
   //   children: [
   //     {
   //       path: 'operator',
-  //       name: '运营商数据',
+  //       name: 'Operator data',
   //       component: () => import('@/views/operator/index'),
-  //       meta: { title: '运营商数据', icon: 'el-icon-data-analysis' }
+  //       meta: { title: 'Operator data', icon: 'el-icon-data-analysis' }
   //     }
   //   ]
   // },

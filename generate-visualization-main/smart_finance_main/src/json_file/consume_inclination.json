@@ -1,6 +1,6 @@
-{"30000":{"餐饮": 60, "生活用品及服务": 10, "衣着美容": 10, "交通通信": 2, "教育文化": 10, "医疗保健": 5, "娱乐": 3, "居住": 0},
-"50000":{"餐饮": 50, "生活用品及服务": 10, "衣着美容": 10, "交通通信": 3, "教育文化": 10, "医疗保健": 5, "娱乐": 7, "居住": 5},
-"100000":{"餐饮": 40, "生活用品及服务": 13, "衣着美容": 12, "交通通信": 5, "教育文化": 10, "医疗保健": 8, "娱乐": 7, "居住": 5},
-"200000":{"餐饮": 30, "生活用品及服务": 15, "衣着美容": 10, "交通通信": 5, "教育文化": 10, "医疗保健": 10, "娱乐": 10, "居住": 10},
-"500000":{"餐饮": 20, "生活用品及服务": 15, "衣着美容": 15, "交通通信": 5, "教育文化": 10, "医疗保健": 10, "娱乐": 10, "居住": 15},
-"-":{"餐饮": 10, "生活用品及服务": 15, "衣着美容": 20, "交通通信": 5, "教育文化": 20, "医疗保健": 10, "娱乐": 15, "居住": 5}}
+{"30000":{"Catering": 60, "Household_items_and_services": 10, "Clothing_and_beauty": 10, "Transportation_and_communication": 2, "Education_and_culture": 10, "Healthcare": 5, "Entertainment": 3, "Residence": 0},
+"50000":{"Catering": 50, "Household_items_and_services": 10, "Clothing_and_beauty": 10, "Transportation_and_communication": 3, "Education_and_culture": 10, "Healthcare": 5, "Entertainment": 7, "Residence": 5},
+"100000":{"Catering": 40, "Household_items_and_services": 13, "Clothing_and_beauty": 12, "Transportation_and_communication": 5, "Education_and_culture": 10, "Healthcare": 8, "Entertainment": 7, "Residence": 5},
+"200000":{"Catering": 30, "Household_items_and_services": 15, "Clothing_and_beauty": 10, "Transportation_and_communication": 5, "Education_and_culture": 10, "Healthcare": 10, "Entertainment": 10, "Residence": 10},
+"500000":{"Catering": 20, "Household_items_and_services": 15, "Clothing_and_beauty": 15, "Transportation_and_communication": 5, "Education_and_culture": 10, "Healthcare": 10, "Entertainment": 10, "Residence": 15},
+"-":{"Catering": 10, "Household_items_and_services": 15, "Clothing_and_beauty": 20, "Transportation_and_communication": 5, "Education_and_culture": 20, "Healthcare": 10, "Entertainment": 15, "Residence": 5}}

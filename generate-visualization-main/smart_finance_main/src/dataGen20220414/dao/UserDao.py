@@ -9,38 +9,33 @@ class UserDao():
     def __init__(self):
         pass
 
-    # 创建user数据库表
     def createUserTable(self, table_name):
-        '''
-        创建user表
-        :return:
-        '''
         # sql = """
         # CREATE TABLE `user`  (
-        #     `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
-        #     `age` int(0) NULL DEFAULT NULL COMMENT '年龄',
-        #     `gender` int(0) NULL DEFAULT NULL COMMENT '性别',
+        #     `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'ID primary key',
+        #     `age` int(0) NULL DEFAULT NULL COMMENT 'Age',
+        #     `gender` int(0) NULL DEFAULT NULL COMMENT 'Gender',
         #     `job` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' ,
-        #     `wage` int(0) NULL DEFAULT NULL COMMENT '工资',
-        #     `card` json NULL DEFAULT NULL COMMENT '所持有的银行卡',
-        #     `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-        #     `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
-        #     `user_no` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT '随机生成的加密用户号',
-        #     `loc_id` varchar(18) NULL DEFAULT NULL COMMENT '地区字段' ,
+        #     `wage` int(0) NULL DEFAULT NULL COMMENT 'Salary',
+        #     `card` json NULL DEFAULT NULL COMMENT 'Bank cards held',
+        #     `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+        #     `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
+        #     `user_no` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT 'Randomly generated encrypted user ID',
+        #     `loc_id` varchar(18) NULL DEFAULT NULL COMMENT 'Region field' ,
         #     PRIMARY KEY (`id`) USING BTREE
         # ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
         # """
         sql = """CREATE TABLE """ + """`""" + table_name + """` (
-            `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id主键',
-            `age` int(0) NULL DEFAULT NULL COMMENT '年龄',
-            `gender` int(0) NULL DEFAULT NULL COMMENT '性别',
+            `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'ID primary key',
+            `age` int(0) NULL DEFAULT NULL COMMENT 'Age',
+            `gender` int(0) NULL DEFAULT NULL COMMENT 'Gender',
             `job` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' ,
-            `wage` int(0) NULL DEFAULT NULL COMMENT '工资',
-            `card` json NULL DEFAULT NULL COMMENT '所持有的银行卡',
-            `abnormal` int(0) NULL DEFAULT 0 COMMENT '是否异常',
-            `abnormal_state` json NULL DEFAULT NULL COMMENT '异常类型',
-            `user_no` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT '随机生成的加密用户号',
-            `loc_id` varchar(18) NULL DEFAULT NULL COMMENT '地区字段' ,
+            `wage` int(0) NULL DEFAULT NULL COMMENT 'Salary',
+            `card` json NULL DEFAULT NULL COMMENT 'Bank cards held',
+            `abnormal` int(0) NULL DEFAULT 0 COMMENT 'Is abnormal',
+            `abnormal_state` json NULL DEFAULT NULL COMMENT 'Abnormal type',
+            `user_no` varchar(100) NULL DEFAULT NULL UNIQUE COMMENT 'Randomly generated encrypted user ID',
+            `loc_id` varchar(18) NULL DEFAULT NULL COMMENT 'Region field' ,
             PRIMARY KEY (`id`) USING BTREE
         ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
         """
@@ -57,13 +52,7 @@ class UserDao():
         finally:
             db.close()
 
-    # 将userList插入到数据库user表中
     def insertUsers(self, userList, table_name):
-        '''
-        批量插入User表
-        :param userList:
-        :return:
-        '''
         try:
             db = get_mysql_connection()
             cursor = db.cursor()
@@ -73,7 +62,6 @@ class UserDao():
                 job = user.getJob()
                 wage = user.getWage()
                 abnormal = user.getAbnormal()
-                # 务必要转换成JSON字符串，否则会因为编译器导致dic中为单引号，使得非JSON格式，而插入失败
                 abnormal_state = json.dumps(user.getAbnormal_state(), ensure_ascii=False)
                 user_no = user.get_user_no()
                 loc_id = user.getLoc_id()
@@ -112,13 +100,6 @@ class UserDao():
         return select_res
 
     # def selectFraudUsers(self, fraud_category=None, table_name=None):
-    #     '''
-    #     # 搜索指定类型的欺诈用户
-    #     # editor: 20220410顾峻铨
-    #     # 20220410修改后，fraud_category为单个异常标签选择，若为空则返回所有abnormal用户
-    #     :param category: String 欺诈用户类别
-    #     :return:
-    #     '''
     #     # sql_select = """
     #     #         select id,age,gender,job,wage,card,abnormal,abnormal_state,user_no, loc_id
     #     #         from user
@@ -155,12 +136,6 @@ class UserDao():
     #     return userList
 
     def selectNormalUser(self, table_name):
-        '''
-        获取正常用户列表
-        # editor: 20220410顾峻铨
-        # 20220410修改后，fraud_category为单个异常标签选择，若为空则返回所有abnormal用户
-        :return:
-        '''
         sql = """select id,age,gender,job,wage,card, abnormal, abnormal_state, user_no, loc_id
                 from""" + table_name
         # sql_select = """
@@ -186,13 +161,6 @@ class UserDao():
         return userList
 
     def addUserCard(self, user_id=None, new_card=None, user_no=None, table_name=None):
-        '''
-        在用户表中修改持有银行卡字段
-        :param user_id:
-        :param new_card:
-        :param user_no:
-        :return:
-        '''
         if user_no is None:
             sql_select = """select id,card from """ + table_name + """ where id = %s """
             db = get_mysql_connection()
@@ -237,12 +205,6 @@ class UserDao():
         return res
 
     def updateUserState(self, user_id, fraud_category, table_name):
-        '''
-        更新用户是否为欺诈用户
-        :param user:
-        :param fraud_category:
-        :return:
-        '''
         sql_select = """
                 select id,abnormal,abnormal_state
                 from """ + table_name + """ 
@@ -258,12 +220,10 @@ class UserDao():
         abnormal_state = json.loads(abnormal_state)
         if fraud_category == '' or fraud_category == None:
             abnormal = 0
-            # 将字典中的所有值设为0
             abnormal_state = dict.fromkeys(abnormal_state, 0)
         else:
             abnormal = 1
             abnormal_state[fraud_category] = 1
-        # 更新数据库
         sql_update = """
                 update """ + table_name + """
                 set abnormal = %s, abnormal_state = %s
@@ -276,11 +236,6 @@ class UserDao():
         return res
 
     def get_user_info(self, user_id, table_name):
-        '''
-        根据userid获取user信息
-        :param user_id:
-        :return:
-        '''
         sql_select = """
             select id,age,gender,job,wage,card,abnormal,abnormal_state,user_no, loc_id
             from """ + table_name + """
@@ -298,12 +253,6 @@ class UserDao():
 
     @staticmethod
     def get_user_id_by(user_no, table_name):
-        '''
-        20220417
-        editor顾峻铨
-        :param user_no:
-        :return:
-        '''
         sql_select = """
                         select id,card
                         from """ + table_name + """

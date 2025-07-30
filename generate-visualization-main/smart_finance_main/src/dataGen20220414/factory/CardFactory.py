@@ -28,15 +28,15 @@ class CardFactory:
         human_list = self.userService.selectUsers()
         for human in human_list:
             # print("human", human.get_user_info())
-            cards_list_per_person = self.cardService.createCardsFromHuman(human.get_user_info())  # 生成一个人拥有的多张卡各自的值
+            cards_list_per_person = self.cardService.createCardsFromHuman(human.get_user_info())
             cardList.extend(cards_list_per_person)
         store_list = self.storeService.selectStores()
         pre_card_list_per_store = []
         pre_name = ''
         for store in store_list:
-            name = store.getName().replace("(低)", "")
-            name = name.replace("(中)", "")
-            name = name.replace("(高)", "")
+            name = store.getName().replace("(Low)", "")
+            name = name.replace("(Medium)", "")
+            name = name.replace("(High)", "")
             if name == pre_name:
                 self.cardService.updateAcctOfStore(store.getStore_id(), pre_card_list_per_store[0].getC4())
             else:
@@ -50,21 +50,14 @@ class CardFactory:
 
 
 if __name__ == '__main__':
-    #创建用户表
     userFactory = UserFactory()
     userFactory.createUserTable()
-    # 创建用户
     userFactory.createUsers(30)
-
-    # 创建商户表
     storeFactory = StoreFactory()
     storeFactory.createStoreTable()
-    # 创建商户
     storeFactory.createStores(10)
 
-    #创建银行卡表
     cardFactory = CardFactory()
     cardFactory.createCardTable()
-    # 创建银行卡
     cardFactory.createCards()
 

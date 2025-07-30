@@ -19,9 +19,9 @@ def user(request):
     p = postBody.decode()
     p = eval(p)
     total = p['total']
-    print("生成用户开始")
-    api_DataGeneration.api_user("信用卡违规套现", total)
-    print("生成用户结束")
+    print("User generation start")
+    api_DataGeneration.api_user("Credit_card_fraud", total)
+    print("User generation end")
     return userDisplay()
 
 
@@ -39,21 +39,21 @@ def userDisplay():
         user_job[foo.job] += 1
 
         if foo.age >= 18 and foo.age <= 23:
-            user_age['18-23岁'] += 1
+            user_age['ages 18-23'] += 1
         elif foo.age >= 24 and foo.age <= 29:
-            user_age['24-29岁'] += 1
+            user_age['ages 24-29'] += 1
         elif foo.age >= 30 and foo.age <= 39:
-            user_age['30-39岁'] += 1
+            user_age['ages 30-39'] += 1
         elif foo.age >= 40 and foo.age <= 49:
-            user_age['40-49岁'] += 1
+            user_age['ages 40-49'] += 1
         elif foo.age >= 50 and foo.age <= 59:
-            user_age['50-59岁'] += 1
+            user_age['ages 50-59'] += 1
         elif foo.age >= 60 and foo.age <= 65:
-            user_age['60-65岁'] += 1
+            user_age['ages 60-65'] += 1
         else:
-            user_age['>=66岁'] += 1
+            user_age['ages >=66'] += 1
 
-    user_age_data_1 = ['18-23岁', '24-29岁', '30-39岁', '40-49岁', '50-59岁', '60-65岁', '>=66岁']
+    user_age_data_1 = ['ages 18-23', 'ages 24-29', 'ages 30-39', 'ages 40-49', 'ages 50-59', 'ages 60-65', 'ages >=66']
     user_age_data_2 = list()
 
     for key in user_age_data_1:
@@ -86,9 +86,9 @@ def store(request):
     p = postBody.decode()
     p = eval(p)
     total = p['total']
-    print("生成商户开始")
-    api_DataGeneration.api_store("信用卡违规套现", total)
-    print("生成商户结束")
+    print("Merchant generation start")
+    api_DataGeneration.api_store("Credit_card_fraud", total)
+    print("Merchant generation end")
     return storeDisplay()
 
 
@@ -138,9 +138,9 @@ def card(request):
     p = eval(p)
     is_generate = p['is_generate']
 
-    print("生成卡开始")
-    api_DataGeneration.api_card("信用卡违规套现")
-    print("生成卡结束")
+    print("Card generation start")
+    api_DataGeneration.api_card("Credit_card_fraud")
+    print("Card generation end")
     return cardDisplay()
 
 

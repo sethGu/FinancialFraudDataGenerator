@@ -1,153 +1,153 @@
 {
-  "衣着美容": {
-    "低": [
-      "散货",
-      "基本护理"
+  "Clothing_and_beauty": {
+    "Low": [
+      "Bulk_goods",
+      "Basic_care"
     ],
-    "中": [
-      "品牌折扣",
-      "中档品牌服装",
-      "疗效性护理",
-      "修饰类美容",
-      "美体类护理"
+    "Medium": [
+      "Brand_discounts",
+      "Mid_range_brand_clothing",
+      "Therapeutic_care",
+      "Cosmetic_enhancements",
+      "Body_care_treatments"
     ],
-    "高": [
-      "高级品牌服装",
-      "高档定制男装",
-      "高档定制女装",
-      "仪器类护理",
-      "特殊类护理"
+    "High": [
+      "High_end_brand_clothing",
+      "High_end_custom_men's_clothing",
+      "High_end_custom_women's_clothing",
+      "Instrument_based_treatments",
+      "Specialized_care"
     ]
   },
-  "娱乐": {
-    "低": [
-      "网络游戏(低)",
-      "电影、电视剧、音乐(低)",
-      "直播短视频(低)",
-      "游戏厅、游乐园(低)",
-      "网吧(低)",
-      "KTV、电影院、棋牌、桌游(低)"
+  "Entertainment": {
+    "Low": [
+      "Online_games(Low)",
+      "Movies,TV_shows,Music(Low)",
+      "Live_streaming_and_short_videos(Low)",
+      "Arcades,Amusement_parks(Low)",
+      "Internet_café(Low)",
+      "KTV,Cinema,Chess,Board_games(Low)"
     ],
-    "中": [
-      "网络游戏(中)",
-      "电影、电视剧、音乐(中)",
-      "直播短视频(中)",
-      "游戏厅、游乐园(中)",
-      "网吧(中)",
-      "KTV、电影院、棋牌、桌游(中)"
+    "Medium": [
+      "Online_games(Medium)",
+      "Movies,TV_shows,Music(Medium)",
+      "Live_streaming_and_short_videos(Medium)",
+      "Arcades,Amusement_parks(Medium)",
+      "Internet_café(Medium)",
+      "KTV,Cinema,Chess,Board_games(Medium)"
     ],
-    "高": [
-      "网络游戏(高)",
-      "电影、电视剧、音乐(高)",
-      "直播短视频(高)",
-      "游戏厅、游乐园(高)",
-      "网吧(高)",
-      "KTV、电影院、棋牌、桌游(高)"
+    "High": [
+      "Online_games(High)",
+      "Movies,TV_shows,Music(High)",
+      "Live_streaming_and_short_videos(High)",
+      "Arcades,Amusement_parks(High)",
+      "Internet_café(High)",
+      "KTV,Cinema,Chess,Board_games(High)"
     ]
   },
-  "医疗保健": {
-    "低": [
-      "乡镇卫生院(低)",
-      "社区卫生服务中心(低)",
-      "二级医院(低)",
-      "三级医院(低)"
+  "Healthcare": {
+    "Low": [
+      "Township_health_center(Low)",
+      "Community_health_service_center(Low)",
+      "Secondary_hospital(Low)",
+      "Tertiary_hospital(Low)"
     ],
-    "中": [
-      "乡镇卫生院(中)",
-      "社区卫生服务中心(中)",
-      "二级医院(中)",
-      "三级医院(中)"
+    "Medium": [
+      "Township_health_center(Medium)",
+      "Community_health_service_center(Medium)",
+      "Secondary_hospital(Medium)",
+      "Tertiary_hospital(Medium)"
     ],
-    "高": []
+    "High": []
   },
-  "交通通信": {
-    "低": [
-      "二线、三线普通品牌"
+  "Transportation_and_communication": {
+    "Low": [
+      "Second_tier_and_third_tier_regular_brands"
     ],
-    "中": [
-      "二线豪华品牌",
-      "一线普通品牌"
+    "Medium": [
+      "Second_tier_luxury_brands",
+      "First_tier_regular_brands"
     ],
-    "高": [
-      "高奢品牌",
-      "轻奢一线豪华品牌"
+    "High": [
+      "High_luxury_brands",
+      "Light_luxury_first_tier_luxury_brands"
     ]
   },
-  "居住": {
-    "低": [
-      "青旅",
-      "普通(低)",
-      "四星(低)",
-      "五星(低)"
+  "Residence": {
+    "Low": [
+      "Youth_hostel",
+      "Regular(Low)",
+      "Four_star(Low)",
+      "Five_star(Low)"
     ],
-    "中": [
-      "普通(中)",
-      "四星(中)",
-      "五星(中)"
+    "Medium": [
+      "Regular(Medium)",
+      "Four_star(Medium)",
+      "Five_star(Medium)"
     ],
-    "高": [
-      "普通(高)",
-      "四星(高)",
-      "五星(高)"
+    "High": [
+      "Regular(High)",
+      "Four_star(High)",
+      "Five_star(High)"
     ]
   },
-  "餐饮": {
-    "低": [
-      "小吃店、摊贩(低)",
-      "快餐盒饭(低)",
-      "自助(低)",
-      "餐厅(低)",
-      "旅游饭店(低)"
+  "Catering": {
+    "Low": [
+      "Snack_bars,Vendors(Low)",
+      "Fast_food_and_boxed_meals(Low)",
+      "Self_service(Low)",
+      "Restaurant(Low)",
+      "Tourist_hotel(Low)"
     ],
-    "中": [
-      "小吃店、摊贩(中)",
-      "快餐盒饭(中)",
-      "自助(中)",
-      "餐厅(中)",
-      "旅游饭店(中)"
+    "Medium": [
+      "Snack_bars,Vendors(Medium)",
+      "Fast_food_and_boxed_meals(Medium)",
+      "Self_service(Medium)",
+      "Restaurant(Medium)",
+      "Tourist_hotel(Medium)"
     ],
-    "高": [
-      "小吃店、摊贩(高)",
-      "快餐盒饭(高)",
-      "自助(高)",
-      "餐厅(高)",
-      "旅游饭店(高)"
+    "High": [
+      "Snack_bars,Vendors(High)",
+      "Fast_food_and_boxed_meals(High)",
+      "Self_service(High)",
+      "Restaurant(High)",
+      "Tourist_hotel(High)"
     ]
   },
-  "生活用品及服务": {
-    "低": [
-      "洗漱用品(低)",
-      "厨卫用品(低)",
-      "家具(低)",
-      "床上用品(低)",
-      "化妆用品(低)"
+  "Household_items_and_services": {
+    "Low": [
+      "Toiletries(Low)",
+      "Kitchen_and_bathroom_supplies(Low)",
+      "Furniture(Low)",
+      "Bedding_supplies(Low)",
+      "Cosmetic_products(Low)"
     ],
-    "中": [
-      "洗漱用品(中)",
-      "厨卫用品(中)",
-      "家具(中)",
-      "床上用品(中)",
-      "化妆用品(中)"
+    "Medium": [
+      "Toiletries(Medium)",
+      "Kitchen_and_bathroom_supplies(Medium)",
+      "Furniture(Medium)",
+      "Bedding_supplies(Medium)",
+      "Cosmetic_products(Medium)"
     ],
-    "高": [
-      "洗漱用品(高)",
-      "厨卫用品(高)",
-      "家具(高)",
-      "床上用品(高)",
-      "化妆用品(高)"
+    "High": [
+      "Toiletries(High)",
+      "Kitchen_and_bathroom_supplies(High)",
+      "Furniture(High)",
+      "Bedding_supplies(High)",
+      "Cosmetic_products(High)"
     ]
   },
-  "教育文化": {
-    "低": [
-      "普通文具",
-      "教育书本"
+  "Education_and_culture": {
+    "Low": [
+      "Regular_stationery",
+      "Educational_books"
     ],
-    "中": [
-      "文体类兴趣班",
-      "成人教育大班课"
+    "Medium": [
+      "Arts_and_sports_interest_classes",
+      "Adult_education_large_group_classes"
     ],
-    "高": [
-      "成人教育小班课"
+    "High": [
+      "Adult_education_small_group_classes"
     ]
   }
 }

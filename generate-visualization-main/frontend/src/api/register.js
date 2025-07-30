@@ -112,7 +112,6 @@ export function registerFraudGenerate(data) {
   })
 }
 
-// 删除历史数据并重新建表
 export function registerRecreateTable(data) {
   return request({
     url: '/api_register/register/RecreateTable/',

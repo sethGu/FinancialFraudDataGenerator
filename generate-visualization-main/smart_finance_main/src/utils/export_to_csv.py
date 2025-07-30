@@ -170,5 +170,5 @@ def out_put(scene, path = '../../datas/'):
     get_stores(scene, path)
     get_f_t(scene, path)
 if __name__ == '__main__':
-    scene = '异常转账'
+    scene = 'Abnormal_transfer'
     out_put(scene)

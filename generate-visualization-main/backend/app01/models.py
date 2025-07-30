@@ -1535,10 +1535,10 @@ class User(models.Model):
         db_table = 'user'
 
 class System_log(models.Model):
-    user = models.CharField(max_length=255)  # 用户名
-    change = models.CharField(max_length=255)  # 操作描述
-    time = models.DateTimeField()  # 操作时间
-    result = models.CharField(max_length=10)  # 操作结果，例如成功或失败
+    user = models.CharField(max_length=255)
+    change = models.CharField(max_length=255)
+    time = models.DateTimeField()
+    result = models.CharField(max_length=10)
 
     class Meta:
         managed = False

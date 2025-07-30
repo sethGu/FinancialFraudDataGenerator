@@ -38,12 +38,10 @@ const actions = {
 
     return new Promise((resolve, reject) => {
       console.log('userInfo', userInfo)
-      // 服务器需要的登录参数
       const payload = {
         username: username,
         password: password
       }
-      // 请求服务器
       user.login(payload).then(response => {
         const { data } = response
         console.log('response', response)
@@ -62,20 +60,18 @@ const actions = {
 
     return new Promise((resolve, reject) => {
       console.log('userInfo', userInfo)
-      // 服务器需要的登录参数
       const payload = {
         username: username,
         oldPassword: oldPassword,
         newPassword: newPassword
       }
-      // 请求服务器
       updatePassword(payload).then(response => {
         const { data } = response
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        if (data.state === "false") {
-          reject('密码错误')
+        if (data.state === false) {
+          reject('Incorrect password')
         }
         resolve()
       }).catch(error => {
@@ -135,14 +131,12 @@ const actions = {
       resolve()
     })
   },
-
-  // 删除历史数据并重新建表
   recreateTable({ commit }, is_delete) {
     return new Promise(resolve => {
-      console.log('删除历史数据开始')
+      console.log('Delete historical data start')
       const payload = { 'is_recreate': is_delete }
       recreateTable(payload).then(response => {
-        const { data } = response// 后端返回的数据用data保存
+        const { data } = response
         if (!data) {
           return false
         }
@@ -152,8 +146,6 @@ const actions = {
       })
     })
   },
-
-  // 下载数据
   download({ state }) {
     return new Promise((resolve, reject) => {
       download(state.token).then(response => {

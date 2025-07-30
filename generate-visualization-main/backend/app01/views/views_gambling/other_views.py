@@ -21,12 +21,12 @@ def RecreateTable(request):
     p = eval(p)
     is_recreate = p['is_recreate']
 
-    print("重建表开始")
-    api_DataGeneration.api_user_table("赌博违规交易")
-    api_DataGeneration.api_store_table("赌博违规交易")
-    api_DataGeneration.api_card_table("赌博违规交易")
-    api_DataGeneration.api_trans_table("赌博违规交易")
-    print("重建表结束")
+    print("Rebuild table start")
+    api_DataGeneration.api_user_table("Gambling_violation")
+    api_DataGeneration.api_store_table("Gambling_violation")
+    api_DataGeneration.api_card_table("Gambling_violation")
+    api_DataGeneration.api_trans_table("Gambling_violation")
+    print("Rebuild table end")
 
     return JsonResponse(
         {
@@ -37,20 +37,19 @@ def RecreateTable(request):
 
 
 def do_zip_compress(dirpath):
-    print("原始文件夹路径：" + dirpath)
-    output_name = f"{dirpath}赌博违规交易.zip"
+    print("Original folder path: " + dirpath)
+    output_name = f"{dirpath}Gambling_violation.zip"
     print(output_name)
     parent_name = os.path.dirname(dirpath)
-    print("压缩文件夹目录：", parent_name)
+    print("Compressed folder directory: ", parent_name)
     zip = zipfile.ZipFile(output_name, "w", zipfile.ZIP_DEFLATED)
-    # 多层级压缩
     for root, dirs, files in os.walk(dirpath):
         for file in files:
             if str(file).startswith("~$"):
                 continue
             if str(file).endswith(".csv"):
                 filepath = os.path.join(root, file)
-                print("压缩文件路径：" + filepath)
+                print("Compressed file path: " + filepath)
                 writepath = os.path.relpath(filepath, parent_name)
                 zip.write(filepath, writepath)
     zip.close()
@@ -58,19 +57,16 @@ def do_zip_compress(dirpath):
 
 @require_http_methods(["GET"])
 def download(request):
-    # 开始导出数据
-    print("开始导出数据")
+    print("Start exporting data")
     path = os.path.dirname(os.path.abspath(__file__)) + r'/datas/'
     print(path)
-    api_DataGeneration.api_export_to_csv("赌博违规交易", path)
+    api_DataGeneration.api_export_to_csv("Gambling_violation", path)
 
-    # 开始打包数据
-    print("开始打包数据")
+    print("Start packing data")
     do_zip_compress(path)
 
-    # 开始下载数据
-    print('开始下载数据')
-    file_path = path + r'赌博违规交易.zip'
+    print('Start downloading data')
+    file_path = path + r'Gambling_violation.zip'
     try:
         r = StreamingHttpResponse(open(file_path, "rb"))
         r["content_type"] = "application/octet-stream"

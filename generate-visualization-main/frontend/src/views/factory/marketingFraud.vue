@@ -67,10 +67,7 @@
 
         <el-checkbox-group v-model="checkList" class="checkData">
           <el-checkbox label="Normal transaction data generation" border size="big" @change="conC" />
-          <!--          <el-checkbox label="正常转账数据生成" border size="big" @change="tranC" />-->
         </el-checkbox-group>
-
-        <!--————————————通用————————————-->
         <div class="marketGebtn">
           <el-button type="primary" round size="large" @click="create()">Data generation</el-button>
           <el-button type="default" round size="large" @click="reset()">Parameter reset</el-button>
@@ -80,9 +77,6 @@
 
       </el-form>
     </div>
-
-    <!--————————————通用————————————-->
-    <!-- 图表展示 -->
     <div class="chart-container" style="width: 25%;">
       <div id="chartCard" class="chart" style="height:200px;width:100%;padding: 5px;" />
       <div id="chartMarketing" class="chart" style="height:200px;width:100%;padding: 5px;" />
@@ -101,7 +95,6 @@
       <div id="chartConsume" class="chart" style="height:250px;width:100%;padding: 5px;" />
       <!-- <div id="chartTrans" class="chart" style="height:250px;width:100%;padding: 5px;" /> -->
     </div>
-    <!--————————————通用————————————-->
   </div>
 </template>
 
@@ -114,7 +107,6 @@ import { logChange } from '@/api/logs'
 export default {
   data() {
     return {
-      // ——————————————————————————————————————直接复制——————————————————————————————————————
       btnDisabled: false,
       userAmount: 50,
       storeAmount: 10,
@@ -122,13 +114,13 @@ export default {
       is_tran: false,
       checkList: [],
       store: {
-        totaldata: [], // 行业数量
-        totalvalue: [], // 行业数量
-        parantClassdata: [], // 行业大类生成数量
-        parantClassvalue: [], // 行业大类生成数量
-        childClassdata: [], // 行业子类生成数量
-        childClassvalue: [], // 行业子类生成数量
-        dictClass: [] // 用字典保存行业占比数据，用来行业占比显示，这里只获取了行业大类
+        totaldata: [],
+        totalvalue: [],
+        parantClassdata: [],
+        parantClassvalue: [],
+        childClassdata: [],
+        childClassvalue: [],
+        dictClass: []
       },
       cardsOwnerType: [],
       pickerOptions: {
@@ -141,7 +133,6 @@ export default {
           { required: true, message: 'Please select a date.', trigger: 'blur' }
         ]
       },
-      // ——————————————————————————————————————不用修改——————————————————————————————————————
       form: {
         startDate: '20221001',
         store: 5,
@@ -153,7 +144,6 @@ export default {
       }
     }
   },
-  // ——————————————————————————————————————部分修改——————————————————————————————————————
   computed: {
     ...mapGetters([
       'marketing_user_data',
@@ -174,9 +164,7 @@ export default {
   created() {
     this.init()
   },
-  // ——————————————————————————————————————部分修改——————————————————————————————————————
   methods: {
-    // ——————————————————————————————————————部分修改——————————————————————————————————————
     conC(value) {
       this.is_con = value
       this.is_tran = value
@@ -215,15 +203,14 @@ export default {
       this.form.user = 5
       this.form.openTime = 1
       this.form.clothRatio = 0.45
-      this.form.serviceRatio = 0.45// 修改
-      // 发送请求记录日志
+      this.form.serviceRatio = 0.45
       logChange({
         change: 'MarketingFraud reset',
         result: 'success'
       }).then(response => {
-        console.log('日志记录成功', response.data)
+        console.log('Log recorded successfully', response.data)
       }).catch(error => {
-        console.error('日志记录失败', error)
+        console.error('Log recording failed', error)
       })
     },
     deleteData() {
@@ -232,20 +219,18 @@ export default {
         cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
-        // 发送请求记录日志
         logChange({
           change: 'MarketingFraud deleteData',
           result: 'success'
         }).then(response => {
-          console.log('日志记录成功', response.data)
+          console.log('Log recorded successfully', response.data)
         }).catch(error => {
-          console.error('日志记录失败', error)
+          console.error('Log recording failed', error)
         })
         this.$message({
           type: 'success',
           message: 'Data deleted successfully!'
         })
-        // 在这里写删除接口
         this.$store.dispatch('marketing/marketingRecreateTable').then(response => {
         })
       }).catch(() => {
@@ -256,20 +241,17 @@ export default {
       })
     },
     download() {
-      // 发送请求记录日志
       logChange({
         change: 'MarketingFraud download',
         result: 'success'
       }).then(response => {
-        console.log('日志记录成功', response.data)
+        console.log('Log recorded successfully', response.data)
       }).catch(error => {
-        console.error('日志记录失败', error)
+        console.error('Log recording failed', error)
       })
       window.location.href = '/api_marketing/marketing/download/'
     },
-    // ——————————————————————————————————————部分修改——————————————————————————————————————
     init() {
-      // ——————————————————————————————————————部分修改——————————————————————————————————————
       this.$store.dispatch('marketing/userInitMarketing', this.userAmount).then(() => {
         this.showUserAge()
         // this.showUserJob()
@@ -279,8 +261,6 @@ export default {
 
           this.$store.dispatch('marketing/cardInitMarketing', '1').then(() => {
             this.showChartCard()
-
-            // 将消费和转账数据嵌套在这里了
             this.$store.dispatch('marketing/consumeInitMarketing').then(() => {
               this.showChartConsume()
 
@@ -293,14 +273,11 @@ export default {
               })
               // })
             })
-            // ——————————————————————————————————————直接复制——————————————————————————————————————
           })
         })
       })
-      // ——————————————————————————————————————不用修改——————————————————————————————————————
     },
     create() {
-      // ——————————————————————————————————————部分修改——————————————————————————————————————
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.$confirm('Do you want to generate the data?', 'Tip', {
@@ -308,48 +285,47 @@ export default {
             cancelButtonText: 'No',
             type: 'warning'
           }).then(() => {
-            // 发送请求记录日志
             logChange({
               change: 'MarketingFraud create',
               result: 'success'
             }).then(response => {
-              console.log('日志记录成功', response.data)
+              console.log('Log recorded successfully', response.data)
             }).catch(error => {
-              console.error('日志记录失败', error)
+              console.error('Log recording failed', error)
             })
             this.$message({
               type: 'success',
               message: 'Data generated successfully!'
             })
-            const loadingInstanceUserAge = Loading.service({ // 启动loading服务
+            const loadingInstanceUserAge = Loading.service({
               target: document.querySelector('#chartUserAge'),
               fullscreen: false
             })
-            const loadingInstanceStoreBig = Loading.service({ // 启动loading服务
+            const loadingInstanceStoreBig = Loading.service({
               target: document.querySelector('#chartStoreBig'),
               fullscreen: false
             })
-            const loadingInstanceCard = Loading.service({ // 启动loading服务
+            const loadingInstanceCard = Loading.service({
               target: document.querySelector('#chartCard'),
               fullscreen: false
             })
-            const loadingInstanceMarketing = Loading.service({ // 启动loading服务
+            const loadingInstanceMarketing = Loading.service({
               target: document.querySelector('#chartMarketing'),
               fullscreen: false
             })
-            const loadingInstanceFraud = Loading.service({ // 启动loading服务
+            const loadingInstanceFraud = Loading.service({
               target: document.querySelector('#chartFraud'),
               fullscreen: false
             })
-            const loadingInstanceConsume = Loading.service({ // 启动loading服务
+            const loadingInstanceConsume = Loading.service({
               target: document.querySelector('#chartConsume'),
               fullscreen: false
             })
-            // const loadingInstanceUserJob = Loading.service({ // 启动loading服务
+            // const loadingInstanceUserJob = Loading.service({
             //   target: document.querySelector('#chartUserJob'),
             //   fullscreen: false
             // })
-            // const loadingInstanceTrans = Loading.service({ // 启动loading服务
+            // const loadingInstanceTrans = Loading.service({
             //   target: document.querySelector('#chartTrans'),
             //   fullscreen: false
             // })
@@ -380,7 +356,6 @@ export default {
                         // this.showChartTrans()
                         loadingInstanceConsume.close()
                         this.showChartConsume()
-                        // ——————————————————————————————————————部分修改——————————————————————————————————————
                         this.$store.dispatch('marketing/marketingGenerate', this.form).then(response => {
                           loadingInstanceMarketing.close()
                           loadingInstanceFraud.close()
@@ -389,12 +364,10 @@ export default {
                         })
                       })
                     })
-                    // ——————————————————————————————————————直接复制——————————————————————————————————————
                   })
                 })
               })
             })
-            // ——————————————————————————————————————不用修改——————————————————————————————————————
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -407,10 +380,9 @@ export default {
       })
     },
     showUserAge() {
-      // chartUserAge 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartUserAge'))
       var optionUserAge = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'User age distribution',
           left: 'center'
@@ -458,7 +430,7 @@ export default {
           {
             type: 'value',
             name: 'People',
-            nameGap: '15' // 距离大小可以根据自己的实际需求调整
+            nameGap: '15'
           }
         ],
         color: ['#00437C'],
@@ -475,7 +447,6 @@ export default {
       this.chart.setOption(optionUserAge)
     },
     showChartStoreBig() {
-      // 获取行业大类
       var pdTmp = []
       var pvTmp = []
       this.marketing_store_data['data_1'].forEach(item => {
@@ -487,13 +458,12 @@ export default {
       if (pdTmp.length > 0 || pvTmp.length > 0) {
         this.store.parantClassdata = pdTmp
         this.store.parantClassvalue = pvTmp
-        this.store.parantClassdata.forEach(item => { // 将所有大类和子类的data数据保存到totaldata中，用来做行业数量显示
+        this.store.parantClassdata.forEach(item => {
           this.store.totaldata.push(item)
         })
-        this.store.parantClassvalue.forEach(item => { // 将所有大类和子类的value数据保存到totalvalue中，用来做行业数量显示
+        this.store.parantClassvalue.forEach(item => {
           this.store.totalvalue.push(item)
         })
-        // 获取行业大类的字典数据
         this.store.parantClassdata.forEach((item, i) => {
           this.store.dictClass.push({
             value: this.store.parantClassvalue[i],
@@ -501,8 +471,6 @@ export default {
           })
         })
       }
-
-      // 获取行业子类
       var cdTmp = []
       var cvTmp = []
       this.marketing_store_data['data_2'].forEach(item => {
@@ -521,7 +489,6 @@ export default {
           this.store.totalvalue.push(item)
         })
       }
-      // chartStoreBig 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartStoreBig'))
       const colors = ['#007D85', '#00437C']
       var optionStoreBig = {
@@ -626,7 +593,7 @@ export default {
           {
             type: 'value',
             name: 'Amount (units)',
-            nameGap: '30' // 距离大小可以根据自己的实际需求调整
+            nameGap: '30'
           }
         ],
         series: [
@@ -665,7 +632,6 @@ export default {
       if (cardsOwnerTypeTmp.length > 0) {
         this.cardsOwnerType = cardsOwnerTypeTmp
       }
-      // chart1 基于准备好的dom，初始化echarts实例
       this.chart = echarts.init(document.getElementById('chartCard'))
       var optionCard = {
         backgroundColor: 'rgba(128, 128, 128, 0.1)',
@@ -713,7 +679,7 @@ export default {
     showChartMarket() {
       this.chart = echarts.init(document.getElementById('chartMarketing'))
       var optionMarket = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Transaction size distribution',
           left: 'center'
@@ -764,7 +730,7 @@ export default {
     showChartConsume() {
       this.chart = echarts.init(document.getElementById('chartConsume'))
       var optionConsume = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Normal transaction',
           left: 'center'
@@ -835,7 +801,7 @@ export default {
     showChartFraud() {
       this.chart = echarts.init(document.getElementById('chartFraud'))
       var optionFraud = {
-        backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',
         title: {
           text: 'Abnormal transaction',
           left: 'center'
@@ -905,12 +871,11 @@ export default {
     }
 
     // showUserJob() {
-    //   // chartUserJob 基于准备好的dom，初始化echarts实例
     //   this.chart = echarts.init(document.getElementById('chartUserJob'))
     //   var optionUserJob = {
-    //     backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+    //     backgroundColor: 'rgba(128, 128, 128, 0.1)',
     //     title: {
-    //       text: '职业分布',
+    //       text: 'Occupation distribution',
     //       left: 'center'
 
     //     },
@@ -921,7 +886,7 @@ export default {
     //     color: ['#00437C', '#007D85', '#FC001B'],
     //     series: [
     //       {
-    //         name: '用户数量',
+    //         name: 'Number of users',
     //         type: 'pie',
     //         radius: [50, 200],
     //         // radius: ['30%', '60%'],
@@ -946,9 +911,9 @@ export default {
     // showChartTrans() {
     //   this.chart = echarts.init(document.getElementById('chartTrans'))
     //   var optionTrans = {
-    //     backgroundColor: 'rgba(128, 128, 128, 0.1)', // rgba设置透明度0.1
+    //     backgroundColor: 'rgba(128, 128, 128, 0.1)',
     //     title: {
-    //       text: '正常转账',
+    //       text: 'Normal transfer',
     //       left: 'center'
     //     },
     //     tooltip: {
@@ -988,7 +953,7 @@ export default {
     //       end: 35
     //     }],
     //     xAxis: {
-    //       name: '时间',
+    //       name: 'Time',
     //       type: 'category',
     //       boundaryGap: false,
     //       axisLabel: {
@@ -999,12 +964,12 @@ export default {
     //     },
     //     yAxis: {
     //       type: 'value',
-    //       name: '金额(元)'
+    //       name: 'Amount (CNY)'
     //     },
     //     color: ['#00437C'],
     //     series: [
     //       {
-    //         name: '金额(元)',
+    //         name: 'Amount (CNY)',
     //         type: 'line',
     //         stack: 'Total',
     //         // data: [120, 132, 101, 134, 90, 230, 210]

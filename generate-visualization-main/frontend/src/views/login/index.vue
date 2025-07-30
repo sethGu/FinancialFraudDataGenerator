@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Financial Risk Simulation Software for Payment Systems</h3>
+        <h3 class="title">FF Data Generator</h3>
       </div>
 
       <el-form-item prop="username">
@@ -62,7 +62,6 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      // 详见validate.js
       if (!validUsername(value)) {
         callback(new Error('Please enter a valid username!'))
       } else {
@@ -70,7 +69,6 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      // 密码规格：10-100个字符，包含大小写字母、数字、特殊字符
       if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-])[A-Za-z\d!@#$%^&*(),.?<>;:'"{}\[\]\\/|`~+=_-]{10,100}$/.test(value)) {
         callback(new Error('Must include uppercase and lowercase letters, numbers, and special characters.'))
       } else {
@@ -78,12 +76,10 @@ export default {
       }
     }
     return {
-      // 用户账号密码
       loginForm: {
         username: '',
         password: ''
       },
-      // 登陆规则，详见validator
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
@@ -112,25 +108,19 @@ export default {
         this.$refs.password.focus()
       })
     },
-    // 点击登陆按钮触发的函数
     handleLogin() {
-      // loginForm表单验证，详见loginRules
       this.$refs.loginForm.validate(valid => {
-        // 验证成功
         if (valid) {
           this.loading = true
-          // 调用src/store/modules/user.js中login方法
-          // 密码加密
           console.log('loginForm before encryption:', this.loginForm)
           console.log('loginForm:', this.loginForm)
           this.loginForm.password = encrypt(this.loginForm.password)
           console.log('loginForm:', this.loginForm)
           this.$store.dispatch('user/login', this.loginForm)
-            .then(() => { // 登陆成功
-              // 路由到dashboard
+            .then(() => {
               this.$router.push({ path: this.redirect || '/' })
               this.loading = false
-            }).catch(() => { // 异常
+            }).catch(() => {
               this.loading = false
               this.$refs.loginForm.clearValidate()
               this.$refs.loginForm.resetFields()
@@ -146,7 +136,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
 $bg:#283443;
