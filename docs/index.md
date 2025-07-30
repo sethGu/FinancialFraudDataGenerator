@@ -26,8 +26,24 @@ Welcome to **F²-Gen**, a research-driven open-source platform for scenario-base
 
 ## 📂 Project Resources
 
+<div style="margin-top: 1em; margin-bottom: 1em;">
+  <a href="https://github.com/sethGu/FinancialFraudDataGenerator/releases/download/v1.0/F2Gen-v1.0.zip" style="text-decoration: none;">
+    <button style="background-color: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
+      ⬇️ Download .zip
+    </button>
+  </a>
+  <a href="https://github.com/sethGu/FinancialFraudDataGenerator/releases/download/v1.0/F2Gen-v1.0.tar.gz" style="text-decoration: none; margin-left: 10px;">
+    <button style="background-color: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
+      ⬇️ Download .tar.gz
+    </button>
+  </a>
+</div>
+
+
 - [GitHub Repository](https://github.com/sethGu/FinancialFraudDataGenerator)
-- Contact: your.email@example.com
+- Contact:
+  > gujunquan@shu.edu.cn or
+  > 1525241401@qq.com
 
 ---
 > This website is under active development. Stay tuned for more updates!
