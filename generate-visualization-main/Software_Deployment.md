@@ -1,3 +1,5 @@
+# Deployment Instructions (Non-Docker)
+
 ## Specific Steps
 
 ### Environment Setup
@@ -85,3 +87,58 @@ This will generate a `dist` folder in the `frontend` directory. Then, replace th
 
 
 Login Account: editor, Password: FdpDg@2024
+
+
+
+# Deployment Guide (Docker)
+
+## Quick Start
+
+ Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/install/) to quickly get started with the project.
+
+### 1. Clone the Git Repository
+
+First, clone the code repository to the local directory：
+
+```bash
+git clone https://github.com/sethGu/FinancialFraudDataGenerator.git
+cd generate-visualization-main
+```
+
+### 2. Build the Docker Images
+
+Run the following command to build the required Docker images:
+
+```bash
+docker-compose build
+```
+
+### 3. Create Docker Volumes
+
+Create Docker volumes for the database and application data:
+
+```bash
+docker volume create --name=vol_smart_pgdata
+docker volume create --name=vol_smart_data
+```
+
+### 4. Run Database Migrations
+
+Ensure that the database is initialized and run the migration command:
+
+```bash
+docker-compose run --rm backend python manage.py migrate
+docker-compose run --rm backend python manage.py createsuperuser
+```
+
+### 5. Start the Containers
+
+Start all the containers:
+
+```bash
+docker-compose up -d
+```
+
+### 6. Access the Application
+
+Once the containers are up and running, access your project through the browser: <http://localhost:9528>
