@@ -68,8 +68,10 @@ Each module includes:
 
 Navigate via the sidebar to “Credit Card Cash-Out”. The interface includes seven areas:
 
-[Image: Credit Card Fraud Interface]
+
 ![Credit Card Fraud](assets/Credit_card cash-out_screenshot.png)
+Image: Credit Card Fraud Interface
+
 
 **Area 1: Parameter Configuration**
 - User Count
@@ -97,6 +99,22 @@ Click **Download Data** to export results, or **Delete Data** to remove generate
 ---
 
 _... other 5 scenarios follow same structure ..._
+
+![Abnormal Transfer Fraud](assets/Abnormal_transfer_screenshot.png)
+Image: Abnormal Transfer Fraud Interface
+
+![Fake Registration Fraud](assets/Fake_registration_screenshot.png)
+Image: Fake Registration Fraud Interface
+
+![Gambling Violation Fraud](assets/Gambling_violation_screenshot.png)
+Image: Gambling Violation Fraud Interface
+
+![Merchant Violation Fraud](assets/Merchant_violation_screenshot.png)
+Image: Merchant Violation Fraud Interface
+
+![Scalper Marketing Fraud](assets/Scalper_marketing_screenshot.png)
+Image: Scalper Marketing Fraud Interface
+
 
 ---
 
