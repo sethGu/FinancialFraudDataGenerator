@@ -21,7 +21,7 @@ Welcome to **F²-Gen**, a research-driven open-source platform for scenario-base
 - 📂 [Engine](engine.html)
 - 📌 [Fraud Scenarios Overview](scenarios.html)
 - 🧪 [Playground Demo](playground.html)
-- 🎬 [Video Tutorial](tutorial.html)
+- 🎬 [Video Demo](demo.html)
 
 ---
 
