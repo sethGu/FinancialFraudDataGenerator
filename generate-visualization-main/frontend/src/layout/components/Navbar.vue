@@ -11,7 +11,7 @@
           <img :src="url1" class="user-avatar">
 <!--          <i class="el-icon-caret-bottom" />-->
         </div>
-<!--        <el-dropdown-menu slot="dropdown" class="user-dropdown">-->
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
 <!--          <router-link to="/">-->
 <!--            <el-dropdown-item>-->
 <!--              Home-->
@@ -24,32 +24,32 @@
 <!--            <el-dropdown-item>Docs</el-dropdown-item>-->
 <!--          </a>-->
 
-<!--          <el-dropdown-item @click.native="logout">-->
-<!--            <span style="display:block;">Log out</span>-->
-<!--          </el-dropdown-item>-->
-<!--          <a target="_blank" @click.prevent="updatePassword">-->
-<!--            <el-dropdown-item>Change password</el-dropdown-item>-->
-<!--          </a>-->
-<!--        </el-dropdown-menu>-->
+          <el-dropdown-item @click.native="logout">
+            <span style="display:block;">Log out</span>
+          </el-dropdown-item>
+          <a target="_blank" @click.prevent="updatePassword">
+            <el-dropdown-item>Change password</el-dropdown-item>
+          </a>
+        </el-dropdown-menu>
       </el-dropdown>
     </div>
-<!--    <el-dialog width="500px" title="Change Password" :visible.sync="showDialog" append-to-body @close="btnCancel">-->
-<!--      <el-form ref="passwordForm" label-width="150px" :model="passwordForm" :rules="rules">-->
-<!--        <el-form-item label="Old password" prop="oldPassword">-->
-<!--          <el-input v-model="passwordForm.oldPassword" show-password placeholder="Please enter your old password." />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="New password" prop="newPassword">-->
-<!--          <el-input v-model="passwordForm.newPassword" show-password placeholder="Please enter your new password." />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="Confirm password" prop="confirmPassword">-->
-<!--          <el-input v-model="passwordForm.confirmPassword" show-password placeholder="Please confirm your password." />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item>-->
-<!--          <el-button size="mini" type="primary" @click="btnOK">Confirm</el-button>-->
-<!--          <el-button size="mini" @click="btnCancel">Cancel</el-button>-->
-<!--        </el-form-item>-->
-<!--      </el-form>-->
-<!--    </el-dialog>-->
+    <el-dialog width="500px" title="Change Password" :visible.sync="showDialog" append-to-body @close="btnCancel">
+      <el-form ref="passwordForm" label-width="150px" :model="passwordForm" :rules="rules">
+        <el-form-item label="Old password" prop="oldPassword">
+          <el-input v-model="passwordForm.oldPassword" show-password placeholder="Please enter your old password." />
+        </el-form-item>
+        <el-form-item label="New password" prop="newPassword">
+          <el-input v-model="passwordForm.newPassword" show-password placeholder="Please enter your new password." />
+        </el-form-item>
+        <el-form-item label="Confirm password" prop="confirmPassword">
+          <el-input v-model="passwordForm.confirmPassword" show-password placeholder="Please confirm your password." />
+        </el-form-item>
+        <el-form-item>
+          <el-button size="mini" type="primary" @click="btnOK">Confirm</el-button>
+          <el-button size="mini" @click="btnCancel">Cancel</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 

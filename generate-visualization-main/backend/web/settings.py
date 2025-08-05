@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
-from pathlib import Path
+import sys
 import os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,7 +96,8 @@ DATABASES = {
         'NAME': 'sf_web_001',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        # 'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '3306'
     }
 }

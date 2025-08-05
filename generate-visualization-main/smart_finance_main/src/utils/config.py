@@ -5,7 +5,8 @@ import pymysql
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 connection = pymysql.connect(
-    host='localhost',
+    # host='localhost',
+    host='db',
     user='root',
     password='root',
     db='sf_web_001',

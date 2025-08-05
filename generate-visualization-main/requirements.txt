@@ -3,13 +3,6 @@ django-cors-headers
 pymysql
 ruamel.yaml
 PyYAML
-torch
-torchvision
-torchaudio
-torch_geometric
-torch_sparse
-torch_scatter
-torch_cluster
 matplotlib
 networkx
 transformers
@@ -17,3 +10,5 @@ scikit-learn
 pandas
 django-redis
 celery
+cryptography
+pycryptodome

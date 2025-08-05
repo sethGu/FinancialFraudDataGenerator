@@ -24,7 +24,7 @@ class AbnormalCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_card'
 
 
@@ -76,7 +76,7 @@ class AbnormalFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_f_t'
 
 
@@ -90,7 +90,7 @@ class AbnormalRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_relative'
 
 
@@ -134,7 +134,7 @@ class AbnormalStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_store'
 
 
@@ -182,7 +182,7 @@ class AbnormalTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_trans'
 
 
@@ -198,7 +198,7 @@ class AbnormalUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'abnormal_user'
 
 
@@ -287,7 +287,7 @@ class Card(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'card'
 
 
@@ -307,7 +307,7 @@ class CreditCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_card'
 
 
@@ -359,7 +359,7 @@ class CreditFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_f_t'
 
 
@@ -373,7 +373,7 @@ class CreditRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_relative'
 
 
@@ -417,7 +417,7 @@ class CreditStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_store'
 
 
@@ -465,7 +465,7 @@ class CreditTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_trans'
 
 
@@ -481,7 +481,7 @@ class CreditUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'credit_user'
 
 
@@ -545,7 +545,7 @@ class Enterprise(models.Model):
     busscope = models.CharField(db_column='busScope', max_length=200, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'enterprise'
 
 
@@ -597,7 +597,7 @@ class FT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'f_t'
 
 
@@ -617,7 +617,7 @@ class GamblingCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_card'
 
 
@@ -669,7 +669,7 @@ class GamblingFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_f_t'
 
 
@@ -683,7 +683,7 @@ class GamblingRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_relative'
 
 
@@ -727,7 +727,7 @@ class GamblingStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_store'
 
 
@@ -775,7 +775,7 @@ class GamblingTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_trans'
 
 
@@ -791,7 +791,7 @@ class GamblingUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'gambling_user'
 
 
@@ -801,7 +801,7 @@ class Login(models.Model):
     password = models.CharField(max_length=255)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'login'
         unique_together = (('username', 'password'),)
 
@@ -822,7 +822,7 @@ class MarketingCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_card'
 
 
@@ -874,7 +874,7 @@ class MarketingFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_f_t'
 
 
@@ -888,7 +888,7 @@ class MarketingRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_relative'
 
 
@@ -932,7 +932,7 @@ class MarketingStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_store'
 
 
@@ -980,7 +980,7 @@ class MarketingTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_trans'
 
 
@@ -996,7 +996,7 @@ class MarketingUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'marketing_user'
 
 
@@ -1021,7 +1021,7 @@ class Operator(models.Model):
     three_month_calling = models.DecimalField(max_digits=18, decimal_places=0, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'operator'
 
 
@@ -1041,7 +1041,7 @@ class RegisterCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_card'
 
 
@@ -1093,7 +1093,7 @@ class RegisterFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_f_t'
 
 
@@ -1107,7 +1107,7 @@ class RegisterRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_relative'
 
 
@@ -1151,7 +1151,7 @@ class RegisterStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_store'
 
 
@@ -1199,7 +1199,7 @@ class RegisterTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_trans'
 
 
@@ -1215,7 +1215,7 @@ class RegisterUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'register_user'
 
 
@@ -1229,7 +1229,7 @@ class Relative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'relative'
 
 
@@ -1273,7 +1273,7 @@ class Store(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store'
 
 
@@ -1293,7 +1293,7 @@ class StoreCard(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_card'
 
 
@@ -1345,7 +1345,7 @@ class StoreFT(models.Model):
     f45 = models.CharField(db_column='F45', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_f_t'
 
 
@@ -1359,7 +1359,7 @@ class StoreRelative(models.Model):
     c_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_relative'
 
 
@@ -1403,7 +1403,7 @@ class StoreStore(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_store'
 
 
@@ -1451,7 +1451,7 @@ class StoreTrans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_trans'
 
 
@@ -1467,9 +1467,8 @@ class StoreUser(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'store_user'
-
 
 class Trans(models.Model):
     t1 = models.CharField(db_column='T1', max_length=100, blank=True, null=True)  # Field name made lowercase.
@@ -1515,7 +1514,7 @@ class Trans(models.Model):
     abnormal_state = models.JSONField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'trans'
 
 
@@ -1531,7 +1530,7 @@ class User(models.Model):
     loc_id = models.CharField(max_length=18, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'user'
 
 class System_log(models.Model):
@@ -1541,5 +1540,5 @@ class System_log(models.Model):
     result = models.CharField(max_length=10)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'system_log'

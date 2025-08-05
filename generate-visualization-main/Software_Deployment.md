@@ -20,11 +20,6 @@ pip3 install -ihttps://mirrors.aliyun.com/pypi/simple/ django-cors-headers
 pip3 install pymysql
 pip3 install ruamel.yaml
 pip3 install PyYAML
-pip3 install torch torchvision torchaudio
-pip3 install torch_geometric
-pip3 install torch_sparse
-pip3 install torch_scatter
-pip3 install torch_cluster
 pip3 install matplotlib
 pip3 install networkx
 pip3 install transformers
@@ -32,6 +27,8 @@ pip3 install scikit-learn
 pip3 install pandas
 pip3 install django-redis
 pip3 install celery
+pip3 install cryptography
+pip3 install pycryptodome
 ```
 
 4. Install MySQL.
@@ -74,6 +71,8 @@ Click on "Data download" Data export will take some time. You can monitor the ba
 
 
 ### Note
+
+When you use the Non-Docker mode. Comment out `'HOST': 'db'` in the `generate-visualization-main/backend/web/setting.py` file and uncomment `'HOST': '127.0.0.1'`; in the `smart_finance_main/src/utils/config.py` file, comment out `host='db'` and uncomment `host='localhost'`.
 
 During secondary development, if you modify the frontend, you also need to:
 
@@ -127,8 +126,8 @@ docker volume create --name=vol_smart_data
 Ensure that the database is initialized and run the migration command:
 
 ```bash
+docker-compose run --rm backend python manage.py dbcheck
 docker-compose run --rm backend python manage.py migrate
-docker-compose run --rm backend python manage.py createsuperuser
 ```
 
 ### 5. Start the Containers
@@ -142,3 +141,9 @@ docker-compose up -d
 ### 6. Access the Application
 
 Once the containers are up and running, access your project through the browser: <http://localhost:9528>
+
+## Note
+
+Login Account: editor, Password: FdpDg@2024
+
+When you use the Docker mode. Comment out `'HOST': '127.0.0.1'` in the `generate-visualization-main/backend/web/setting.py` file and uncomment `'HOST': 'db'`; in the `smart_finance_main/src/utils/config.py` file, comment out `host='localhost'` and uncomment `host='db'`.

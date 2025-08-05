@@ -1,17 +1,18 @@
-version: '3.8'
-
 services:
-  web:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: django_vue_webapp
+    container_name: django_backend
     volumes:
-      - ./backend:/app
+      - .:/app
     ports:
       - "9528:9528"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:9528"
 
   db:
     image: mysql:8.0
@@ -20,12 +21,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sf_web_001
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$MYSQL_ROOT_PASSWORD" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
 
 volumes:
   mysql_data:
