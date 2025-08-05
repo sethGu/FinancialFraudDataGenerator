@@ -69,7 +69,7 @@ Each module includes:
 Navigate via the sidebar to “Credit Card Cash-Out”. The interface includes seven areas:
 
 [Image: Credit Card Fraud Interface]
-![Credit Card Fraud](assets/Credit.png)
+![Credit Card Fraud](assets/Credit_card cash-out_screenshot.png)
 
 **Area 1: Parameter Configuration**
 - User Count
@@ -104,7 +104,6 @@ _... other 5 scenarios follow same structure ..._
 
 Click the icon in the top-right of any page, then click “Logout” to return to the login screen.
 
-[Image: Logout Instruction Screenshot]
 
 ---
 
@@ -112,4 +111,3 @@ Click the icon in the top-right of any page, then click “Logout” to return t
 
 Click the top-right icon → “Change Password”, then input the **old password**, **new password**, and **confirmation** to update your credentials.
 
-[Image: Change Password Instruction Screenshot]
