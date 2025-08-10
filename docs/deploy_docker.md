@@ -11,20 +11,24 @@ This page provides a quick guide for deploying **F²-Gen** using Docker and Dock
 
 ## 🚀 Quick Start
 
-Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/install/) to get started.
+ Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/install/) to quickly get started with the project.
 
 ---
 
 ### 1. Clone the Git Repository
 
+First, clone the code repository to the local directory：
+
 ```bash
 git clone https://github.com/sethGu/FinancialFraudDataGenerator.git
-cd FinancialFraudDataGenerator
+cd generate-visualization-main
 ```
 
 ---
 
 ### 2. Build Docker Images
+
+Run the following command to build the required Docker images:
 
 ```bash
 docker-compose build
@@ -34,9 +38,11 @@ docker-compose build
 
 ### 3. Create Docker Volumes
 
+Create Docker volumes for the database and application data:
+
 ```bash
-docker volume create --name=vol_f2gen_pgdata
-docker volume create --name=vol_f2gen_data
+docker volume create --name=vol_smart_pgdata
+docker volume create --name=vol_smart_data
 ```
 
 > 📌 You can rename volumes if needed, but make sure to reflect the change in `docker-compose.yml`.
@@ -45,14 +51,17 @@ docker volume create --name=vol_f2gen_data
 
 ### 4. Run Database Migrations
 
+Ensure that the database is initialized and run the migration command:
+
 ```bash
+docker-compose run --rm backend python manage.py dbcheck
 docker-compose run --rm backend python manage.py migrate
-docker-compose run --rm backend python manage.py createsuperuser
 ```
 
 ---
 
 ### 5. Start the Application
+Start all the containers:
 
 ```bash
 docker-compose up -d
@@ -72,6 +81,12 @@ Login using the default credentials:
 🔐 Username: editor
 🔐 Password: FdpDg@2024
 ```
+
+---
+
+## Note
+
+When you use the Docker mode. Comment out `'HOST': '127.0.0.1'` in the `generate-visualization-main/backend/web/setting.py` file and uncomment `'HOST': 'db'`; in the `smart_finance_main/src/utils/config.py` file, comment out `host='localhost'` and uncomment `host='db'`.
 
 ---
 
