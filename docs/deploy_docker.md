@@ -24,6 +24,30 @@ git clone https://github.com/sethGu/FinancialFraudDataGenerator.git
 cd generate-visualization-main
 ```
 
+
+### 🛠 Optional: Configure Docker Hub Mirror for Faster Builds
+For users in regions with slow or unstable access to Docker Hub (e.g., mainland China), you can speed up image pulls by configuring a registry mirror in Docker Desktop.
+
+Add the following to your Docker Engine’s daemon.json (Docker Desktop → Settings → Docker Engine):
+
+{
+  "registry-mirrors": ["https://mirror.gcr.io"]
+}
+
+---
+
+🚨 **重要提示（中国大陆用户必看）** 🚨
+
+如果您位于国内，**并且尚未配置 Docker 镜像加速**（或刚刚全新安装 Docker），在继续构建镜像前务必先进行以下设置，否则可能会出现下载极慢或直接连接失败的情况。
+
+1. 打开 **Docker Desktop → Settings → Docker Engine**  
+2. 在配置中添加如下内容（如已有其他配置，请合并）：
+
+
+{
+  "registry-mirrors": ["https://mirror.gcr.io"]
+}
+
 ---
 
 ### 2. Build Docker Images
