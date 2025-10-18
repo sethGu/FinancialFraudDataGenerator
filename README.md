@@ -39,7 +39,6 @@ This software is intended **only for academic research, teaching, and experiment
 
 This project is licensed under the [BSD 3-Clause License](./LICENSE).
 
-> ⚠️ Note: Commercial use is explicitly prohibited without prior written permission.
 
 
 
